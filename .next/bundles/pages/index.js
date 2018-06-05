@@ -181,7 +181,7 @@ var Footer = function Footer() {
       fileName: _jsxFileName,
       lineNumber: 6
     }
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_grommet__["g" /* Paragraph */], {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_grommet__["f" /* Paragraph */], {
     style: {
       maxWidth: '500px'
     },
@@ -203,7 +203,7 @@ var Footer = function Footer() {
       fileName: _jsxFileName,
       lineNumber: 11
     }
-  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_grommet__["g" /* Paragraph */], {
+  }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_grommet__["f" /* Paragraph */], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 12
@@ -292,7 +292,7 @@ var Header = function Header() {
       fileName: _jsxFileName,
       lineNumber: 8
     }
-  }, "HyperSearch"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_grommet__["h" /* Text */], {
+  }, "HyperSearch"))), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_grommet__["g" /* Text */], {
     margin: {
       top: 'xsmall'
     },
@@ -41304,7 +41304,7 @@ if (true) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Markdown__ = __webpack_require__("./node_modules/grommet/es6/components/Markdown/Markdown.js");
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__Markdown__["a"]; });
+/* unused harmony reexport Markdown */
 
 
 
@@ -47081,13 +47081,13 @@ var withTheme = function withTheme(WrappedComponent) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__Layer__ = __webpack_require__("./node_modules/grommet/es6/components/Layer/index.js");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__Markdown__ = __webpack_require__("./node_modules/grommet/es6/components/Markdown/index.js");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_20__Markdown__["a"]; });
+/* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__Menu__ = __webpack_require__("./node_modules/grommet/es6/components/Menu/index.js");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Meter__ = __webpack_require__("./node_modules/grommet/es6/components/Meter/index.js");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__Paragraph__ = __webpack_require__("./node_modules/grommet/es6/components/Paragraph/index.js");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_23__Paragraph__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_23__Paragraph__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__RadioButton__ = __webpack_require__("./node_modules/grommet/es6/components/RadioButton/index.js");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__RangeInput__ = __webpack_require__("./node_modules/grommet/es6/components/RangeInput/index.js");
@@ -47107,7 +47107,7 @@ var withTheme = function withTheme(WrappedComponent) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__Tabs__ = __webpack_require__("./node_modules/grommet/es6/components/Tabs/index.js");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__Text__ = __webpack_require__("./node_modules/grommet/es6/components/Text/index.js");
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_33__Text__["a"]; });
+/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_33__Text__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__TextArea__ = __webpack_require__("./node_modules/grommet/es6/components/TextArea/index.js");
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__TextInput__ = __webpack_require__("./node_modules/grommet/es6/components/TextInput/index.js");
@@ -47169,7 +47169,6 @@ var withTheme = function withTheme(WrappedComponent) {
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_0__components__["e"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_0__components__["f"]; });
 /* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_0__components__["g"]; });
-/* harmony namespace reexport (by used) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_0__components__["h"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__themes__ = __webpack_require__("./node_modules/grommet/es6/themes/index.js");
 /* unused harmony namespace reexport */
 

@@ -5907,12 +5907,24 @@ function (_Document) {
           fileName: _jsxFileName,
           lineNumber: 16
         }
-      }, this.props.styleTags, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("meta", {
+      }, this.props.styleTags, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("title", {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18
+        }
+      }, "HyperSearch: Hyperparameter Optimization for Javascript"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("meta", {
         name: "viewport",
         content: "width=device-width,initial-scale=1",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18
+          lineNumber: 19
+        }
+      }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("meta", {
+        name: "description",
+        content: "HyperSearch is a Javascript library for hyperparameter optimization. It is based on the Python library Hyperopt ",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20
         }
       })), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("body", {
         style: {
@@ -5922,17 +5934,17 @@ function (_Document) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20
+          lineNumber: 22
         }
       }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_next_document__["Main"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21
+          lineNumber: 23
         }
       }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_next_document__["NextScript"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 22
+          lineNumber: 24
         }
       })));
     }
