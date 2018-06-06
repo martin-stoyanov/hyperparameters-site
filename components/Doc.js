@@ -26,9 +26,7 @@ export default class Doc extends React.Component {
                 <strong>{name}</strong>
               </Heading>
               {desc ? (
-                <Paragraph size='large'>
-                  {desc.description}
-                </Paragraph>
+                <p dangerouslySetInnerHTML={{ __html: desc.description }} />
               ) : null}
               {text ? (
                 <Paragraph size='large'>
