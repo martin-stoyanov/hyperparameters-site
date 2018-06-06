@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from 'grommet';
+// import hpe from 'hyperparameters/src';
 // import hp from '../src';
 // import RandomState from '../src/utils/RandomState';
-import { sample } from '../src/pyll/stochastic';
 import Layout from '../components/Layout';
 import Section from '../components/Section';
 import Item from '../components/Item';
@@ -12,30 +12,6 @@ import KDEChartArray from '../components/KDEChartArray';
 import hp from '../src';
 
 
-const getData = () => {
-  const seededSample = space => sample(space);
-  const randIntArr = [];
-  const uniformArr = [];
-  const loguniformArr = [];
-  const qloguniformArr = [];
-  let hyperparamGenerators;
-  const NSamples = 5;
-  for (let i = 0; i < NSamples; i += 1) {
-    hyperparamGenerators = {
-      randint: seededSample(hp.randint('randint', 5)),
-      uniform: seededSample(hp.uniform('uniform', -2, 2)),
-      loguniform: seededSample(hp.loguniform('loguniform', -2, 2)),
-      qloguniform: seededSample(hp.qloguniform('qloguniform', -2, 2, 0.1)),
-    };
-    randIntArr.push(hyperparamGenerators.randint);
-    uniformArr.push(hyperparamGenerators.uniform);
-    loguniformArr.push(hyperparamGenerators.loguniform);
-    qloguniformArr.push(hyperparamGenerators.qloguniform);
-    console.log(Object.entries(hyperparamGenerators));
-  }
-  console.log(loguniformArr);
-  console.log(qloguniformArr);
-};
 const Index = () => (
   <Layout title='Hyperparamer Optimization for Javascript'>
     <Box pad={{ horizontal: 'large' }}>

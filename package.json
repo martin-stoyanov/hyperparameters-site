@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next",
     "start": "next start -p $PORT",
+    "server": "next start",
     "build": "next build",
     "heroku-postbuild": "npm run build"
   },
@@ -15,12 +16,13 @@
   "dependencies": {
     "@data-ui/histogram": "0.0.57",
     "@data-ui/theme": "0.0.48",
+    "babel-plugin-styled-components": "^1.5.1",
     "chart.js": "^2.7.2",
     "eslint": "^4.19.1",
-    "grommet": "^2.0.0-beta.1",
+    "grommet": "^2.0.0-beta.2",
     "grommet-controls": "^0.25.3",
-    "hyperparameters": "^0.20.2",
     "isomorphic-fetch": "^2.2.1",
+    "kernel-smooth": "^0.2.3",
     "next": "^6.0.3",
     "react": "^16.4.0",
     "react-chartjs-2": "^2.7.2",
