@@ -8,16 +8,16 @@ import ChartArray from '../components/ChartArray';
 
 export default () => (
   <Doc
-    name='randint'
+    name='choice'
     example={(
       <Box basis='medium' pad='small'>
         <ChartArray array={spaceToArray(hp.choice('choice', ['cat', 'dog']))} labels='["cat", "dog"]' />
       </Box>
     )}
     desc={{
-        description: 'Return a random integer in the range [0, upper)',
+        description: 'Randomly returns one of the options',
         properties: [{ name: 'label', description: 'a name for the expression' },
-            { name: 'upper', description: 'The random integer can be anywhere from 0 to upper (not included)', required: false }],
+            { name: 'options', description: 'an array containing the options', required: true }],
 }}
   />
 );
