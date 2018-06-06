@@ -14,7 +14,7 @@ export default () => (
       </Box>
     )}
     desc={{
-        description: <p dangerouslySetInnerHTML={{ __html: desc }} />,
+        description: desc,
         properties: [{ name: 'label', description: 'a name for the expression' },
             { name: 'low', description: 'The minimum possible value of the number', required: false },
             { name: 'high', description: 'The maximum possible value of the number', required: false },
