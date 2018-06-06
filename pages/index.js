@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from 'grommet';
-import hp from '../src';
+// import hp from '../src';
 // import RandomState from '../src/utils/RandomState';
 import { sample } from '../src/pyll/stochastic';
 import Layout from '../components/Layout';
@@ -9,6 +9,7 @@ import Item from '../components/Item';
 import spaceToArray from '../components/utils/spaceToArray';
 import ChartArray from '../components/ChartArray';
 import KDEChartArray from '../components/KDEChartArray';
+import hp from '../src';
 
 
 const getData = () => {
@@ -36,7 +37,7 @@ const getData = () => {
   console.log(qloguniformArr);
 };
 const Index = () => (
-  <Layout>
+  <Layout title='Hyperparamer Optimization for Javascript'>
     <Box pad={{ horizontal: 'large' }}>
       <Section align='stretch' name='Parameter Expressions' index={0}>
         <Item name='hp.choice(label, options)' path='/choice'>

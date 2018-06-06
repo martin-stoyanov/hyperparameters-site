@@ -15,9 +15,7 @@ export default class MyDocument extends Document {
       <html lang='en-US'>
         <Head>
           {this.props.styleTags}
-          <title>HyperSearch: Hyperparameter Optimization for Javascript</title>
           <meta name='viewport' content='width=device-width,initial-scale=1' />
-          <meta name='description' content='HyperSearch is a Javascript library for hyperparameter optimization. It is based on the Python library Hyperopt ' />
         </Head>
         <body style={{ margin: 0, height: 'auto', minHeight: '100vh' }} >
           <Main />
