@@ -33,7 +33,7 @@ class ChartArray extends React.Component {
     // sort the array
     sorted.sort((a, b) => a[0] - b[0]);
     const data = {
-      labels: labels,
+      labels,
       datasets: [
         {
           label: 'after 500 iterations',
