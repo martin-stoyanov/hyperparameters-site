@@ -37,11 +37,11 @@ class ChartArray extends React.Component {
       datasets: [
         {
           label: 'after 500 iterations',
-          backgroundColor: 'rgba(101, 199, 216,0.4)',
-          borderColor: 'rgba(101, 199, 216,1)',
+          backgroundColor: 'rgba(206, 95, 47,0.4)',
+          borderColor: 'rgba(206, 95, 47,1)',
           borderWidth: 1,
-          hoverBackgroundColor: 'rgba(117,16,218,0.4)',
-          hoverBorderColor: 'rgba(117,16,218,1)',
+          hoverBackgroundColor: 'rgba(206, 95, 47,0.4)',
+          hoverBorderColor: 'rgba(206, 95, 47,1)',
           data: [sorted[0][1], sorted[1][1]],
         },
       ],

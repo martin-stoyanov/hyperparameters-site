@@ -6,8 +6,9 @@ import linSpace from '../components/utils/linSpace';
 class KDEChartArray extends React.Component {
   render() {
     const { rawData } = this.props;
+    // const xDomain = linSpace(Math.min(...rawData), Math.max(...rawData), rawData.length);
     const xDomain = linSpace(Math.min(...rawData), Math.max(...rawData), rawData.length);
-    const data = kernel.density(rawData, kernel.fun.gaussian, 0.001);
+    const data = kernel.density(rawData, kernel.fun.gaussian, 0.1);
     // console.log(data(0));
     // const { size } = this.props;
     // const width = size === 'small' ? 350 : 450;
@@ -16,24 +17,30 @@ class KDEChartArray extends React.Component {
     // console.log(typeof allColors);
     // console.log('aay');
     // console.log(rawData);
-    console.log(xDomain);
+    console.log(data(xDomain));
     const formattedData = {
       labels: xDomain,
       datasets: [
         {
           label: '',
-          backgroundColor: 'rgba(101, 199, 216,0.4)',
-          borderColor: 'rgba(101, 199, 216,1)',
+          backgroundColor: 'rgba(206, 95, 47,0.4)',
+          borderColor: 'rgba(206, 95, 47,1)',
           borderWidth: 1,
-          hoverBackgroundColor: 'rgba(117,16,218,0.4)',
-          hoverBorderColor: 'rgba(117,16,218,1)',
-          data: rawData,
+          hoverBackgroundColor: 'rgba(206, 95, 47,0.4)',
+          hoverBorderColor: 'rgba(206, 95, 47,1)',
+          responsive: true,
+          maintainAspectRatio: false,
+          data: data(xDomain),
         },
       ],
     };
 
     return (
-      <div>
+      <div
+        style={{
+position: 'relative', top: '0px', left: '0px', width: '400px', height: '400px',
+ }}
+      >
         <Line
           data={formattedData}
         />
