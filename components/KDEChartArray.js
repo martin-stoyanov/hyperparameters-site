@@ -37,6 +37,7 @@ class KDEChartArray extends React.Component {
 
     return (
       <Box
+        fill='true'
         style={{ position: 'relative', width: { width }, height: { height } }}
       >
         <Line

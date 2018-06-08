@@ -1,6 +1,6 @@
+import hp from 'hyperparameters';
 import { Box } from 'grommet';
 import Doc from '../components/Doc';
-import hp from '../src';
 import spaceToArray from '../components/utils/spaceToArray';
 import ChartArray from '../components/ChartArray';
 // import KDEChartArray from '../components/KDEChartArray';

@@ -1,5 +1,4 @@
 import { RandomState, sample } from 'hyperparameters';
-// import RandomState from 'hyperparameters/src/utils/RandomState';
 
 export default (space, NSamples = 400, seed = undefined) => {
   const arr = [];

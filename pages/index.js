@@ -1,9 +1,6 @@
 import React from 'react';
 import { Box } from 'grommet';
 import hp from 'hyperparameters';
-// import hpe from 'hyperparameters/src';
-// import hp from '../src';
-// import RandomState from '../src/utils/RandomState';
 import Layout from '../components/Layout';
 import Section from '../components/Section';
 import Item from '../components/Item';
