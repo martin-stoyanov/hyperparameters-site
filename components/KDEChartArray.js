@@ -7,18 +7,10 @@ import linSpace from '../components/utils/linSpace';
 class KDEChartArray extends React.Component {
   render() {
     const { rawData, size } = this.props;
-    // const xDomain = linSpace(Math.min(...rawData), Math.max(...rawData), rawData.length);
     const xDomain = linSpace(Math.min(...rawData), Math.max(...rawData), rawData.length);
     const data = kernel.density(rawData, kernel.fun.gaussian, 0.35);
-    // console.log(data(0));
-    // const { size } = this.props;
     const width = size === 'small' ? '350px' : '550px';
     const height = size === 'small' ? '220px' : '450px';
-    console.log(size, width, height);
-    // const rawData = Array(100).fill().map(Math.random);
-    // console.log(typeof allColors);
-    // console.log('aay');
-    // console.log(rawData);
     const formattedData = {
       labels: xDomain,
       datasets: [
@@ -34,15 +26,15 @@ class KDEChartArray extends React.Component {
         },
       ],
     };
-
     return (
       <Box
         fill='true'
-        style={{ position: 'relative', width: { width }, height: { height } }}
+        style={{ position: 'relative', width, height }}
       >
         <Line
           data={formattedData}
         />
+        {width}
       </Box>
     );
   }
