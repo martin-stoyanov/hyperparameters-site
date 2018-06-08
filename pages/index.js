@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from 'grommet';
+import hp from 'hyperparameters';
 // import hpe from 'hyperparameters/src';
 // import hp from '../src';
 // import RandomState from '../src/utils/RandomState';
@@ -9,7 +10,6 @@ import Item from '../components/Item';
 import spaceToArray from '../components/utils/spaceToArray';
 import ChartArray from '../components/ChartArray';
 import KDEChartArray from '../components/KDEChartArray';
-import hp from '../src';
 
 
 const Index = () => (
