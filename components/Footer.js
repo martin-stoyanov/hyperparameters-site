@@ -8,7 +8,7 @@ const Footer = () => (
       <Paragraph style={{ maxWidth: '500px' }}>
         <Button href='https://github.com/atanasster/hyperparameters' target='_blank'>hyperparameters (hpjs)</Button>
       </Paragraph>
-      <Paragraph>Copyright (c) 2018 Martin & Atanas Stoyanov</Paragraph>
+      <Paragraph style={{ maxWidth: '500px' }}>Copyright (c) {(new Date().getFullYear())} Atanas Stoyanov, Martin Stoyanov</Paragraph>
     </Box>
   </Box>
 );
