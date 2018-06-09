@@ -8,15 +8,16 @@ import 'brace/mode/javascript';
 import 'brace/theme/twilight';
 
 
-const CodeEditor = ({ code, options, onChange }) => (
+const CodeEditor = ({ code, options, ...rest }) => (
   <Box fill='horizontal'>
     <AceEditor
       value={code}
       mode='javascript'
       theme='twilight'
-      onChange={onChange}
       editorProps={{ $blockScrolling: true }}
+      style={{ padding: '10px' }}
       {...options}
+      {...rest}
     />
   </Box>
 
@@ -29,12 +30,10 @@ CodeEditor.defaultProps = {
     height: '100px',
     showGutter: false,
   },
-  onChange: undefined,
 };
 
 CodeEditor.propTypes = {
   code: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
   options: PropTypes.object,
 };
 

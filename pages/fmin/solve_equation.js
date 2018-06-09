@@ -8,14 +8,8 @@ export default class SolveEquationPage extends React.Component {
     data: [],
     argmin: undefined,
   };
-  async componentDidMount() {
-    const space = {
-      x: hp.uniform('x', -5, 5),
-    };
-    const opt = ({ x }) => ((x ** 2) - (x + 1));
 
-    const trials = await fmin(opt, space, optimizers.rand.suggest, 1000);
-    // eslint-disable-next-line react/no-did-mount-set-state
+  onData = (trials) => {
     this.setState({
       argmin: trials.argmin,
       data: trials.trials.map(trial => (
@@ -24,13 +18,15 @@ export default class SolveEquationPage extends React.Component {
         .sort((a, b) => b.x - a.x)
         .reverse(),
     });
-  }
+  };
+
   render() {
     const { data, argmin } = this.state;
     return (
       <Box>
         <Example
           name='x ** 2 - x + 1'
+          onData={this.onData}
           example={(
             <Box basis='medium'>
               <LineChart
@@ -50,7 +46,7 @@ export default class SolveEquationPage extends React.Component {
   x: hp.uniform('x', -5, 5),
 };
 const opt = ({ x }) => ((x ** 2) - (x + 1));
-const trials = await fmin(opt, space, optimizers.rand.suggest, 1000);
+return fmin(opt, space, optimizers.rand.suggest, 1000);
 `}
         />
       </Box>
