@@ -1,18 +1,10 @@
-import hp from 'hyperparameters';
-import { Box } from 'grommet';
 import Doc from '../components/Doc';
-import spaceToArray from '../components/utils/spaceToArray';
-import KDEChartArray from '../components/KDEChartArray';
 
 const desc = 'returns a quantized value of <a href="/normal">hp.normal</a> i.e. (normal(mu, sigma) / q) * q';
 export default () => (
   <Doc
     name='qnormal'
-    example={(
-      <Box basis='medium' pad='small'>
-        <KDEChartArray rawData={spaceToArray(hp.qnormal('qnormal', 0, 1, 0.1))} />
-      </Box>
-    )}
+    code={'hp.qnormal(\'qnormal\', 0, 1, 0.1);'}
     desc={{
         description: desc,
         properties: [{ name: 'label', description: 'a name for the expression' },

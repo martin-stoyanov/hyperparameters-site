@@ -33,64 +33,65 @@ class CodeSnippet extends React.Component {
     super(props);
     this.state = { snippet: props.code, annotations: [], modified: false };
   }
-executeCodeSnippet = async (codeSnippet) => {
-  const annotations = [];
-  const reportError = (e) => {
-    const error = { type: 'error' };
-    const lineNumber = getLineNumber(e);
-    if (lineNumber !== undefined) {
-      error.row = lineNumber - 1;
+  executeCodeSnippet = async (codeSnippet) => {
+    const { formatSnippet = p => p } = this.props;
+    const annotations = [];
+    const reportError = (e) => {
+      const error = { type: 'error' };
+      const lineNumber = getLineNumber(e);
+      if (lineNumber !== undefined) {
+        error.row = lineNumber - 1;
+      }
+      error.text = e.message;
+      annotations.push(error);
+    };
+
+      // It is important that codeSnippet and 'try {' be on the same line
+      // in order to not modify the line number on an error.
+    const evalString = `(async function runner() { try { ${formatSnippet(codeSnippet)
+    }} catch (e) { reportError(e); } })()`;
+
+    window.hp = hp;
+    window.fmin = fmin;
+    window.optimizers = optimizers;
+
+    // tf.ENV.engine.startScope();
+    try {
+      // eslint-disable-next-line no-eval
+      const value = await eval(evalString)
+        .catch((e) => {
+          // This catch is for errors within promises within snippets
+          reportError(e);
+        });
+      this.props.onData(value);
+    } catch (e) {
+      reportError(e);
     }
-    error.text = e.message;
-    annotations.push(error);
+    this.setState({ annotations, modified: false });
+    window.hp = undefined;
+    window.fmin = undefined;
+    window.optimizers = undefined;
+
+    // tf.ENV.engine.endScope();
   };
+  render() {
+    const { snippet, annotations, modified } = this.state;
+    return snippet ? (
+      <Box fill='horizontal'>
+        <Box basis='xxsmall' align='end'>
+          {modified && (
+          <Anchor label='run' primary={true} onClick={() => this.executeCodeSnippet(snippet)} />
+            )}
+        </Box>
+        <CodeEditor
+          annotations={annotations}
+          code={snippet}
+          onLoad={() => this.executeCodeSnippet(snippet)}
+          onChange={value => this.setState({ modified: true, snippet: value })}
+        />
 
-    // It is important that codeSnippet and 'try {' be on the same line
-    // in order to not modify the line number on an error.
-  const evalString = `(async function runner() { try { ${codeSnippet
-  }} catch (e) { reportError(e); } })()`;
-
-  window.hp = hp;
-  window.fmin = fmin;
-  window.optimizers = optimizers;
-
-  // tf.ENV.engine.startScope();
-  try {
-    // eslint-disable-next-line no-eval
-    const value = await eval(evalString)
-      .catch((e) => {
-        // This catch is for errors within promises within snippets
-        reportError(e);
-      });
-    this.props.onData(value);
-  } catch (e) {
-    reportError(e);
-  }
-  this.setState({ annotations, modified: false });
-  window.hp = undefined;
-  window.fmin = undefined;
-  window.optimizers = undefined;
-
-  // tf.ENV.engine.endScope();
-};
-render() {
-  const { snippet, annotations, modified } = this.state;
-  return snippet ? (
-    <Box fill='horizontal'>
-      <Box basis='xxsmall' align='end'>
-        {modified && (
-        <Anchor label='run' primary={true} onClick={() => this.executeCodeSnippet(snippet)} />
-          )}
       </Box>
-      <CodeEditor
-        annotations={annotations}
-        code={snippet}
-        onLoad={() => this.executeCodeSnippet(snippet)}
-        onChange={value => this.setState({ modified: true, snippet: value })}
-      />
-
-    </Box>
-  ) : null;
-}
+    ) : null;
+  }
 }
 export default CodeSnippet;

@@ -1,18 +1,10 @@
-import hp from 'hyperparameters';
-import { Box } from 'grommet';
 import Doc from '../components/Doc';
-import spaceToArray from '../components/utils/spaceToArray';
-import KDEChartArray from '../components/KDEChartArray';
 
 const desc = 'returns a quantized value of <a href="/uniform">hp.uniform</a> i.e. (uniform(low, high) / q) * q';
 export default () => (
   <Doc
     name='quniform'
-    example={(
-      <Box basis='medium' pad='small'>
-        <KDEChartArray rawData={spaceToArray(hp.quniform('quniform', 0, 5, 0.1))} />
-      </Box>
-    )}
+    code={'hp.quniform(\'quniform\', 0, 5, 0.1);'}
     desc={{
         description: desc,
         properties: [{ name: 'label', description: 'a name for the expression' },
