@@ -75,6 +75,7 @@ class CodeSnippet extends React.Component {
     // tf.ENV.engine.endScope();
   };
   render() {
+    const { code, ondata, ...rest } = this.props;
     const { snippet, annotations, modified } = this.state;
     return snippet ? (
       <Box fill='horizontal'>
@@ -88,6 +89,7 @@ class CodeSnippet extends React.Component {
           code={snippet}
           onLoad={() => this.executeCodeSnippet(snippet)}
           onChange={value => this.setState({ modified: true, snippet: value })}
+          {...rest}
         />
 
       </Box>

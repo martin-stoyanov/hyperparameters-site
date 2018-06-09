@@ -40,6 +40,7 @@ export default class Doc extends React.Component {
                 onData={this.onData}
                 formatSnippet={p => `return ${p}`}
                 code={code}
+                height='30px'
               />
             </Box>
             <Box flex={true} pad={{ vertical: 'large' }} align='center'>
