@@ -38,6 +38,7 @@ export default class SolveEquationPage extends React.Component {
                 style={{
                   label: argmin ? argmin.toFixed(2) : '',
                   pointRadius: 0,
+                  borderWidth: 5,
                 }}
               />
             </Box>)}
