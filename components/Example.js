@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Box, Heading, Button } from 'grommet';
+import { Box, Heading, Anchor } from 'grommet';
 import hp, { fmin, optimizers } from 'hyperparameters';
 import Layout from './Layout';
 import CodeSnippet from './CodeSnippet';
@@ -28,26 +28,22 @@ function getLineNumber(error) {
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { snippet: props.code };
+    this.state = { snippet: props.code, annotations: [], modified: false };
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
   }
   executeCodeSnippet = async (codeSnippet) => {
+    const annotations = [];
     const reportError = (e) => {
-      let errorMessage = '\n<div class="snippet-error"><em>An error occured';
+      const error = { type: 'error' }
       const lineNumber = getLineNumber(e);
       if (lineNumber !== undefined) {
-        errorMessage += ` on line: ${lineNumber}</em>`;
-      } else {
-        errorMessage += '</em>';
+        error.row = lineNumber - 1;
       }
-      errorMessage += '<br/>';
-      errorMessage += `<div class="snippet-error-msg">${e.message}</div>`;
-      errorMessage += '</div>';
-
-      console.log(errorMessage);
+      error.text = e.message;
+      annotations.push(error);
     };
 
     // It is important that codeSnippet and 'try {' be on the same line
@@ -71,6 +67,7 @@ export default class Example extends React.Component {
     } catch (e) {
       reportError(e);
     }
+    this.setState({ annotations, modified: false });
     window.hp = undefined;
     window.fmin = undefined;
     window.optimizers = undefined;
@@ -80,9 +77,9 @@ export default class Example extends React.Component {
 
   render() {
     const {
-      children, description, name, example, onData,
+      children, description, name, example,
     } = this.props;
-    const { snippet } = this.state;
+    const { snippet, annotations, modified } = this.state;
     return (
       <Layout
         title={this.props.name}
@@ -98,13 +95,19 @@ export default class Example extends React.Component {
                 <p dangerouslySetInnerHTML={{ __html: description }} />
               ) : null}
               {snippet ? (
-                <Box pad={{ bottom: 'large' }} fill='horizontal'>
-                  <Button label='run' onClick={() => this.executeCodeSnippet(snippet)} />
+                <Box fill='horizontal'>
+                  <Box basis='xxsmall' align='end'>
+                    {modified && (
+                      <Anchor label='run' primary onClick={() => this.executeCodeSnippet(snippet)} />
+                    )}
+                  </Box>
                   <CodeSnippet
+                    annotations={annotations}
                     code={snippet}
                     onLoad={() => this.executeCodeSnippet(snippet)}
-                    onChange={value => this.setState({ snippet: value })}
+                    onChange={value => this.setState({ modified: true, snippet: value })}
                   />
+
                 </Box>
               ) : null}
             </Box>
