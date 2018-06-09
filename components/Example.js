@@ -26,21 +26,20 @@ export default class Example extends React.Component {
               {description ? (
                 <p dangerouslySetInnerHTML={{ __html: description }} />
               ) : null}
+              {code ? (
+                <Box pad={{ bottom: 'large' }} fill='horizontal'>
+                  <CodeSnippet
+                    code={code}
+                    onChange={value => console.log(value)}
+                  />
+                </Box>
+              ) : null}
             </Box>
             <Box flex={true} pad={{ top: 'large' }} align='center'>
               {example}
             </Box>
           </Box>
         </Box>
-
-        {code ? (
-          <Box pad={{ horizontal: 'large', bottom: 'large' }}>
-            <CodeSnippet
-              code={code}
-              onChange={value => console.log(value)}
-            />
-          </Box>
-        ) : null}
         {children}
       </Layout>
     );
