@@ -5,23 +5,25 @@ import { Line } from 'react-chartjs-2';
 
 class LineChart extends React.Component {
   render() {
-    const { labels, dataset, size } = this.props;
+    const {
+      labels, dataset, size, style,
+    } = this.props;
     const width = size === 'small' ? '350px' : '550px';
     const height = size === 'small' ? '220px' : '450px';
+    const defaultStyle = {
+      backgroundColor: 'rgba(206, 95, 47,0.2)',
+      borderColor: 'rgba(206, 95, 47,1)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(206, 95, 47,0.2)',
+      hoverBorderColor: 'rgba(206, 95, 47,1)',
+      responsive: true,
+      maintainAspectRatio: false,
+      data: dataset,
+    };
+    const lineData = { ...defaultStyle, ...style };
     const formattedData = {
       labels,
-      datasets: [
-        {
-          backgroundColor: 'rgba(206, 95, 47,0.2)',
-          borderColor: 'rgba(206, 95, 47,1)',
-          borderWidth: 1,
-          hoverBackgroundColor: 'rgba(206, 95, 47,0.2)',
-          hoverBorderColor: 'rgba(206, 95, 47,1)',
-          responsive: true,
-          maintainAspectRatio: false,
-          data: dataset,
-        },
-      ],
+      datasets: [lineData],
     };
     return (
       <Box
@@ -38,12 +40,14 @@ class LineChart extends React.Component {
 
 LineChart.defaultProps = {
   size: 'small',
+  style: {},
 };
 
 LineChart.propTypes = {
   size: PropTypes.oneOf(['small', 'large']),
   labels: PropTypes.array.isRequired,
   dataset: PropTypes.array.isRequired,
+  style: PropTypes.object,
 };
 
 export default LineChart;
