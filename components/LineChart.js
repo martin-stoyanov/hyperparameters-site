@@ -20,7 +20,6 @@ class LineChart extends React.Component {
           responsive: true,
           maintainAspectRatio: false,
           data: dataset,
-          cubicInterpolationMode: 'monotone',
         },
       ],
     };
