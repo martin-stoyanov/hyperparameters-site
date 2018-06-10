@@ -3,25 +3,15 @@ import { Bar } from 'react-chartjs-2';
 
 class ChartArray extends React.Component {
   render() {
-    function isIn2D(int, array) {
-      let isIn = false;
-      for (let i = 0; i < array.length; i += 1) {
-        if (Number(array[i][0]) === int) { isIn = true; }
-      }
-      return isIn;
-    }
     const { array } = this.props;
-    let { labels } = this.props;
-    labels = JSON.parse(labels);
     const count = array.reduce((n, val) => {
       const result = n;
       result[val] = result[val] === undefined ? 1 : result[val] + 1;
       return result;
     }, {});
-
+    const labels = Object.keys(count);
     // makes object into 2d array
     const sorted = Object.keys(count).map(key => [key, count[key]]);
-    console.log(sorted);
     if (sorted.length < 1) {
       return null;
     }

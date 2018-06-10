@@ -5,7 +5,7 @@ export default () => (
   <Doc
     name='choice'
     code={'hp.choice(\'choice\', [\'cat\', \'dog\']);'}
-    example={data => (data ? <ChartArray array={data} labels='["cat", "dog"]' /> : null)}
+    example={data => (data ? <ChartArray array={data}  /> : null)}
     labels='["cat", "dog"]'
 
     desc={{

@@ -15,7 +15,7 @@ const Index = () => (
       <Section align='stretch' name='Parameter Expressions' index={0}>
         <Item name='hp.choice(label, options)' path='/choice'>
           <Box flex={true}>
-            <ChartArray array={spaceToArray(hp.choice('choice', ['cat', 'dog']))} labels='["cat", "dog"]' />
+            <ChartArray array={spaceToArray(hp.choice('choice', ['cat', 'dog']))} />
           </Box>
         </Item>
         <Item name='hp.randint(label, upper)' path='/randint'>
