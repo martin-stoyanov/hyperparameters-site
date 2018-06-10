@@ -73,7 +73,7 @@ const Index = () => (
         </Item>
       </Section>
       <Section align='stretch' name='fmin examples' index={1}>
-        <Item name='x ** 2 - x + 1' path='/fmin/solve_equation'>
+        <Item name='x ** 2 - x - 2' path='/fmin/solve_equation'>
           <Box flex={true}>
             <KDEChartArray rawData={spaceToArray(hp.qlognormal('qlognormal', 0, 1, 0.1))} size='small' />
           </Box>

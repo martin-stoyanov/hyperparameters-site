@@ -29,7 +29,7 @@ export default class SolveEquationPage extends React.Component {
     const { data, argmin, trials } = this.state;
     return (
       <Example
-        name='x ** 2 - x + 1'
+        name='x ** 2 - x - 2'
         onData={this.onData}
         example={(
           <LineChart
@@ -42,12 +42,12 @@ export default class SolveEquationPage extends React.Component {
               borderWidth: 5,
             }}
           />)}
-        description='Find minimum value of equation x ** 2 - x + 1.'
+        description='Simple equation solver. Uses unnamed single parameter in the search space and will find the x value for a minimum of y using the equation y = x ** 2 - x - 2.'
         code={
 `const space = hp.uniform('x', -3, 3);
 
 const opt = x => (Math.pow(x, 2) - x - 2);
-return fmin(opt, space, optimizers.rand.suggest, 200);
+return fmin(opt, space, optimizers.rand.suggest, 500);
 `}
       >
         <TrialsTable trials={trials} />
