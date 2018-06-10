@@ -1,6 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-import { Box, Anchor } from 'grommet';
+import { Box, Text, Anchor } from 'grommet';
 import hp, { fmin, optimizers } from 'hyperparameters';
 
 const CodeEditor = dynamic(import('./CodeEditor'), {
@@ -79,7 +79,10 @@ class CodeSnippet extends React.Component {
     const { snippet, annotations, modified } = this.state;
     return snippet ? (
       <Box fill='horizontal'>
-        <Box basis='xxsmall' align='end'>
+        <Box pad={{ horizontal: 'small' }} basis='xxsmall' justify='between' background='light-1' direction='row' align='center'>
+          <Text weight={200}>
+            example code:
+          </Text>
           {modified && (
           <Anchor label='run' primary={true} onClick={() => this.executeCodeSnippet(snippet)} />
             )}
