@@ -39,8 +39,8 @@ export default class Example extends React.Component {
               {example}
             </Box>
           </Box>
+          {children}
         </Box>
-        {children}
       </Layout>
     );
   }
