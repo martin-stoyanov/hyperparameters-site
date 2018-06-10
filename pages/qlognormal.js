@@ -1,18 +1,10 @@
-import { Box } from 'grommet';
-import hp from 'hyperparameters';
 import Doc from '../components/Doc';
-import spaceToArray from '../components/utils/spaceToArray';
-import KDEChartArray from '../components/KDEChartArray';
 
 const desc = 'returns a quantized value of <a href="/lognormal">hp.lognormal</a> i.e. (exp(normal(mu, sigma)) / q) * q';
 export default () => (
   <Doc
     name='qlognormal'
-    example={(
-      <Box basis='medium' pad='small'>
-        <KDEChartArray rawData={spaceToArray(hp.qlognormal('qlognormal', 0, 1, 0.1))} />
-      </Box>
-    )}
+    code={'hp.qlognormal(\'qlognormal\', 0, 1, 0.1);'}
     desc={{
         description: desc,
         properties: [{ name: 'label', description: 'a name for the expression' },

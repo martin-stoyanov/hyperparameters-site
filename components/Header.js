@@ -3,9 +3,9 @@ import { Box, Heading, Text, Button } from 'grommet';
 import Link from 'next/link';
 
 const Header = () => (
-  <Box direction='row' pad='medium' align='center' justify='between' background='brand'>
+  <Box direction='row' pad={{ horizontal: 'medium', vertical: 'small' }} align='center' justify='between' background='brand'>
     <Box direction='row' justify='left' gap='small'>
-      <Link href='/'><Button><Heading margin='none' level='3'>HyperSearch</Heading></Button></Link>
+      <Link href='/'><Button><Heading margin='none' level='2'>hpjs</Heading></Button></Link>
       <Text margin={{ top: 'xsmall' }}size='xsmall'>Hyperparameter optimization for Javascript</Text>
     </Box>
     <Box direction='row' justify='right' gap='small'>

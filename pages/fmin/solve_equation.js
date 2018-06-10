@@ -1,5 +1,4 @@
 import { Box } from 'grommet';
-import hp, { fmin, optimizers } from 'hyperparameters';
 import Example from '../../components/Example';
 import LineChart from '../../components/LineChart';
 
@@ -45,7 +44,7 @@ export default class SolveEquationPage extends React.Component {
 `const space = {
   x: hp.uniform('x', -5, 5),
 };
-const opt = ({ x }) => ((x ** 2) - (x + 1));
+const opt = ({ x }) => (Math.pow(x, 2) - (x + 1));
 return fmin(opt, space, optimizers.rand.suggest, 1000);
 `}
         />

@@ -9,13 +9,12 @@ import 'brace/theme/twilight';
 
 
 const CodeEditor = ({ code, options, ...rest }) => (
-  <Box fill='horizontal'>
+  <Box fill='horizontal' background='#141414' style={{ paddingTop: '10px' }}>
     <AceEditor
       value={code}
       mode='javascript'
       theme='twilight'
       editorProps={{ $blockScrolling: true }}
-      style={{ padding: '10px' }}
       {...options}
       {...rest}
     />
@@ -28,7 +27,7 @@ CodeEditor.defaultProps = {
     tabSize: 2,
     width: '100%',
     height: '100px',
-    showGutter: false,
+    showGutter: true,
   },
 };
 

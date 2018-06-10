@@ -1,17 +1,11 @@
 import { Box, Paragraph } from 'grommet';
-import hp from 'hyperparameters';
 import Doc from '../components/Doc';
-import spaceToArray from '../components/utils/spaceToArray';
-import KDEChartArray from '../components/KDEChartArray';
 
 export default () => (
   <Box>
     <Doc
       name='uniform'
-      example={(
-        <Box basis='medium'>
-          <KDEChartArray rawData={spaceToArray(hp.uniform('uniform', 0, 5))} />
-        </Box>)}
+      code={'hp.uniform(\'uniform\', 0, 5);'}
       desc={{
         description: 'Returns a single value uniformly between low and high i.e. any value between low and high has an equal probability of being selected',
         properties: [{ name: 'label', description: 'a name for the expression' },

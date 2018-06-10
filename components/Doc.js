@@ -1,46 +1,52 @@
 import PropTypes from 'prop-types';
-import { Box, Button, Heading, Paragraph, Text, Markdown } from 'grommet';
+import { Box, Heading, Text, Markdown } from 'grommet';
 import Layout from './Layout';
 import DocProperty from './DocProperty';
+import spaceToArray from './utils/spaceToArray';
+import KDEChartArray from './KDEChartArray';
+import CodeSnippet from './CodeSnippet';
 
 export default class Doc extends React.Component {
+  state = {
+    rawdata: [],
+  };
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
+  onData = (data) => {
+    this.setState({ rawdata: spaceToArray(data) });
+  };
   render() {
     const {
-      children, desc, name, example, examples, text, nav, footer,
+      children, desc, name, examples, code, example,
     } = this.props;
+    const { rawdata } = this.state;
     return (
       <Layout
         title={this.props.name}
         description={desc && desc.description}
-        nav={nav}
-        footer={footer}
       >
         <Box pad={{ horizontal: 'large', top: 'large' }}>
           <Box direction='row-responsive'>
-            <Box margin={{ vertical: 'large' }} basis='1/2' align='start'>
+            <Box margin={{ vertical: 'large' }} basis='1/2' align='start' gap='small'>
               <Heading level={1}>
                 <strong>{name}</strong>
               </Heading>
               {desc ? (
                 <p dangerouslySetInnerHTML={{ __html: desc.description }} />
               ) : null}
-              {text ? (
-                <Paragraph size='large'>
-                  {text}
-                </Paragraph>
-              ) : null}
-              {(desc && desc.availableAt) ? (
-                <Button href={desc.availableAt.url} target='_blank' >
-                  {typeof desc.availableAt.badge === 'string' ? <img alt='Example badge' src={desc.availableAt.badge} /> : desc.availableAt.badge}
-                </Button>
-              ) : null}
+              <CodeSnippet
+                onData={this.onData}
+                formatSnippet={p => `return ${p}`}
+                code={code}
+                height='30px'
+              />
             </Box>
             <Box flex={true} pad={{ vertical: 'large' }} align='center'>
-              {example}
+              <Box basis='medium' pad='small'>
+                {example ? example(rawdata) : <KDEChartArray rawData={rawdata} />}
+              </Box>
             </Box>
           </Box>
         </Box>
@@ -73,15 +79,13 @@ export default class Doc extends React.Component {
 
 Doc.propTypes = {
   desc: PropTypes.object,
-  example: PropTypes.node,
+  code: PropTypes.string.isRequired,
   examples: PropTypes.object,
   name: PropTypes.string.isRequired,
-  text: PropTypes.string,
 };
 
 Doc.defaultProps = {
   desc: undefined,
-  example: null,
   examples: {},
   text: undefined,
 };

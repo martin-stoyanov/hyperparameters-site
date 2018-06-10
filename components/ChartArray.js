@@ -22,7 +22,9 @@ class ChartArray extends React.Component {
     // makes object into 2d array
     const sorted = Object.keys(count).map(key => [key, count[key]]);
     console.log(sorted);
-
+    if (sorted.length < 1) {
+      return null;
+    }
     /* // of array doesn't have an int, then add [int, 0] to array
     for (let i = 0; i < 5; i += 1) {
       if (!isIn2D(i, sorted)) {
