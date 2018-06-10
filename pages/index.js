@@ -20,7 +20,15 @@ const Index = () => (
         </Item>
         <Item name='hp.randint(label, upper)' path='/randint'>
           <Box flex={true}>
-            <KDEChartArray rawData={spaceToArray(hp.randint('random int', 5))} size='small' />
+            <KDEChartArray
+              rawData={spaceToArray(hp.randint('random int', 5))}
+              size='small'
+              smoothing='0.01'
+              style={{
+                pointRadius: 0,
+                borderWidth: 1,
+              }}
+            />
           </Box>
         </Item>
         <Item name='hp.uniform(label, low, high)' path='/uniform'>

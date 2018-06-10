@@ -11,7 +11,14 @@ export default () => (
     name='randint'
     example={(
       <Box basis='medium' pad='small'>
-        <KDEChartArray rawData={spaceToArray(hp.randint('random int', 5))} />
+        <KDEChartArray
+          rawData={spaceToArray(hp.randint('random int', 5))}
+          smoothing='0.01'
+          style={{
+            pointRadius: 0,
+            borderWidth: 1,
+          }}
+        />
       </Box>
     )}
     desc={{
