@@ -1,16 +1,12 @@
 import PropTypes from 'prop-types';
-import { Box, Heading, Anchor } from 'grommet';
+import { Box, Heading } from 'grommet';
 import Layout from './Layout';
 import CodeSnippet from './CodeSnippet';
 
-
-
 export default class Example extends React.Component {
-
   componentDidMount() {
     window.scrollTo(0, 0);
   }
-
 
   render() {
     const {

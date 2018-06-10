@@ -81,7 +81,7 @@ class CodeSnippet extends React.Component {
       <Box fill='horizontal'>
         <Box pad={{ horizontal: 'small' }} basis='xxsmall' justify='between' background='light-1' direction='row' align='center'>
           <Text weight={200}>
-            example code:
+            edit code snippet:
           </Text>
           {modified && (
           <Anchor label='run' primary={true} onClick={() => this.executeCodeSnippet(snippet)} />
