@@ -5,7 +5,9 @@ import linSpace from '../components/utils/linSpace';
 
 class KDEChartArray extends React.Component {
   render() {
-    const { rawData, size, smoothing } = this.props;
+    const {
+      rawData, size, smoothing, style,
+    } = this.props;
     const xDomain = linSpace(Math.min(...rawData), Math.max(...rawData), rawData.length);
     const data = kernel.density(rawData, kernel.fun.gaussian, smoothing);
     const dataset = xDomain.map(x => ({ x, y: data(x) }));
@@ -13,6 +15,7 @@ class KDEChartArray extends React.Component {
       <LineChart
         size={size}
         dataset={dataset}
+        style={style}
         options={{
           scales: {
           xAxes: [{
