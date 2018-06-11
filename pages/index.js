@@ -7,7 +7,8 @@ import Item from '../components/Item';
 import spaceToArray from '../components/utils/spaceToArray';
 import ChartArray from '../components/ChartArray';
 import KDEChartArray from '../components/KDEChartArray';
-
+import ExpressionPreview from '../components/ExpressionPreview';
+import { unnamedParametersSolve } from '../components/utils/expressions';
 
 const Index = () => (
   <Layout title='Hyperparamer Optimization for Javascript'>
@@ -75,7 +76,7 @@ const Index = () => (
       <Section align='stretch' name='fmin examples' index={1}>
         <Item name='x ** 2 - x - 2' path='/fmin/solve_equation'>
           <Box flex={true}>
-            <KDEChartArray rawData={spaceToArray(hp.qlognormal('qlognormal', 0, 1, 0.1))} size='small' />
+            <ExpressionPreview expression={unnamedParametersSolve} />
           </Box>
         </Item>
       </Section>

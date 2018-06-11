@@ -1,6 +1,7 @@
 import Example from '../../components/Example';
 import LineChart from '../../components/LineChart';
 import TrialsTable from '../../components/TrialsTable';
+import { unnamedParametersSolve } from '../../components/utils/expressions';
 
 export default class SolveEquationPage extends React.Component {
   state = {
@@ -43,12 +44,7 @@ export default class SolveEquationPage extends React.Component {
             }}
           />)}
         description='Simple equation solver. Uses unnamed single parameter in the search space and will find the x value for a minimum of y using the equation y = x ** 2 - x - 2.'
-        code={
-`const space = hp.uniform('x', -3, 3);
-
-const opt = x => (Math.pow(x, 2) - x - 2);
-return fmin(opt, space, optimizers.rand.suggest, 500);
-`}
+        code={unnamedParametersSolve}
       >
         <TrialsTable trials={trials} />
       </Example>
