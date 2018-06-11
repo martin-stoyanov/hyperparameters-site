@@ -5,6 +5,10 @@ export default () => (
   <Doc
     name='qnormal'
     code={'hp.qnormal(\'qnormal\', 0, 1, 0.1);'}
+    style={{
+      pointRadius: 0,
+      borderWidth: 1,
+    }}
     desc={{
         description: desc,
         properties: [{ name: 'label', description: 'a name for the expression' },

@@ -6,6 +6,10 @@ export default () => (
     name='randint'
     code={'hp.randint(\'randint\', 5);'}
     smoothing='0.01'
+    style={{
+      pointRadius: 0,
+      borderWidth: 1,
+    }}
     desc={{
         description: 'Return a random integer in the range [0, upper)',
         properties: [{ name: 'label', description: 'a name for the expression' },

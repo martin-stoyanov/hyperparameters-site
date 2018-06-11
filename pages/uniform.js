@@ -6,6 +6,10 @@ export default () => (
     <Doc
       name='uniform'
       code={'hp.uniform(\'uniform\', 0, 5);'}
+      style={{
+        pointRadius: 0,
+        borderWidth: 1,
+      }}
       desc={{
         description: 'Returns a single value uniformly between low and high i.e. any value between low and high has an equal probability of being selected',
         properties: [{ name: 'label', description: 'a name for the expression' },

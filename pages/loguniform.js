@@ -6,6 +6,10 @@ export default () => (
     <Doc
       name='loguniform'
       code={'hp.loguniform(\'loguniform\', 0, 5);'}
+      style={{
+        pointRadius: 0,
+        borderWidth: 1,
+      }}
       desc={{
         description: 'Returns a value exp(uniform(low, high)) so the logarithm of the return value is uniformly distributed.',
         properties: [{ name: 'label', description: 'a name for the expression' },
