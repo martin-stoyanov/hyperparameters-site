@@ -1,3 +1,4 @@
+import * as tf from '@tensorflow/tfjs';
 import hp, { fmin, optimizers } from 'hyperparameters';
 
 function getErrorLine(error) {
@@ -40,7 +41,7 @@ export default async (expression, formatSnippet = p => p) => {
   window.fmin = fmin;
   window.optimizers = optimizers;
   let value;
-  // tf.ENV.engine.startScope();
+  tf.ENV.engine.startScope();
   try {
     // eslint-disable-next-line no-eval
     value = await eval(evalString)
@@ -51,6 +52,7 @@ export default async (expression, formatSnippet = p => p) => {
   } catch (e) {
     reportError(e);
   }
+  tf.ENV.engine.endScope();
   window.hp = undefined;
   window.fmin = undefined;
   window.optimizers = undefined;
