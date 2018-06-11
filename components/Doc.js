@@ -33,10 +33,9 @@ export default class Doc extends React.Component {
               <Heading level={1}>
                 <strong>{name}</strong>
               </Heading>
-              {
-               // eslint-disable-next-line react/no-danger
-               desc ? (
-                 <p dangerouslySetInnerHTML={{ __html: desc.description }} />
+              {desc ? (
+                // eslint-disable-next-line react/no-danger
+                <p dangerouslySetInnerHTML={{ __html: desc.description }} />
               ) : null}
               <CodeSnippet
                 onData={this.onData}

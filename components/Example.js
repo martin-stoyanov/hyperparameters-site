@@ -24,6 +24,7 @@ export default class Example extends React.Component {
                 <strong>{name}</strong>
               </Heading>
               {description ? (
+                // eslint-disable-next-line react/no-danger
                 <p dangerouslySetInnerHTML={{ __html: description }} />
               ) : null}
               <CodeSnippet
