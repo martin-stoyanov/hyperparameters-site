@@ -6,6 +6,7 @@ export default () => (
     <Doc
       name='loguniform'
       code={'hp.loguniform(\'loguniform\', 0, 5);'}
+      size='large'
       style={{
         pointRadius: 0,
         borderWidth: 1,

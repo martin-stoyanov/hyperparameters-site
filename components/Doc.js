@@ -19,7 +19,7 @@ export default class Doc extends React.Component {
   };
   render() {
     const {
-      children, desc, name, examples, code, example, smoothing, style,
+      children, desc, name, examples, code, example, smoothing, style, size,
     } = this.props;
     const { rawdata } = this.state;
     return (
@@ -49,6 +49,7 @@ export default class Doc extends React.Component {
                   rawData={rawdata}
                   smoothing={smoothing}
                   style={style}
+                  size={size}
                 />
                 }
               </Box>

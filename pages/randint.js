@@ -5,6 +5,7 @@ export default () => (
   <Doc
     name='randint'
     code={'hp.randint(\'randint\', 5);'}
+    size='large'
     smoothing='0.01'
     style={{
       pointRadius: 0,

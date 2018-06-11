@@ -5,6 +5,7 @@ export default () => (
   <Doc
     name='qloguniform'
     code={'hp.qloguniform(\'qloguniform\', 0, 5, 0.1);'}
+    size='large'
     style={{
       pointRadius: 0,
       borderWidth: 1,

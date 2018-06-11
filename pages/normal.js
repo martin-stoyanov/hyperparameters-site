@@ -5,6 +5,7 @@ export default () => (
   <Doc
     name='normal'
     code={'hp.normal(\'normal\', 0, 1);'}
+    size='large'
     style={{
       pointRadius: 0,
       borderWidth: 1,

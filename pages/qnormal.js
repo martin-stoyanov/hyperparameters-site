@@ -5,6 +5,7 @@ export default () => (
   <Doc
     name='qnormal'
     code={'hp.qnormal(\'qnormal\', 0, 1, 0.1);'}
+    size='large'
     style={{
       pointRadius: 0,
       borderWidth: 1,

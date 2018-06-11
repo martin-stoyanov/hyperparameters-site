@@ -5,6 +5,7 @@ export default () => (
   <Doc
     name='quniform'
     code={'hp.quniform(\'quniform\', 0, 5, 0.1);'}
+    size='large'
     style={{
       pointRadius: 0,
       borderWidth: 1,

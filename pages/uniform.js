@@ -6,6 +6,7 @@ export default () => (
     <Doc
       name='uniform'
       code={'hp.uniform(\'uniform\', 0, 5);'}
+      size='large'
       style={{
         pointRadius: 0,
         borderWidth: 1,
