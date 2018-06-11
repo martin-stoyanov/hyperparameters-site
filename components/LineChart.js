@@ -6,7 +6,7 @@ import { Line } from 'react-chartjs-2';
 class LineChart extends React.Component {
   render() {
     const {
-      labels, dataset, size, style,
+      labels, dataset, size, style, options,
     } = this.props;
     const width = size === 'small' ? '350px' : '550px';
     const height = size === 'small' ? '220px' : '450px';
@@ -31,6 +31,7 @@ class LineChart extends React.Component {
         style={{ position: 'relative', width, height }}
       >
         <Line
+          options={options}
           data={formattedData}
         />
       </Box>
@@ -41,11 +42,12 @@ class LineChart extends React.Component {
 LineChart.defaultProps = {
   size: 'small',
   style: {},
+  labels: undefined,
 };
 
 LineChart.propTypes = {
   size: PropTypes.oneOf(['small', 'large']),
-  labels: PropTypes.array.isRequired,
+  labels: PropTypes.array,
   dataset: PropTypes.array.isRequired,
   style: PropTypes.object,
 };

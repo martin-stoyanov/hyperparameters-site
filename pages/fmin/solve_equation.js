@@ -35,13 +35,34 @@ export default class SolveEquationPage extends React.Component {
         example={(
           <LineChart
             size='large'
-            dataset={data.map(row => row.y)}
-            labels={data.map(row => row.x)}
+            dataset={data}
             style={{
               label: argmin ? (argmin.x || argmin || 0).toFixed(2) : '',
               pointRadius: 0,
               borderWidth: 5,
             }}
+            options={{
+          legend: {
+            display: false,
+          },
+          title: {
+            display: true,
+            fontStyle: 'bold',
+            fontSize: 16,
+            text: argmin ? `x = ${(argmin.x || argmin || 0).toFixed(2)}` : '',
+          },
+          scales: {
+            xAxes: [{
+              type: 'linear',
+              position: 'bottom',
+              callback: value => parseFloat(value).toFixed(1),
+              ticks: {
+                stepSize: 0.5,
+                 autoSkip: true,
+              },
+            }],
+          },
+        }}
           />)}
         description='Simple equation solver. Uses unnamed single parameter in the search space and will find the x value for a minimum of y using the equation y = x ** 2 - x - 2.'
         code={unnamedParametersSolve}

@@ -30,10 +30,30 @@ class ExpressionPreview extends React.Component {
     return (
       <LineChart
         size='large'
-        dataset={data.map(row => row.y)}
-        labels={data.map(row => row.x)}
+        dataset={data}
+        options={{
+          legend: {
+            display: false,
+          },
+          title: {
+            display: true,
+            fontStyle: 'bold',
+            fontSize: 16,
+            text: argmin ? `x = ${(argmin.x || argmin || 0).toFixed(2)}` : '',
+          },
+          scales: {
+            xAxes: [{
+              type: 'linear',
+              position: 'bottom',
+              callback: value => parseFloat(value).toFixed(1),
+              ticks: {
+                stepSize: 0.5,
+                 autoSkip: true,
+              },
+            }],
+          },
+        }}
         style={{
-          label: argmin ? (argmin.x || argmin || 0).toFixed(2) : '',
           pointRadius: 0,
           borderWidth: 5,
         }}
