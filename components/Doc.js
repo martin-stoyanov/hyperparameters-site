@@ -19,7 +19,7 @@ export default class Doc extends React.Component {
   };
   render() {
     const {
-      children, desc, name, examples, code, example,
+      children, desc, name, examples, code, example, smoothing,
     } = this.props;
     const { rawdata } = this.state;
     return (
@@ -45,7 +45,11 @@ export default class Doc extends React.Component {
             </Box>
             <Box flex={true} pad={{ vertical: 'large' }} align='center'>
               <Box basis='medium' pad='small'>
-                {example ? example(rawdata) : <KDEChartArray rawData={rawdata} />}
+                {example ? example(rawdata) : <KDEChartArray
+                  rawData={rawdata}
+                  smoothing={smoothing}
+                />
+                }
               </Box>
             </Box>
           </Box>
