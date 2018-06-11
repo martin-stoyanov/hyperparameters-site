@@ -9,8 +9,11 @@ class ExpressionPreview extends React.Component {
   };
 
   async componentDidMount() {
-    const { expression, formatSnippet } = this.props;
+    const { expression, formatSnippet, onData } = this.props;
     const { value: trials } = await evalExpression(expression, formatSnippet);
+    if (onData) {
+      onData(trials);
+    }
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({
       argmin: trials.argmin,
@@ -63,11 +66,13 @@ class ExpressionPreview extends React.Component {
 }
 ExpressionPreview.defaultProps = {
   formatSnippet: undefined,
+  onData: undefined,
 };
 
 ExpressionPreview.propTypes = {
   expression: PropTypes.string.isRequired,
   formatSnippet: PropTypes.func,
+  onData: PropTypes.func,
 };
 
 export default ExpressionPreview;
