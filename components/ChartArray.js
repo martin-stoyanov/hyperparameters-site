@@ -28,7 +28,7 @@ class ChartArray extends React.Component {
       labels,
       datasets: [
         {
-          label: 'after 500 iterations',
+          label: `after ${array.length} iterations`,
           backgroundColor: 'rgba(206, 95, 47,0.4)',
           borderColor: 'rgba(206, 95, 47,1)',
           borderWidth: 1,
@@ -42,6 +42,15 @@ class ChartArray extends React.Component {
       <div>
         <Bar
           data={data}
+          options={{
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                }],
+            },
+        }}
         />
       </div>
     );
