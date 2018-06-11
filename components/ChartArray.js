@@ -1,9 +1,12 @@
+import { Box } from 'grommet';
 import { Bar } from 'react-chartjs-2';
 
 
 class ChartArray extends React.Component {
   render() {
-    const { array } = this.props;
+    const { array, size } = this.props;
+    const width = size === 'small' ? '350px' : '550px';
+    const height = size === 'small' ? '220px' : '450px';
     const count = array.reduce((n, val) => {
       const result = n;
       result[val] = result[val] === undefined ? 1 : result[val] + 1;
@@ -39,7 +42,10 @@ class ChartArray extends React.Component {
       ],
     };
     return (
-      <div>
+      <Box
+        fill='true'
+        style={{ position: 'relative', width, height }}
+      >
         <Bar
           data={data}
           options={{
@@ -52,7 +58,7 @@ class ChartArray extends React.Component {
             },
         }}
         />
-      </div>
+      </Box>
     );
   }
 }
