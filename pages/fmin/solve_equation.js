@@ -39,7 +39,7 @@ export default class SolveEquationPage extends React.Component {
             style={{
               label: argmin ? (argmin.x || argmin || 0).toFixed(2) : '',
               pointRadius: 0,
-              borderWidth: 5,
+              borderWidth: 1,
             }}
             options={{
           legend: {

@@ -55,7 +55,7 @@ class ExpressionPreview extends React.Component {
         }}
         style={{
           pointRadius: 0,
-          borderWidth: 5,
+          borderWidth: 1,
         }}
       />
     );
