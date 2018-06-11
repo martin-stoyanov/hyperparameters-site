@@ -9,7 +9,7 @@ class ExpressionPreview extends React.Component {
   };
 
   async componentDidMount() {
-    const { expression, formatSnippet, onData } = this.props;
+    const { expression, formatSnippet, onData, more } = this.props;
     const { value: trials } = await evalExpression(expression, formatSnippet);
     if (onData) {
       onData(trials);
