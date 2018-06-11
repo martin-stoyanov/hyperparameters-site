@@ -135,6 +135,11 @@ const Index = () => (
             <ExpressionPreview expression={unnamedParametersSolve} />
           </Box>
         </Item>
+        <Item name='Tiny tensorflow' path='/tensorflow/tiny'>
+          <Box flex={true}>
+            <ExpressionPreview expression={unnamedParametersSolve} />
+          </Box>
+        </Item>
       </Section>
     </Box>
   </Layout>

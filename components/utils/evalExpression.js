@@ -55,6 +55,7 @@ export default async (expression, formatSnippet = p => p) => {
   tf.ENV.engine.endScope();
   window.hpjs = undefined;
   window.tf = undefined;
+  console.log(errors, value);
   return { errors, value };
 };
 

@@ -17,7 +17,7 @@ return hpjs.fmin(opt, space, hpjs.estimators.rand.suggest, 300);
 
 
 export const tinyTensorflowModel =
-`const trainModel = async ({ optimizer, epochs }, { xs, ys }) => {
+`async function trainModel({ optimizer, epochs }, { xs, ys }) {
   // Create a simple model.
   const model = tf.sequential();
   model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
@@ -29,29 +29,27 @@ export const tinyTensorflowModel =
   // Train the model using the data.
   const h = await model.fit(xs, ys, { epochs });
   return { model, loss: h.history.loss[h.history.loss.length - 1] };
-};
+}
 
 // fmin optmization function, retuns the loss and a STATUS_OK
-const modelOpt = async ({ optimizer, epochs }, { xs, ys }) => {
+async function modelOpt({ optimizer, epochs }, { xs, ys }) {
   const { loss } = await trainModel({ optimizer, epochs }, { xs, ys });
   return { loss, status: hpjs.STATUS_OK };
+}
+
+// hyperparameters search space
+// optmizer is a choice field
+// epochs ia an integer value from 10 to 250 with a step of 5
+const space = {
+  optimizer: hpjs.choice('optimizer', ['sgd', 'adam', 'adagrad', 'rmsprop']),
+  epochs: hpjs.quniform('epochs', 50, 250, 50),
 };
-
-async function launchHPJS() {
-  // hyperparameters search space
-  // optmizer is a choice field
-  // epochs ia an integer value from 10 to 250 with a step of 5
-  const space = {
-    optimizer: hp.choice('optimizer', ['sgd', 'adam', 'adagrad', 'rmsprop']),
-    epochs: hp.quniform('epochs', 50, 250, 50),
-  };
-  // Generate some synthetic data for training. (y = 2x - 1) and pass to fmin as parameters
-  // data will be passed as a parameters to the fmin
-  const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
-  const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
-
-  return await fmin(
-    modelOpt, space, hpjs.optimizers.rand.suggest, 10,
-    { rng: new hpjs.RandomState(654321), xs, ys }
-  );
-}`;
+// Generate some synthetic data for training. (y = 2x - 1) and pass to fmin as parameters
+// data will be passed as a parameters to the fmin
+const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
+const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+return await hpjs.fmin(
+  modelOpt, space, hpjs.estimators.rand.suggest, 10,
+  { rng: new hpjs.RandomState(654321), xs, ys }
+);
+`;
