@@ -3,6 +3,7 @@ import { Grommet } from 'grommet';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
+import theme from './utils/theme';
 
 const Layout = ({ title, children, description = 'HyperSearch is a Javascript library for hyperparameter optimization. It is based on the Python library Hyperopt ' }) => (
   <React.Fragment>
@@ -11,7 +12,7 @@ const Layout = ({ title, children, description = 'HyperSearch is a Javascript li
       <title>HyperSearch: Hyperparameter Optimization for Javascript</title>
       <meta name='description' content={description} />
     </Head>
-    <Grommet theme={{ global: { colors: { brand: '#ce5f2f' } } }}>
+    <Grommet theme={theme}>
       <Header />
       {children}
       <Footer />
