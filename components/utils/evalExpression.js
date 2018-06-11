@@ -1,5 +1,5 @@
 import * as tf from '@tensorflow/tfjs';
-import hp, { fmin, optimizers } from 'hyperparameters';
+import * as hpjs from 'hyperparameters';
 
 // from https://github.com/tensorflow/tfjs-website/blob/master/themes/dljs/source/js/codeSnippets.js
 function getErrorLine(error) {
@@ -38,9 +38,8 @@ export default async (expression, formatSnippet = p => p) => {
   const evalString = `(async function runner() { try { ${formatSnippet(expression)
   }} catch (e) { reportError(e); } })()`;
 
-  window.hp = hp;
-  window.fmin = fmin;
-  window.optimizers = optimizers;
+  window.hpjs = hpjs;
+  window.tf = tf;
   let value;
   tf.ENV.engine.startScope();
   try {
@@ -54,9 +53,8 @@ export default async (expression, formatSnippet = p => p) => {
     reportError(e);
   }
   tf.ENV.engine.endScope();
-  window.hp = undefined;
-  window.fmin = undefined;
-  window.optimizers = undefined;
+  window.hpjs = undefined;
+  window.tf = undefined;
   return { errors, value };
 };
 

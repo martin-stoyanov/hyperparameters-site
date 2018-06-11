@@ -4,7 +4,7 @@ const desc = 'Returns a logarithmic version of <a href="/normal">hp.normal</a> i
 export default () => (
   <Doc
     name='lognormal'
-    code={'hp.lognormal(\'lognormal\', 0, 1);'}
+    code={'hpjs.lognormal(\'lognormal\', 0, 1);'}
     size='large'
     style={{
       pointRadius: 0,

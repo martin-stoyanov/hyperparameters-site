@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from 'grommet';
-import hp from 'hyperparameters';
+import * as hpjs from 'hyperparameters';
 import Layout from '../components/Layout';
 import Section from '../components/Section';
 import Item from '../components/Item';
@@ -14,15 +14,15 @@ const Index = () => (
   <Layout title='Hyperparamer Optimization for Javascript'>
     <Box pad={{ horizontal: 'large' }}>
       <Section align='stretch' name='Parameter Expressions' index={0}>
-        <Item name='hp.choice(label, options)' path='/choice'>
+        <Item name='hpjs.choice(label, options)' path='/choice'>
           <Box flex={true}>
-            <ChartArray array={spaceToArray(hp.choice('choice', ['cat', 'dog']))} />
+            <ChartArray array={spaceToArray(hpjs.choice('choice', ['cat', 'dog']))} />
           </Box>
         </Item>
-        <Item name='hp.randint(label, upper)' path='/randint'>
+        <Item name='hpjs.randint(label, upper)' path='/randint'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.randint('random int', 5))}
+              rawData={spaceToArray(hpjs.randint('random int', 5))}
               size='small'
               smoothing='0.01'
               style={{
@@ -32,10 +32,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.uniform(label, low, high)' path='/uniform'>
+        <Item name='hpjs.uniform(label, low, high)' path='/uniform'>
           <Box flex={true} >
             <KDEChartArray
-              rawData={spaceToArray(hp.uniform('uniform', 0, 5))}
+              rawData={spaceToArray(hpjs.uniform('uniform', 0, 5))}
               size='small'
               style={{
                 pointRadius: 0,
@@ -44,10 +44,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.quniform(label, low, high, q)' path='/quniform'>
+        <Item name='hpjs.quniform(label, low, high, q)' path='/quniform'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.quniform('quniform', 0, 5, 0.1))}
+              rawData={spaceToArray(hpjs.quniform('quniform', 0, 5, 0.1))}
               size='small'
               style={{
                 pointRadius: 0,
@@ -56,10 +56,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.loguniform(label, low, high)' path='/loguniform'>
+        <Item name='hpjs.loguniform(label, low, high)' path='/loguniform'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.loguniform('loguniform', 0, 5))}
+              rawData={spaceToArray(hpjs.loguniform('loguniform', 0, 5))}
               size='small'
               style={{
                 pointRadius: 0,
@@ -68,10 +68,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.qloguniform(label, low, high, q)' path='/qloguniform'>
+        <Item name='hpjs.qloguniform(label, low, high, q)' path='/qloguniform'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.qloguniform('qloguniform', 0, 5, 0.1))}
+              rawData={spaceToArray(hpjs.qloguniform('qloguniform', 0, 5, 0.1))}
               size='small'
               style={{
                 pointRadius: 0,
@@ -80,10 +80,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.normal(label, mu, sigma)' path='/normal'>
+        <Item name='hpjs.normal(label, mu, sigma)' path='/normal'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.normal('normal', 0, 1))}
+              rawData={spaceToArray(hpjs.normal('normal', 0, 1))}
               size='small'
               style={{
                 pointRadius: 0,
@@ -92,10 +92,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.qnormal(label, mu, sigma, q)' path='/qnormal'>
+        <Item name='hpjs.qnormal(label, mu, sigma, q)' path='/qnormal'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.qnormal('qnormal', 0, 1, 0.1))}
+              rawData={spaceToArray(hpjs.qnormal('qnormal', 0, 1, 0.1))}
               size='small'
               style={{
                 pointRadius: 0,
@@ -104,10 +104,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.lognormal(label, mu, sigma)' path='/lognormal'>
+        <Item name='hpjs.lognormal(label, mu, sigma)' path='/lognormal'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.lognormal('lognormal', 0, 1))}
+              rawData={spaceToArray(hpjs.lognormal('lognormal', 0, 1))}
               size='small'
               style={{
                 pointRadius: 0,
@@ -116,10 +116,10 @@ const Index = () => (
             />
           </Box>
         </Item>
-        <Item name='hp.qlognormal(label, mu, sigma, q)' path='/qlognormal'>
+        <Item name='hpjs.qlognormal(label, mu, sigma, q)' path='/qlognormal'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hp.qlognormal('qlognormal', 0, 1, 0.1))}
+              rawData={spaceToArray(hpjs.qlognormal('qlognormal', 0, 1, 0.1))}
               size='small'
               style={{
                 pointRadius: 0,

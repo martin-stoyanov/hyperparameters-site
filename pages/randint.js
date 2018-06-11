@@ -4,7 +4,7 @@ import Doc from '../components/Doc';
 export default () => (
   <Doc
     name='randint'
-    code={'hp.randint(\'randint\', 5);'}
+    code={'hpjs.randint(\'randint\', 5);'}
     size='large'
     smoothing='0.01'
     style={{

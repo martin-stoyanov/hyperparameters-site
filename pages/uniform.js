@@ -5,7 +5,7 @@ export default () => (
   <Box>
     <Doc
       name='uniform'
-      code={'hp.uniform(\'uniform\', 0, 5);'}
+      code={'hpjs.uniform(\'uniform\', 0, 5);'}
       size='large'
       style={{
         pointRadius: 0,

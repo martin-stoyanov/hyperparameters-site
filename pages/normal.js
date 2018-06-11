@@ -4,7 +4,7 @@ const desc = "Returns a real number that's normally-distributed with mean mu and
 export default () => (
   <Doc
     name='normal'
-    code={'hp.normal(\'normal\', 0, 1);'}
+    code={'hpjs.normal(\'normal\', 0, 1);'}
     size='large'
     style={{
       pointRadius: 0,

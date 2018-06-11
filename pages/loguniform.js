@@ -5,7 +5,7 @@ export default () => (
   <Box>
     <Doc
       name='loguniform'
-      code={'hp.loguniform(\'loguniform\', 0, 5);'}
+      code={'hpjs.loguniform(\'loguniform\', 0, 5);'}
       size='large'
       style={{
         pointRadius: 0,
