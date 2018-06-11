@@ -8,7 +8,7 @@
     "start": "next start -p $PORT",
     "server": "next start",
     "test": "npm run lint",
-    "lint": "eslint src test",
+    "lint": "eslint pages components",
     "build": "next build",
     "heroku-postbuild": "npm run build"
   },

@@ -33,8 +33,10 @@ export default class Doc extends React.Component {
               <Heading level={1}>
                 <strong>{name}</strong>
               </Heading>
-              {desc ? (
-                <p dangerouslySetInnerHTML={{ __html: desc.description }} />
+              {
+               // eslint-disable-next-line react/no-danger
+               desc ? (
+                 <p dangerouslySetInnerHTML={{ __html: desc.description }} />
               ) : null}
               <CodeSnippet
                 onData={this.onData}
@@ -93,5 +95,4 @@ Doc.propTypes = {
 Doc.defaultProps = {
   desc: undefined,
   examples: {},
-  text: undefined,
 };
