@@ -27,6 +27,7 @@ class CodeSnippet extends React.Component {
 
   render() {
     const { code, ondata, ...rest } = this.props;
+    const nLines = code.split(/\r\n|\r|\n/).length;
     const { snippet, annotations, modified } = this.state;
     return snippet ? (
       <Box fill='horizontal'>
@@ -43,6 +44,7 @@ class CodeSnippet extends React.Component {
           code={snippet}
           onLoad={() => this.executeCodeSnippet(snippet)}
           onChange={value => this.setState({ modified: true, snippet: value })}
+          height={`${(nLines + 1) * 16}px`}
           {...rest}
         />
 

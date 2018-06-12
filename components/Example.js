@@ -15,7 +15,7 @@ export default class Example extends React.Component {
       trials: trials.trials,
       argmin: trials.argmin,
       data: trials.trials.map((trial) => {
-        const x = trial.args.x !== undefined ? trial.args.x.toFixed(2) : trial.args.toFixed(2);
+        const x = typeof trial.args === 'object' ? trial.args[Object.keys(trial.args)[0]].toFixed(2) : trial.args.toFixed(2);
         return {
           x,
           y: trial.result.loss ? trial.result.loss.toFixed(2) : 0,
@@ -28,12 +28,24 @@ export default class Example extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+  renderSidePanel = () => {
+    const { argmin, data } = this.state;
+    return <ExpressionChart data={data} argmin={argmin} />;
+  };
+
+  renderDescriptionPanel = () => {
+    const { code } = this.props;
+    return (
+      <CodeSnippet
+        onData={this.onData}
+        code={code}
+      />
+    );
+  };
 
   render() {
-    const {
-      description, name, code,
-    } = this.props;
-    const { trials, argmin, data } = this.state;
+    const { description, name } = this.props;
+    const { trials } = this.state;
     return (
       <Layout
         title={this.props.name}
@@ -49,13 +61,10 @@ export default class Example extends React.Component {
                 // eslint-disable-next-line react/no-danger
                 <p dangerouslySetInnerHTML={{ __html: description }} />
               ) : null}
-              <CodeSnippet
-                onData={this.onData}
-                code={code}
-              />
+              {this.renderDescriptionPanel()}
             </Box>
             <Box flex={true} pad={{ top: 'large' }} align='center'>
-              <ExpressionChart data={data} argmin={argmin} />
+              {this.renderSidePanel()}
             </Box>
           </Box>
           <TrialsTable trials={trials} />

@@ -19,22 +19,22 @@ export const periodToTime = (duration) => {
       units: 'ms',
     };
   }
-  const hours = (duration / (1000 * 60 * 60)).toFixed(1);
-  const minutes = (duration / (1000 * 60)).toFixed(1);
+  const hours = (duration / (1000 * 60 * 60)).toFixed(0);
+  const minutes = (duration / (1000 * 60)).toFixed(0);
   if (hours > 0) {
     return {
       time: `${hours}:${minutes}`,
       units: 'hrs',
     };
   }
-  const seconds = (duration / 1000).toFixed(1);
+  const seconds = (duration / 1000).toFixed(0);
   if (minutes > 0) {
     return {
       time: `${minutes}:${seconds}`,
       units: 'min',
     };
   }
-  const milliseconds = (duration).toFixed(1);
+  const milliseconds = (duration).toFixed(0);
   if (seconds > 0) {
     return {
       time: `${seconds}:${milliseconds}`,
@@ -69,7 +69,6 @@ export default({ trials }) => {
       getProps: () => ({ align: 'end' }),
     }));
   }
-
   const columns = [
     {
       Header: 'id',
