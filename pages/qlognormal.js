@@ -6,6 +6,7 @@ export default () => (
     name='qlognormal'
     code={'hpjs.qlognormal(\'qlognormal\', 0, 1, 0.1);'}
     size='large'
+    smoothing='0.01'
     style={{
       pointRadius: 0,
       borderWidth: 1,

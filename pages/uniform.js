@@ -7,6 +7,7 @@ export default () => (
       name='uniform'
       code={'hpjs.uniform(\'uniform\', 0, 5);'}
       size='large'
+      smoothing='0.2'
       style={{
         pointRadius: 0,
         borderWidth: 1,

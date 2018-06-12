@@ -4,8 +4,9 @@ const desc = 'returns a quantized value of <a href="/uniform">hp.uniform</a> i.e
 export default () => (
   <Doc
     name='quniform'
-    code={'hpjs.quniform(\'quniform\', 0, 5, 0.1);'}
+    code={'hpjs.quniform(\'quniform\', 0, 5, 0.5);'}
     size='large'
+    smoothing='0.01'
     style={{
       pointRadius: 0,
       borderWidth: 1,
