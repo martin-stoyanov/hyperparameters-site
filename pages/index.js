@@ -9,6 +9,7 @@ import ChartArray from '../components/ChartArray';
 import KDEChartArray from '../components/KDEChartArray';
 import ExpressionPreview from '../components/ExpressionPreview';
 import { unnamedParametersSolve } from '../components/utils/expressions';
+import TensorflowPreview from '../components/TensorflowPreview';
 
 const Index = () => (
   <Layout title='Hyperparamer Optimization for Javascript'>
@@ -136,9 +137,9 @@ const Index = () => (
           </Box>
         </Item>
         <Item name='Tiny tensorflow' path='/tensorflow/tiny'>
-          <Box flex={true}>
-            <ExpressionPreview expression={unnamedParametersSolve} />
-          </Box>
+          <TensorflowPreview
+            items={{ optimizer: 'sgd', epochs: 250 }}
+          />
         </Item>
       </Section>
     </Box>
