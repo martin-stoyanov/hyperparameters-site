@@ -17,6 +17,13 @@ class KDEChartArray extends React.Component {
         dataset={dataset}
         style={style}
         options={{
+          legend: {
+            display: false,
+          },
+          title: {
+            display: true,
+            text: `after ${xDomain.length} Iterations`,
+        },
           scales: {
           xAxes: [{
             type: 'linear',
