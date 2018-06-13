@@ -144,6 +144,7 @@ const Index = () => (
         <Item name='Tiny tensorflow' path='/tensorflow/tiny'>
           <TensorflowPreview
             items={{ optimizer: 'sgd', epochs: 250 }}
+            description='find best optimizer and number of epochs for the "tiny" tensorflow.js sample'
           />
         </Item>
       </Section>
