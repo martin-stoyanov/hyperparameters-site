@@ -64,7 +64,7 @@ export default class TensorflowExample extends React.Component {
               <Box background='light-1' pad={{ horizontal: 'small' }}>
                 experiment
               </Box>
-              <Box pad='small' direction='row' align='center' justify='between' fill='horizontal' border='all'>
+              <Box pad='small' direction='row-responsive' align='center' justify='between' fill='horizontal' border='all'>
                 <Box direction='row' gap='medium'>
                   <ObjectValues obj={{ '#': experimentEnd.idx }} />
                   <ObjectValues obj={experimentEnd.trial.args} />
@@ -79,7 +79,7 @@ export default class TensorflowExample extends React.Component {
               <Box background='light-1' pad={{ horizontal: 'small' }}>
                 last trial
               </Box>
-              <Box pad='small' direction='row' align='center' justify='between' fill='horizontal'>
+              <Box pad='small' direction='row-responsive' align='center' justify='between' fill='horizontal'>
                 <Box direction='row' gap='medium'>
                   <ObjectValues obj={{ 'trial': experimentBegin.idx }} />
                   <ObjectValues obj={experimentBegin.trial.args} />
