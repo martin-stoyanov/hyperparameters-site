@@ -22,7 +22,7 @@ class KDEChartArray extends React.Component {
           },
           title: {
             display: true,
-            text: `after ${xDomain.length} Iterations`,
+            text: `${xDomain.length} Iterations`,
         },
           scales: {
           xAxes: [{
