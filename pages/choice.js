@@ -3,7 +3,7 @@ import ChartArray from '../components/ChartArray';
 
 export default () => (
   <Doc
-    name='choice'
+    name='hpjs.choice(label, options)'
     code={'hpjs.choice(\'choice\', [\'cat\', \'dog\']);'}
     example={data => (data ? <ChartArray array={data} size='large' /> : null)}
     labels='["cat", "dog"]'

@@ -3,7 +3,7 @@ import Doc from '../components/Doc';
 const desc = "Returns a real number that's normally-distributed with mean mu and standard deviation sigma";
 export default () => (
   <Doc
-    name='normal'
+    name='hpjs.normal(label, mu, sigma)'
     code={'hpjs.normal(\'normal\', 0, 1);'}
     size='large'
     style={{

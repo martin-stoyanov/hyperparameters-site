@@ -3,7 +3,7 @@ import Doc from '../components/Doc';
 const desc = 'Returns a logarithmic version of <a href="/normal">hp.normal</a> i.e. exp(normal(mu, sigma))';
 export default () => (
   <Doc
-    name='lognormal'
+    name='hpjs.lognormal(label, mu, sigma)'
     code={'hpjs.lognormal(\'lognormal\', 0, 1);'}
     size='large'
     style={{

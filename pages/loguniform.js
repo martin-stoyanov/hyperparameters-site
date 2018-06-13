@@ -4,7 +4,7 @@ import Doc from '../components/Doc';
 export default () => (
   <Box>
     <Doc
-      name='loguniform'
+      name='hpjs.loguniform(label, low, high)'
       code={'hpjs.loguniform(\'loguniform\', 0, 5);'}
       size='large'
       style={{

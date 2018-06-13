@@ -3,7 +3,7 @@ import Doc from '../components/Doc';
 
 export default () => (
   <Doc
-    name='randint'
+    name='hpjs.randint(label, upper)'
     code={'hpjs.randint(\'randint\', 5);'}
     size='large'
     smoothing='0.01'

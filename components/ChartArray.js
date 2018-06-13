@@ -27,6 +27,7 @@ class ChartArray extends React.Component {
 */
     // sort the array
     sorted.sort((a, b) => a[0] - b[0]);
+    console.log(sorted);
     const data = {
       labels,
       datasets: [

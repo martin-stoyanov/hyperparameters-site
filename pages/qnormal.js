@@ -3,7 +3,7 @@ import Doc from '../components/Doc';
 const desc = 'returns a quantized value of <a href="/normal">hp.normal</a> i.e. (normal(mu, sigma) / q) * q';
 export default () => (
   <Doc
-    name='qnormal'
+    name='hpjs.qnormal(label, mu, sigma, q)'
     code={'hpjs.qnormal(\'qnormal\', 0, 1, 0.5);'}
     size='large'
     smoothing='0.01'
