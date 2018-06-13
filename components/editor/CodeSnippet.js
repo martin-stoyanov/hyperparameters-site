@@ -1,7 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { Box, Text, Anchor } from 'grommet';
-import evalExpression from './utils/evalExpression';
+import evalExpression from './evalExpression';
 
 
 const CodeEditor = dynamic(import('./CodeEditor'), {

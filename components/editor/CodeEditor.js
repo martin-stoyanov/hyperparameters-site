@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { Box } from 'grommet';
 import AceEditor from 'react-ace';
 
-import 'brace/mode/javascript';
 import 'brace/theme/twilight';
+import './javascript';
 
 
 const CodeEditor = ({ code, options, ...rest }) => (

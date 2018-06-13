@@ -8,7 +8,7 @@ import spaceToArray from '../components/utils/spaceToArray';
 import ChartArray from '../components/ChartArray';
 import KDEChartArray from '../components/KDEChartArray';
 import ExpressionPreview from '../components/ExpressionPreview';
-import { unnamedParametersSolve } from '../components/utils/expressions';
+import { unnamedParametersSolve } from '../components/editor/expressions';
 import TensorflowPreview from '../components/TensorflowPreview';
 
 const Index = () => (

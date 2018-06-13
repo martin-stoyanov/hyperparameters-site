@@ -1,5 +1,5 @@
 import TensorflowExample from '../../components/TensorflowExample';
-import { tinyTensorflowModel } from '../../components/utils/expressions';
+import { tinyTensorflowModel } from '../../components/editor/expressions';
 
 export default () => (
   <TensorflowExample

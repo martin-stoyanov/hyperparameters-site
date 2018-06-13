@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import evalExpression from './utils/evalExpression';
+import evalExpression from './editor/evalExpression';
 import ExpressionChart from './ExpressionChart';
 
 class ExpressionPreview extends React.Component {

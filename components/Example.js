@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box, Heading } from 'grommet';
 import PageLayout from './PageLayout';
-import CodeSnippet from './CodeSnippet';
+import CodeSnippet from './editor/CodeSnippet';
 import ExpressionChart from './ExpressionChart';
 import TrialsTable from './TrialsTable';
 

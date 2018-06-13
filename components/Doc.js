@@ -4,7 +4,7 @@ import Layout from './Layout';
 import DocProperty from './DocProperty';
 import spaceToArray from './utils/spaceToArray';
 import KDEChartArray from './KDEChartArray';
-import CodeSnippet from './CodeSnippet';
+import CodeSnippet from './editor/CodeSnippet';
 
 export default class Doc extends React.Component {
   state = {

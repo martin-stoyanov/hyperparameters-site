@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box, Heading, Text } from 'grommet';
 import PageLayout from './PageLayout';
-import CodeSnippet from './CodeSnippet';
+import CodeSnippet from './editor/CodeSnippet';
 import TrialsTable from './TrialsTable';
 
 export default class TensorflowExample extends React.Component {

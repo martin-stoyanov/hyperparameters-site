@@ -1,5 +1,5 @@
 import Example from '../../components/Example';
-import { unnamedParametersSolve } from '../../components/utils/expressions';
+import { unnamedParametersSolve } from '../../components/editor/expressions';
 
 export default () => (
   <Example
