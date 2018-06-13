@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import { Box, Heading, Text } from 'grommet';
-import Example from './Example';
+import PageLayout from './PageLayout';
 import CodeSnippet from './CodeSnippet';
+import TrialsTable from './TrialsTable';
 
-export default class TensorflowExample extends Example {
+export default class TensorflowExample extends React.Component {
+  state = {
+    trials: [],
+  };
   onData = (trials) => {
     this.setState({
       trials: trials.trials,
-      argmin: trials.argmin,
       best: trials.bestTrial(),
     });
   };
@@ -25,10 +28,9 @@ export default class TensorflowExample extends Example {
     this.setState({ epoch, logs });
   };
   onStartExperiments = () => {
-    console.log('onStartExperiments');
-    this.setState({ trials: [] });
+    this.setState({ trials: [], best: undefined });
   };
-  renderSidePanel = () => {
+  renderCodeSnippet = () => {
     const { code } = this.props;
     return (
       <CodeSnippet
@@ -85,6 +87,30 @@ export default class TensorflowExample extends Example {
       </Box>
     );
   };
+  render() {
+    const { description, name } = this.props;
+    const { trials } = this.state;
+    return (
+      <PageLayout
+        title={this.props.name}
+        description={description}
+      >
+        <Box direction='row-responsive'>
+          <Box margin={{ top: 'large' }} basis='1/2' align='start'>
+            <Heading level={1} margin='none'>
+              <strong>{name}</strong>
+            </Heading>
+            <p dangerouslySetInnerHTML={{ __html: description }} />
+            {this.renderDescriptionPanel()}
+          </Box>
+          <Box flex={true} pad={{ top: 'large' }} align='center'>
+            {this.renderCodeSnippet()}
+          </Box>
+        </Box>
+        <TrialsTable trials={trials} />
+      </PageLayout>
+    );
+  }
 }
 
 TensorflowExample.propTypes = {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Box, Heading } from 'grommet';
-import Layout from './Layout';
+import PageLayout from './PageLayout';
 import CodeSnippet from './CodeSnippet';
 import ExpressionChart from './ExpressionChart';
 import TrialsTable from './TrialsTable';
@@ -25,51 +25,35 @@ export default class Example extends React.Component {
         .reverse(),
     });
   };
-  componentDidMount() {
-    window.scrollTo(0, 0);
-  }
-  renderSidePanel = () => {
-    const { argmin, data } = this.state;
-    return <ExpressionChart data={data} argmin={argmin} />;
-  };
-
-  renderDescriptionPanel = () => {
-    const { code } = this.props;
-    return (
-      <CodeSnippet
-        onData={this.onData}
-        code={code}
-      />
-    );
-  };
 
   render() {
-    const { description, name } = this.props;
-    const { trials } = this.state;
+    const { description, name, code } = this.props;
+    const { trials, argmin, data } = this.state;
     return (
-      <Layout
+      <PageLayout
         title={this.props.name}
         description={description}
       >
-        <Box pad={{ horizontal: 'large', top: 'large' }}>
-          <Box direction='row-responsive'>
-            <Box margin={{ top: 'large' }} basis='1/2' align='start'>
-              <Heading level={1} margin='none'>
-                <strong>{name}</strong>
-              </Heading>
-              {description ? (
-                // eslint-disable-next-line react/no-danger
-                <p dangerouslySetInnerHTML={{ __html: description }} />
-              ) : null}
-              {this.renderDescriptionPanel()}
-            </Box>
-            <Box flex={true} pad={{ top: 'large' }} align='center'>
-              {this.renderSidePanel()}
-            </Box>
+        <Box direction='row-responsive'>
+          <Box margin={{ top: 'large' }} basis='1/2' align='start'>
+            <Heading level={1} margin='none'>
+              <strong>{name}</strong>
+            </Heading>
+            {description ? (
+              // eslint-disable-next-line react/no-danger
+              <p dangerouslySetInnerHTML={{ __html: description }} />
+            ) : null}
+            <CodeSnippet
+              onData={this.onData}
+              code={code}
+            />
           </Box>
-          <TrialsTable trials={trials} />
+          <Box flex={true} pad={{ top: 'large' }} align='center'>
+            <ExpressionChart data={data} argmin={argmin} />
+          </Box>
         </Box>
-      </Layout>
+        <TrialsTable trials={trials} />
+      </PageLayout>
     );
   }
 }
