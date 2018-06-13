@@ -32,7 +32,9 @@ export default class TensorflowExample extends React.Component {
     this.setState({ epoch, logs });
   };
   onStartExperiments = () => {
-    this.setState({ trials: [], best: undefined });
+    this.setState({
+      trials: [], best: undefined, experimentBegin: undefined, experimentEnd: undefined,
+    });
   };
   renderCodeSnippet = () => {
     const { code } = this.props;
@@ -97,7 +99,7 @@ export default class TensorflowExample extends React.Component {
         {best && (
           <Box>
             <Heading>
-              Results (best):
+              best result:
             </Heading>
             {items}
           </Box>
