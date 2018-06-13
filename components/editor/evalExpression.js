@@ -38,16 +38,21 @@ export default async (expression, formatSnippet = p => p, params = {}) => {
   // eslint-disable-next-line no-unused-vars
   const onExperimentBegin = async (i, trial) => {
     if (params.onExperimentBegin) {
-      params.onExperimentBegin(i, trial);
+      const res = params.onExperimentBegin(i, trial);
       await tf.nextFrame();
+      return res;
     }
+    return false;
   };
+
   // eslint-disable-next-line no-unused-vars
   const onExperimentEnd = async (i, trial) => {
     if (params.onExperimentEnd) {
-      params.onExperimentEnd(i, trial);
+      const res = params.onExperimentEnd(i, trial);
       await tf.nextFrame();
+      return res;
     }
+    return false;
   };
   // eslint-disable-next-line no-unused-vars
   const onEpochEnd = async (epoch, logs) => {

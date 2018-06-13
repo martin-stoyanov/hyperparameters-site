@@ -18,34 +18,43 @@ class CodeSnippet extends React.Component {
   }
 
   executeCodeSnippet = (codeSnippet) => {
-    setTimeout(() => {
+    setTimeout(async () => {
       const { formatSnippet, evalParams, onStart } = this.props;
 
       if (onStart) {
         onStart(codeSnippet);
       }
-      this.setState({ running: true }, async () => {
-        try {
-          const { errors, value } = await evalExpression(codeSnippet, formatSnippet, evalParams);
-          if (value !== undefined) {
-            this.props.onData(value);
-            this.setState({
-              modified: false,
-              running: false,
-            });
-          } else {
-            this.setState({
-              annotations: errors,
-              modified: false,
-              running: false,
-            });
-          }
-        } catch (e) {
-          console.error(e);
-          this.setState({ running: false });
+      this.setState({ running: true });
+      try {
+        const { errors, value } = await evalExpression(codeSnippet, formatSnippet, evalParams);
+        if (value !== undefined) {
+          this.props.onData(value);
+          this.setState({
+            modified: false,
+            running: false,
+          });
+        } else {
+          this.setState({
+            annotations: errors,
+            modified: false,
+            running: false,
+          });
         }
-      }, 300);
-    });
+      } catch (e) {
+        console.error(e);
+        this.setState({ running: false });
+      }
+    }, 300);
+  };
+
+  onRunClick = () => {
+    const { onStopRequest } = this.props;
+    const { running, snippet } = this.state;
+    if (!running && snippet) {
+      this.executeCodeSnippet(snippet);
+    } else if (onStopRequest) {
+      onStopRequest();
+    }
   };
 
   render() {
@@ -65,7 +74,7 @@ class CodeSnippet extends React.Component {
           <Anchor
             label={running ? 'stop' : 'run'}
             primary={true}
-            onClick={running ? undefined : () => this.executeCodeSnippet(snippet)}
+            onClick={this.onRunClick}
           />
         </Box>
         <CodeEditor

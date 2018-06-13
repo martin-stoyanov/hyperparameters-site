@@ -16,12 +16,15 @@ export default class TensorflowExample extends React.Component {
   };
 
   onExperimentBegin = (idx, trial) => {
+    const { stopping } = this.state;
     this.setState({ experimentBegin: { idx, trial } });
+    return stopping;
   };
 
   onExperimentEnd = (idx, trial) => {
-    const { trials } = this.state;
+    const { trials, stopping } = this.state;
     this.setState({ experimentEnd: { idx, trial }, trials: [...trials, trial] });
+    return stopping;
   };
 
   onEpochEnd = (epoch, logs) => {
@@ -39,6 +42,7 @@ export default class TensorflowExample extends React.Component {
           onExperimentEnd: this.onExperimentEnd,
           onEpochEnd: this.onEpochEnd,
         }}
+        onStopRequest={() => this.setState({ stopping: true })}
         onStart={this.onStartExperiments}
         onData={this.onData}
         code={code}
