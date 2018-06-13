@@ -53,8 +53,8 @@ export default class Example extends React.Component {
       >
         <Box pad={{ horizontal: 'large', top: 'large' }}>
           <Box direction='row-responsive'>
-            <Box margin={{ vertical: 'large' }} basis='1/2' align='start'>
-              <Heading level={1}>
+            <Box margin={{ top: 'large' }} basis='1/2' align='start'>
+              <Heading level={1} margin='none'>
                 <strong>{name}</strong>
               </Heading>
               {description ? (

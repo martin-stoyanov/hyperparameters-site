@@ -36,16 +36,25 @@ export default async (expression, formatSnippet = p => p, params = {}) => {
   };
 
   // eslint-disable-next-line no-unused-vars
-  const onExperimentBegin = (i, trial) => {
+  const onExperimentBegin = async (i, trial) => {
     if (params.onExperimentBegin) {
       params.onExperimentBegin(i, trial);
+      await tf.nextFrame();
     }
   };
   // eslint-disable-next-line no-unused-vars
-  const onExperimentEnd = (i, trial) => {
+  const onExperimentEnd = async (i, trial) => {
     if (params.onExperimentEnd) {
       params.onExperimentEnd(i, trial);
+      await tf.nextFrame();
     }
+  };
+  // eslint-disable-next-line no-unused-vars
+  const onEpochEnd = async (epoch, logs) => {
+    if (params.onEpochEnd) {
+      params.onEpochEnd(epoch, logs);
+    }
+    await tf.nextFrame();
   };
 
   const evalString = `(async function runner() { try { ${formatSnippet(expression)

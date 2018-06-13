@@ -27,7 +27,7 @@ export const tinyTensorflowModel =
     optimizer
   });
   // Train the model using the data.
-  const h = await model.fit(xs, ys, { epochs });
+  const h = await model.fit(xs, ys, { epochs, callbacks: { onEpochEnd } });
   return { model, loss: h.history.loss[h.history.loss.length - 1] };
 }
 
@@ -42,7 +42,7 @@ async function modelOpt({ optimizer, epochs }, { xs, ys }) {
 // epochs ia an integer value from 10 to 250 with a step of 5
 const space = {
   optimizer: hpjs.choice('optimizer', ['sgd', 'adam', 'adagrad', 'rmsprop']),
-  epochs: hpjs.quniform('epochs', 50, 250, 50),
+  epochs: hpjs.quniform('epochs', 10, 20, 5),
 };
 // Generate some synthetic data for training. (y = 2x - 1) and pass to fmin as parameters
 // data will be passed as a parameters to the fmin

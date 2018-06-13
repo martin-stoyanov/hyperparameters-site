@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Box, Heading } from 'grommet';
+import { Box, Heading, Text } from 'grommet';
 import Example from './Example';
 import CodeSnippet from './CodeSnippet';
 
@@ -17,9 +17,17 @@ export default class TensorflowExample extends Example {
   };
 
   onExperimentEnd = (idx, trial) => {
-    this.setState({ experimentEnd: { idx, trial } });
+    const { trials } = this.state;
+    this.setState({ experimentEnd: { idx, trial }, trials: [...trials, trial] });
   };
 
+  onEpochEnd = (epoch, logs) => {
+    this.setState({ epoch, logs });
+  };
+  onStartExperiments = () => {
+    console.log('onStartExperiments');
+    this.setState({ trials: [] });
+  };
   renderSidePanel = () => {
     const { code } = this.props;
     return (
@@ -27,8 +35,9 @@ export default class TensorflowExample extends Example {
         evalParams={{
           onExperimentBegin: this.onExperimentBegin,
           onExperimentEnd: this.onExperimentEnd,
+          onEpochEnd: this.onEpochEnd,
         }}
-        onStart={() => this.setState({})}
+        onStart={this.onStartExperiments}
         onData={this.onData}
         code={code}
       />
@@ -36,9 +45,25 @@ export default class TensorflowExample extends Example {
   };
 
   renderDescriptionPanel = () => {
-    const { best } = this.state;
-    if (!best) {
-      return null;
+    const {
+      best, epoch, logs, experimentBegin, experimentEnd,
+    } = this.state;
+    let progress;
+    if (epoch !== undefined) {
+      progress = (
+        <Box direction='row' align='center' justify='between'>
+          <Box>
+            {false && console.log(experimentEnd.trial.args, experimentEnd.trial.result)}
+          </Box>
+          <Box>
+            {false && console.log(experimentBegin.trial.args)}
+          </Box>
+          <Box direction='row' gap='small'>
+            <Text size='large'>{`Epoch: ${epoch}`}</Text>
+            <Text size='large'>{`Loss: ${logs.loss.toFixed(4)}`}</Text>
+          </Box>
+        </Box>
+      );
     }
     const items = (best && best.args) ? Object.keys(best.args).map(key => (
       <Box key={`best_trials_${key}`} direction='row' gap='medium'>
@@ -47,11 +72,16 @@ export default class TensorflowExample extends Example {
     )) : null;
 
     return (
-      <Box pad={{ vertical: 'medium' }}>
-        <Heading>
-          Best parameters:
-        </Heading>
-        {items}
+      <Box pad={{ vertical: 'medium' }} gap='small'>
+        {progress}
+        {best && (
+          <Box>
+            <Heading>
+              Best parameters:
+            </Heading>
+            {items}
+          </Box>
+          )}
       </Box>
     );
   };

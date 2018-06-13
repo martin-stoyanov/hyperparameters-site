@@ -12,21 +12,40 @@ const CodeEditor = dynamic(import('./CodeEditor'), {
 class CodeSnippet extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { snippet: props.code, annotations: [], modified: false };
+    this.state = {
+      running: false, snippet: props.code, annotations: [], modified: false,
+    };
   }
 
-  executeCodeSnippet = async (codeSnippet) => {
-    const { formatSnippet, evalParams, onStart } = this.props;
-    if (onStart) {
-      onStart(codeSnippet);
-    }
-    const { errors, value } = await evalExpression(codeSnippet, formatSnippet, evalParams);
-    if (value !== undefined) {
-      this.props.onData(value);
-      this.setState({ modified: false });
-    } else {
-      this.setState({ annotations: errors, modified: false });
-    }
+  executeCodeSnippet = (codeSnippet) => {
+    setTimeout(() => {
+      const { formatSnippet, evalParams, onStart } = this.props;
+
+      if (onStart) {
+        onStart(codeSnippet);
+      }
+      this.setState({ running: true }, async () => {
+        try {
+          const { errors, value } = await evalExpression(codeSnippet, formatSnippet, evalParams);
+          if (value !== undefined) {
+            this.props.onData(value);
+            this.setState({
+              modified: false,
+              running: false,
+            });
+          } else {
+            this.setState({
+              annotations: errors,
+              modified: false,
+              running: false,
+            });
+          }
+        } catch (e) {
+          console.error(e);
+          this.setState({ running: false });
+        }
+      }, 300);
+    });
   };
 
   render() {
@@ -34,16 +53,20 @@ class CodeSnippet extends React.Component {
       code, ondata, evalParams, ...rest
     } = this.props;
     const nLines = code.split(/\r\n|\r|\n/).length;
-    const { snippet, annotations, modified } = this.state;
+    const {
+      snippet, annotations, modified, running,
+    } = this.state;
     return snippet ? (
       <Box fill='horizontal'>
         <Box pad={{ horizontal: 'small' }} basis='xxsmall' justify='between' background='light-1' direction='row' align='center'>
           <Text weight={200}>
-            edit code snippet:
+            {running ? 'running...' : `edit code snippet${modified ? '*' : ''}`}
           </Text>
-          {modified && (
-          <Anchor label='run' primary={true} onClick={() => this.executeCodeSnippet(snippet)} />
-            )}
+          <Anchor
+            label={running ? 'stop' : 'run'}
+            primary={true}
+            onClick={running ? undefined : () => this.executeCodeSnippet(snippet)}
+          />
         </Box>
         <CodeEditor
           annotations={annotations}

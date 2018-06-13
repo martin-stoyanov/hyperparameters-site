@@ -10,26 +10,29 @@ class ExpressionPreview extends React.Component {
 
   componentDidMount() {
     const { expression, formatSnippet, onData } = this.props;
-    evalExpression(expression, formatSnippet)
-      .then(({ value: trials }) => {
-        if (onData) {
-          onData(trials);
-        }
-        // eslint-disable-next-line react/no-did-mount-set-state
-        this.setState({
-          argmin: trials.argmin,
-          data: trials.trials.map((trial) => {
-            const x = trial.args.x !== undefined ? trial.args.x.toFixed(2) : trial.args.toFixed(2);
-            return {
-              x,
-              y: trial.result.loss ? trial.result.loss.toFixed(2) : 0,
-            };
-          })
-            .sort((a, b) => b.x - a.x)
-            .reverse(),
-        });
-      })
-      .catch(e => console.error(e));
+    setTimeout(() => {
+      evalExpression(expression, formatSnippet)
+        .then(({ value: trials }) => {
+          if (onData) {
+            onData(trials);
+          }
+          // eslint-disable-next-line react/no-did-mount-set-state
+          this.setState({
+            argmin: trials.argmin,
+            data: trials.trials.map((trial) => {
+              const x = trial.args.x !== undefined ?
+                trial.args.x.toFixed(2) : trial.args.toFixed(2);
+              return {
+                x,
+                y: trial.result.loss ? trial.result.loss.toFixed(2) : 0,
+              };
+            })
+              .sort((a, b) => b.x - a.x)
+              .reverse(),
+          });
+        })
+        .catch(e => console.error(e));
+    }, 300);
   }
   render() {
     const { data, argmin } = this.state;
