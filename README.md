@@ -4,6 +4,7 @@ Website/documentation for the hyperparameter optimization library [(https://gith
 View site at:
 [(https://hyperjs.herokuapp.com/)](https://hyperjs.herokuapp.com/)
 
+Note: Older versions of certain browsers (like Safari) aren't supported
 
 
 # License
