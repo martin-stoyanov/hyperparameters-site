@@ -11,10 +11,24 @@ export default class TensorflowExample extends Example {
       best: trials.bestTrial(),
     });
   };
+
+  onExperimentBegin = (idx, trial) => {
+    this.setState({ experimentBegin: { idx, trial } });
+  };
+
+  onExperimentEnd = (idx, trial) => {
+    this.setState({ experimentEnd: { idx, trial } });
+  };
+
   renderSidePanel = () => {
     const { code } = this.props;
     return (
       <CodeSnippet
+        evalParams={{
+          onExperimentBegin: this.onExperimentBegin,
+          onExperimentEnd: this.onExperimentEnd,
+        }}
+        onStart={() => this.setState({})}
         onData={this.onData}
         code={code}
       />
@@ -23,6 +37,9 @@ export default class TensorflowExample extends Example {
 
   renderDescriptionPanel = () => {
     const { best } = this.state;
+    if (!best) {
+      return null;
+    }
     const items = (best && best.args) ? Object.keys(best.args).map(key => (
       <Box key={`best_trials_${key}`} direction='row' gap='medium'>
         <Heading margin='none' level={2}>{`${key}: ${best.args[key]}`}</Heading>

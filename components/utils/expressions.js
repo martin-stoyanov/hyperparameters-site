@@ -50,6 +50,6 @@ const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
 const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
 return await hpjs.fmin(
   modelOpt, space, hpjs.estimators.rand.suggest, 10,
-  { rng: new hpjs.RandomState(654321), xs, ys }
+  { rng: new hpjs.RandomState(654321), xs, ys, callbacks: { onExperimentBegin, onExperimentEnd } }
 );
 `;

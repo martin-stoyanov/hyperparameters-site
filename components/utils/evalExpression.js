@@ -23,7 +23,7 @@ function getErrorLine(error) {
   return undefined;
 }
 
-export default async (expression, formatSnippet = p => p) => {
+export default async (expression, formatSnippet = p => p, params = {}) => {
   const errors = [];
   const reportError = (e) => {
     const error = { type: 'error' };
@@ -33,6 +33,19 @@ export default async (expression, formatSnippet = p => p) => {
     }
     error.text = e.message;
     errors.push(error);
+  };
+
+  // eslint-disable-next-line no-unused-vars
+  const onExperimentBegin = (i, trial) => {
+    if (params.onExperimentBegin) {
+      params.onExperimentBegin(i, trial);
+    }
+  };
+  // eslint-disable-next-line no-unused-vars
+  const onExperimentEnd = (i, trial) => {
+    if (params.onExperimentEnd) {
+      params.onExperimentEnd(i, trial);
+    }
   };
 
   const evalString = `(async function runner() { try { ${formatSnippet(expression)

@@ -16,7 +16,11 @@ class CodeSnippet extends React.Component {
   }
 
   executeCodeSnippet = async (codeSnippet) => {
-    const { errors, value } = await evalExpression(codeSnippet, this.props.formatSnippet);
+    const { formatSnippet, evalParams, onStart } = this.props;
+    if (onStart) {
+      onStart(codeSnippet);
+    }
+    const { errors, value } = await evalExpression(codeSnippet, formatSnippet, evalParams);
     if (value !== undefined) {
       this.props.onData(value);
       this.setState({ modified: false });
@@ -26,7 +30,9 @@ class CodeSnippet extends React.Component {
   };
 
   render() {
-    const { code, ondata, ...rest } = this.props;
+    const {
+      code, ondata, evalParams, ...rest
+    } = this.props;
     const nLines = code.split(/\r\n|\r|\n/).length;
     const { snippet, annotations, modified } = this.state;
     return snippet ? (
