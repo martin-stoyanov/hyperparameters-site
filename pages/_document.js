@@ -16,6 +16,8 @@ export default class MyDocument extends Document {
         <Head>
           {this.props.styleTags}
           <meta name='viewport' content='width=device-width,initial-scale=1' />
+          <link rel='shortcut icon' type='image/png' href='/static/img/hpjs.png' />
+          <link rel='apple-touch-icon' sizes='196x196' type='image/png' href='/static/img/hpjs.png' />
         </Head>
         <body style={{ margin: 0, height: 'auto', minHeight: '100vh' }} >
           <Main />
