@@ -63,10 +63,10 @@ export default class TensorflowExample extends React.Component {
         <Box fill='horizontal' gap='small'>
           {experimentEnd && (
             <Box border={{ color: 'light-3', side: 'all' }}>
-              <Box background='light-1' pad={{ horizontal: 'small' }}>
+              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
                 experiment
               </Box>
-              <Box pad='small' wrap={true} direction='row' align='center' justify='between' fill='horizontal' border='all'>
+              <Box pad='small' wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
                 <Box direction='row' gap='medium'>
                   <ObjectValues obj={{ '#': experimentEnd.idx }} />
                   <ObjectValues obj={experimentEnd.trial.args} />
@@ -78,7 +78,7 @@ export default class TensorflowExample extends React.Component {
           )}
           {false && (
             <Box border={{ color: 'light-3', side: 'all' }}>
-              <Box background='light-1' pad={{ horizontal: 'small' }}>
+              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
                 last trial
               </Box>
               <Box pad='small' wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
