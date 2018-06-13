@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import { Box, Heading, Text } from 'grommet';
+import { Box, Heading } from 'grommet';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
 import TrialsTable from './TrialsTable';
+import ObjectValues from './ObjectValues';
 
 export default class TensorflowExample extends React.Component {
   state = {
@@ -57,33 +58,46 @@ export default class TensorflowExample extends React.Component {
     let progress;
     if (epoch !== undefined) {
       progress = (
-        <Box direction='row' align='center' justify='between'>
-          <Box>
-            {false && console.log(experimentEnd.trial.args, experimentEnd.trial.result)}
-          </Box>
-          <Box>
-            {false && console.log(experimentBegin.trial.args)}
-          </Box>
-          <Box direction='row' gap='small'>
-            <Text size='large'>{`Epoch: ${epoch}`}</Text>
-            <Text size='large'>{`Loss: ${logs.loss.toFixed(4)}`}</Text>
-          </Box>
+        <Box fill='horizontal' gap='small'>
+          {experimentEnd && (
+            <Box border={{ color: 'light-3', side: 'all' }}>
+              <Box background='light-1' pad={{ horizontal: 'small' }}>
+                experiment
+              </Box>
+              <Box pad='small' direction='row' align='center' justify='between' fill='horizontal' border='all'>
+                <Box direction='row' gap='medium'>
+                  <ObjectValues obj={{ '#': experimentEnd.idx }} />
+                  <ObjectValues obj={experimentEnd.trial.args} />
+                  <ObjectValues obj={{ loss: experimentEnd.trial.result.loss.toFixed(4) }} />
+                </Box>
+                <ObjectValues obj={{ epoch, loss: logs.loss.toFixed(4) }} />
+              </Box>
+            </Box>
+          )}
+          {false && (
+            <Box border={{ color: 'light-3', side: 'all' }}>
+              <Box background='light-1' pad={{ horizontal: 'small' }}>
+                last trial
+              </Box>
+              <Box pad='small' direction='row' align='center' justify='between' fill='horizontal'>
+                <Box direction='row' gap='medium'>
+                  <ObjectValues obj={{ 'trial': experimentBegin.idx }} />
+                  <ObjectValues obj={experimentBegin.trial.args} />
+                </Box>
+              </Box>
+            </Box>
+          )}
         </Box>
       );
     }
-    const items = (best && best.args) ? Object.keys(best.args).map(key => (
-      <Box key={`best_trials_${key}`} direction='row' gap='medium'>
-        <Heading margin='none' level={2}>{`${key}: ${best.args[key]}`}</Heading>
-      </Box>
-    )) : null;
-
+    const items = (best && best.args) ? <ObjectValues obj={best.args} size='xxlarge' color='brand' /> : null;
     return (
-      <Box pad={{ vertical: 'medium' }} gap='small'>
+      <Box pad={{ vertical: 'medium', right: 'medium' }} gap='small' fill='horizontal'>
         {progress}
         {best && (
           <Box>
             <Heading>
-              Best parameters:
+              Results (best):
             </Heading>
             {items}
           </Box>
