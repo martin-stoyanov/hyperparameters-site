@@ -9,9 +9,7 @@ const Header = () => (
       <Text margin={{ top: 'xsmall' }}size='xsmall'>Hyperparameters optimization for Javascript</Text>
     </Box>
     <Box direction='row' justify='right' gap='small'>
-      <Link href='/'><Button>Home</Button></Link>
-      <Link href='/tutorials'><Button>Tutorials</Button></Link>
-      <Link href='/gallery'><Button>Gallery</Button></Link>
+      <Link href='/tutorials'><Button>API Docs</Button></Link>
     </Box>
   </Box>
 );

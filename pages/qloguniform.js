@@ -6,6 +6,7 @@ export default () => (
     name='qloguniform'
     code={'hpjs.qloguniform(\'qloguniform\', 0, 5, 0.1);'}
     size='large'
+    smoothing='0.01'
     style={{
       pointRadius: 0,
       borderWidth: 1,

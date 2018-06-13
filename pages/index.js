@@ -38,6 +38,7 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.uniform('uniform', 0, 5))}
               size='small'
+              smoothing='0.2'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
@@ -48,8 +49,9 @@ const Index = () => (
         <Item name='hpjs.quniform(label, low, high, q)' path='/quniform'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hpjs.quniform('quniform', 0, 5, 0.1))}
+              rawData={spaceToArray(hpjs.quniform('quniform', 0, 5, 0.5))}
               size='small'
+              smoothing='0.01'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
@@ -74,6 +76,7 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.qloguniform('qloguniform', 0, 5, 0.1))}
               size='small'
+              smoothing='0.01'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
@@ -96,8 +99,9 @@ const Index = () => (
         <Item name='hpjs.qnormal(label, mu, sigma, q)' path='/qnormal'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hpjs.qnormal('qnormal', 0, 1, 0.1))}
+              rawData={spaceToArray(hpjs.qnormal('qnormal', 0, 1, 0.5))}
               size='small'
+              smoothing='0.01'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
@@ -122,6 +126,7 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.qlognormal('qlognormal', 0, 1, 0.1))}
               size='small'
+              smoothing='0.01'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,

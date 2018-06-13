@@ -49,6 +49,13 @@ class ChartArray extends React.Component {
         <Bar
           data={data}
           options={{
+            legend: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: `after ${array.length} Iterations`,
+          },
             scales: {
                 yAxes: [{
                     ticks: {
