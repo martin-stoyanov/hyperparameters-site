@@ -8,7 +8,7 @@ class LineChart extends React.Component {
     const {
       labels, dataset, size, style, options,
     } = this.props;
-    const width = size === 'small' ? '350px' : '550px';
+    const width = size === 'small' ? '350px' : '420px';
     const height = size === 'small' ? '220px' : '450px';
     const defaultStyle = {
       backgroundColor: 'rgba(206, 95, 47,0.2)',

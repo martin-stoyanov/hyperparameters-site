@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 class ChartArray extends React.Component {
   render() {
     const { array, size } = this.props;
-    const width = size === 'small' ? '350px' : '550px';
+    const width = size === 'small' ? '350px' : '420px';
     const height = size === 'small' ? '220px' : '450px';
     const count = array.reduce((n, val) => {
       const result = n;
