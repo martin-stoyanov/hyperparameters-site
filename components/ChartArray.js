@@ -18,17 +18,14 @@ class ChartArray extends React.Component {
     if (sorted.length < 1) {
       return null;
     }
-    /* // of array doesn't have an int, then add [int, 0] to array
-    for (let i = 0; i < 5; i += 1) {
-      if (!isIn2D(i, sorted)) {
-        sorted.push([`${i}`, 0]);
-      }
-    }
-*/
+
     // sort the array
     sorted.sort((a, b) => a[0] - b[0]);
-    console.log(sorted);
-    const data = {
+
+    // get count of each label
+    const data = Object.keys(sorted).map(a => sorted[a][1]);
+
+    const chartData = {
       labels,
       datasets: [
         {
@@ -38,7 +35,7 @@ class ChartArray extends React.Component {
           borderWidth: 1,
           hoverBackgroundColor: 'rgba(206, 95, 47,0.4)',
           hoverBorderColor: 'rgba(206, 95, 47,1)',
-          data: [sorted[0][1], sorted[1][1]],
+          data,
         },
       ],
     };
@@ -48,7 +45,7 @@ class ChartArray extends React.Component {
         style={{ position: 'relative', width, height }}
       >
         <Bar
-          data={data}
+          data={chartData}
           options={{
             legend: {
               display: false,
