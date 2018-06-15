@@ -88,7 +88,7 @@ export default class TrialsTable extends React.Component {
     const columns = [
       {
         Header: 'id',
-        accessor: 'tid',
+        accessor: 'id',
         maxWidth: 60,
       },
       {
@@ -145,7 +145,7 @@ export default class TrialsTable extends React.Component {
             data={trials}
             SubComponent={this.onExpand}
             defaultSorted={[{
-              id: 'tid',
+              id: 'id',
               desc: false,
             }]}
             decorations={{
