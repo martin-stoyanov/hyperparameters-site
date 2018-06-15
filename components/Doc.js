@@ -23,12 +23,12 @@ export default class Doc extends React.Component {
     } = this.props;
     let { smoothing } = this.props;
     const { rawdata } = this.state;
-    if (code.includes('randint') || code.includes('quniform') || code.includes('qnormal')) {
-      smoothing = (0.01 * ((Math.max(...rawdata) - Math.min(...rawdata)) / 5)).toString();
-      console.log(smoothing);
-    }
     if (code.includes('uniform') || code.includes('normal')) {
       smoothing = (0.3 * ((Math.max(...rawdata) - Math.min(...rawdata)) / 5)).toString();
+      console.log(smoothing);
+    }
+    if (code.includes('randint') || code.includes('quniform') || code.includes('qnormal')) {
+      smoothing = (0.01 * ((Math.max(...rawdata) - Math.min(...rawdata)) / 5)).toString();
       console.log(smoothing);
     }
     if (smoothing < 0) {
