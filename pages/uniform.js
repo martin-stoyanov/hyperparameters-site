@@ -4,7 +4,7 @@ import Doc from '../components/Doc';
 export default () => (
   <Box>
     <Doc
-      name='uniform'
+      name='hpjs.uniform(label, low, high)'
       code={'hpjs.uniform(\'uniform\', 0, 5);'}
       size='large'
       smoothing='0.2'
