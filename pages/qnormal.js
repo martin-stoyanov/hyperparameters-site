@@ -6,7 +6,6 @@ export default () => (
     name='hpjs.qnormal(label, mu, sigma, q)'
     code={'hpjs.qnormal(\'qnormal\', 0, 1, 0.5);'}
     size='large'
-    smoothing='0.01'
     style={{
       pointRadius: 0,
       borderWidth: 1,

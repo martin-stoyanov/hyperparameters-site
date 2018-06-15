@@ -25,7 +25,6 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.randint('random int', 5))}
               size='small'
-              smoothing='0.01'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
@@ -38,7 +37,6 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.uniform('uniform', 0, 5))}
               size='small'
-              smoothing='0.2'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
@@ -51,7 +49,6 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.quniform('quniform', 0, 5, 0.5))}
               size='small'
-              smoothing='0.01'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
@@ -101,7 +98,6 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.qnormal('qnormal', 0, 1, 0.5))}
               size='small'
-              smoothing='0.01'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,

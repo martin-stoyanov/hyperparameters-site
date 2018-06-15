@@ -6,7 +6,6 @@ export default () => (
     name='hpjs.quniform(label, low, high, q)'
     code={'hpjs.quniform(\'quniform\', 0, 5, 0.5);'}
     size='large'
-    smoothing='0.01'
     style={{
       pointRadius: 0,
       borderWidth: 1,

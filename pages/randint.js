@@ -6,7 +6,6 @@ export default () => (
     name='hpjs.randint(label, upper)'
     code={'hpjs.randint(\'randint\', 5);'}
     size='large'
-    smoothing='0.01'
     style={{
       pointRadius: 0,
       borderWidth: 1,
