@@ -64,6 +64,7 @@ const Index = () => (
             <KDEChartArray
               rawData={spaceToArray(hpjs.loguniform('loguniform', 0, 5))}
               size='small'
+              smoothing='2'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,
