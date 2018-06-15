@@ -75,9 +75,9 @@ const Index = () => (
         <Item name='hpjs.qloguniform(label, low, high, q)' path='/qloguniform'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hpjs.qloguniform('qloguniform', 0, 5, 0.1))}
+              rawData={spaceToArray(hpjs.qloguniform('qloguniform', 0, 5, 5))}
               size='small'
-              smoothing='0.01'
+              smoothing='0.15'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,

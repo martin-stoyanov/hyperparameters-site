@@ -4,9 +4,9 @@ const desc = 'returns a quantized value of <a href="/loguniform">hp.loguniform</
 export default () => (
   <Doc
     name='hpjs.qloguniform(label, low, high, q)'
-    code={'hpjs.qloguniform(\'qloguniform\', 0, 5, 0.1);'}
+    code={'hpjs.qloguniform(\'qloguniform\', 0, 5, 5);'}
     size='large'
-    smoothing='0.01'
+    smoothing='0.15'
     style={{
       pointRadius: 0,
       borderWidth: 1,
