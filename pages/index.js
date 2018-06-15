@@ -125,9 +125,9 @@ const Index = () => (
         <Item name='hpjs.qlognormal(label, mu, sigma, q)' path='/qlognormal'>
           <Box flex={true}>
             <KDEChartArray
-              rawData={spaceToArray(hpjs.qlognormal('qlognormal', 0, 1, 0.1))}
+              rawData={spaceToArray(hpjs.qlognormal('qlognormal', 0, 1, 0.5))}
               size='small'
-              smoothing='0.01'
+              smoothing='0.025'
               style={{
                 pointRadius: 0,
                 borderWidth: 1,

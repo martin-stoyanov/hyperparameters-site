@@ -4,9 +4,9 @@ const desc = 'returns a quantized value of <a href="/lognormal">hp.lognormal</a>
 export default () => (
   <Doc
     name='hpjs.qlognormal(label, mu, sigma, q)'
-    code={'hpjs.qlognormal(\'qlognormal\', 0, 1, 0.1);'}
+    code={'hpjs.qlognormal(\'qlognormal\', 0, 1, 0.5);'}
     size='large'
-    smoothing='0.01'
+    smoothing='0.025'
     style={{
       pointRadius: 0,
       borderWidth: 1,
