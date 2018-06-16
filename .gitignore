@@ -44,3 +44,4 @@ others
 .DS_Store
 .history
 .next/**
+.vscode
