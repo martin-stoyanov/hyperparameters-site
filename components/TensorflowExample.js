@@ -33,7 +33,11 @@ export default class TensorflowExample extends React.Component {
   };
   onStartExperiments = () => {
     this.setState({
-      trials: [], best: undefined, experimentBegin: undefined, experimentEnd: undefined,
+      trials: [],
+      best: undefined,
+      experimentBegin: undefined,
+      experimentEnd: undefined,
+      stopping: false,
     });
   };
   renderCodeSnippet = () => {
