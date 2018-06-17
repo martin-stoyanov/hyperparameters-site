@@ -3,8 +3,8 @@ import Doc from '../components/Doc';
 const desc = 'returns a quantized value of <a href="/lognormal">hp.lognormal</a> i.e. (exp(normal(mu, sigma)) / q) * q';
 export default () => (
   <Doc
-    name='hpjs.qlognormal(label, mu, sigma, q)'
-    code={'hpjs.qlognormal(\'qlognormal\', 0, 1, 0.5);'}
+    name='hpjs.qlognormal(mu, sigma, q)'
+    code='hpjs.qlognormal(0, 1, 0.5);'
     size='large'
     smoothing='0.025'
     style={{

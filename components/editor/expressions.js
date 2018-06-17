@@ -1,6 +1,6 @@
 
 export const unnamedParametersSolve =
-`const space = hpjs.uniform('x', -3, 3);
+`const space = hpjs.uniform(-3, 3);
 
 const opt = x => (Math.pow(x, 2) - x - 2);
 return hpjs.fmin(opt, space, hpjs.estimators.rand.suggest, 300);
@@ -8,7 +8,7 @@ return hpjs.fmin(opt, space, hpjs.estimators.rand.suggest, 300);
 
 export const namedParametersSolve =
 `const space = {
-  x: hpjs.uniform('x', -3, 3);
+  x: hpjs.uniform(-3, 3);
 };  
 
 const opt = ({ x }) => (Math.pow(x, 4) - Math.pow(x, 2));
@@ -41,8 +41,8 @@ async function modelOpt({ optimizer, epochs }, { xs, ys }) {
 // optmizer is a choice field
 // epochs ia an integer value from 10 to 250 with a step of 5
 const space = {
-  optimizer: hpjs.choice('optimizer', ['sgd', 'adam', 'adagrad', 'rmsprop']),
-  epochs: hpjs.quniform('epochs', 10, 30, 10),
+  optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),
+  epochs: hpjs.quniform(10, 30, 10),
 };
 // Generate some synthetic data for training. (y = 2x - 1) and pass to fmin as parameters
 // data will be passed as a parameters to the fmin

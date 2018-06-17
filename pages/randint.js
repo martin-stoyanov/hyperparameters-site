@@ -3,8 +3,8 @@ import Doc from '../components/Doc';
 
 export default () => (
   <Doc
-    name='hpjs.randint(label, upper)'
-    code={'hpjs.randint(\'randint\', 5);'}
+    name='hpjs.randint(upper)'
+    code='hpjs.randint(5);'
     size='large'
     style={{
       pointRadius: 0,

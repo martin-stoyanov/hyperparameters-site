@@ -4,7 +4,7 @@ const desc = 'returns a quantized value of <a href="/normal">hp.normal</a> i.e. 
 export default () => (
   <Doc
     name='hpjs.qnormal(label, mu, sigma, q)'
-    code={'hpjs.qnormal(\'qnormal\', 0, 1, 0.5);'}
+    code='hpjs.qnormal(0, 1, 0.5);'
     size='large'
     style={{
       pointRadius: 0,

@@ -4,8 +4,8 @@ import Doc from '../components/Doc';
 export default () => (
   <Box>
     <Doc
-      name='hpjs.uniform(label, low, high)'
-      code={'hpjs.uniform(\'uniform\', 0, 5);'}
+      name='hpjs.uniform(low, high)'
+      code='hpjs.uniform(0, 5);'
       size='large'
       style={{
         pointRadius: 0,

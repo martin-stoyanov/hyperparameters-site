@@ -3,8 +3,8 @@ import Doc from '../components/Doc';
 const desc = 'returns a quantized value of <a href="/loguniform">hp.loguniform</a> i.e. (loguniform(low, high) / q) * q';
 export default () => (
   <Doc
-    name='hpjs.qloguniform(label, low, high, q)'
-    code={'hpjs.qloguniform(\'qloguniform\', 0, 5, 5);'}
+    name='hpjs.qloguniform(low, high, q)'
+    code='hpjs.qloguniform(0, 5, 5);'
     size='large'
     smoothing='0.15'
     style={{

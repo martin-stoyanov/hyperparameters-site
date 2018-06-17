@@ -3,8 +3,8 @@ import Doc from '../components/Doc';
 const desc = 'returns a quantized value of <a href="/uniform">hp.uniform</a> i.e. (uniform(low, high) / q) * q';
 export default () => (
   <Doc
-    name='hpjs.quniform(label, low, high, q)'
-    code={'hpjs.quniform(\'quniform\', 0, 5, 0.5);'}
+    name='hpjs.quniform(low, high, q)'
+    code='hpjs.quniform(0, 5, 0.5);'
     size='large'
     style={{
       pointRadius: 0,
