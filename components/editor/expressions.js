@@ -3,7 +3,7 @@ export const unnamedParametersSolve =
 `const space = hpjs.uniform(-3, 3);
 
 const opt = x => (Math.pow(x, 2) - x - 2);
-return hpjs.fmin(opt, space, hpjs.estimators.rand.suggest, 300);
+return hpjs.fmin(opt, space, hpjs.search.randomSearch, 300);
 `;
 
 export const namedParametersSolve =
@@ -12,7 +12,7 @@ export const namedParametersSolve =
 };  
 
 const opt = ({ x }) => (Math.pow(x, 4) - Math.pow(x, 2));
-return hpjs.fmin(opt, space, hpjs.estimators.rand.suggest, 300);
+return hpjs.fmin(opt, space, hpjs.search.randomSearch, 300);
 `;
 
 
@@ -49,7 +49,7 @@ const space = {
 const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
 const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
 return await hpjs.fmin(
-  modelOpt, space, hpjs.estimators.rand.suggest, 10,
+  modelOpt, space, hpjs.search.randomSearch, 10,
   { rng: new hpjs.RandomState(654321), xs, ys, callbacks: { onExperimentBegin, onExperimentEnd } }
 );
 `;

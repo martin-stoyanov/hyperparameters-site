@@ -24,7 +24,7 @@
     "grommet": "https://github.com/grommet/grommet/tarball/NEXT-stable",
     "grommet-icons": "^1.0.0",
     "grommet-controls": "^0.30.2",
-    "hyperparameters": "^0.25.0",
+    "hyperparameters": "^0.25.2",
     "kernel-smooth": "^0.2.3",
     "next": "^6.0.3",
     "react": "^16.4.1",
