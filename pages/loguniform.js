@@ -13,7 +13,7 @@ export default () => (
       }}
       desc={{
         description: 'Returns a value exp(uniform(low, high)) so the logarithm of the return value is uniformly distributed.',
-        properties: [{ name: 'label', description: 'a name for the expression' },
+        properties: [
             { name: 'low', description: 'The minimum possible value of the number', required: false },
             { name: 'high', description: 'The maximum possible value of the number', required: false }],
 }}

@@ -12,7 +12,7 @@ export default () => (
     }}
     desc={{
         description: desc,
-        properties: [{ name: 'label', description: 'a name for the expression' },
+        properties: [
             { name: 'mu', description: 'the mean of the random variable', required: false },
             { name: 'sigma', description: 'the standard deviation of the random variable', required: false }],
 }}

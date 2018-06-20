@@ -1,6 +1,6 @@
 import Doc from '../components/Doc';
 
-const desc = 'returns a quantized value of <a href="/uniform">hp.uniform</a> i.e. (uniform(low, high) / q) * q';
+const desc = 'returns a quantized value of <a href="/uniform">hpjs.uniform</a> i.e. (uniform(low, high) / q) * q';
 export default () => (
   <Doc
     name='hpjs.quniform(low, high, q)'
@@ -12,7 +12,7 @@ export default () => (
     }}
     desc={{
         description: desc,
-        properties: [{ name: 'label', description: 'a name for the expression' },
+        properties: [
             { name: 'low', description: 'The minimum possible value of the number', required: false },
             { name: 'high', description: 'The maximum possible value of the number', required: false },
             { name: 'q', description: 'how much to "quantize" by', required: false }],

@@ -1,6 +1,6 @@
 import Doc from '../components/Doc';
 
-const desc = 'Returns a logarithmic version of <a href="/normal">hp.normal</a> i.e. exp(normal(mu, sigma))';
+const desc = 'Returns a logarithmic version of <a href="/normal">hpjs.normal</a> i.e. exp(normal(mu, sigma))';
 export default () => (
   <Doc
     name='hpjs.lognormal(mu, sigma)'
@@ -12,7 +12,7 @@ export default () => (
     }}
     desc={{
         description: desc,
-        properties: [{ name: 'label', description: 'a name for the expression' },
+        properties: [
             { name: 'mu', description: 'the mean of the random variable', required: false },
             { name: 'sigma', description: 'the standard deviation of the random variable', required: false }],
 }}

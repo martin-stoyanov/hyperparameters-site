@@ -9,7 +9,7 @@ export default () => (
     labels='["cat", "dog"]'
     desc={{
         description: 'Randomly returns one of the options',
-        properties: [{ name: 'label', description: 'a name for the expression' },
+        properties: [
             { name: 'options', description: 'an array containing the options', required: true }],
 }}
   />

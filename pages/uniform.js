@@ -13,7 +13,7 @@ export default () => (
       }}
       desc={{
         description: 'Returns a single value uniformly between low and high i.e. any value between low and high has an equal probability of being selected',
-        properties: [{ name: 'label', description: 'a name for the expression' },
+        properties: [
             { name: 'low', description: 'The minimum possible value of the number', required: false },
             { name: 'high', description: 'The maximum possible value of the number', required: false }],
 }}
