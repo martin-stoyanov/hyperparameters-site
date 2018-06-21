@@ -1,10 +1,6 @@
 import React from 'react';
-import * as hpjs from 'hyperparameters';
 import { Box, Heading, Paragraph, Image, Text, Button } from 'grommet';
 import Link from 'next/link';
-import KDEChartArray from '../components/KDEChartArray';
-import spaceToArray from '../components/utils/spaceToArray';
-
 
 import Layout from '../components/Layout';
 
@@ -17,7 +13,7 @@ const Index = () => (
       </Heading>
     </Box>
     <Box align='center'>
-      <Box direction='row' wrap='true' align='center' pad='small'>
+      <Box direction='row' wrap='true' alignContent='start' pad='small'>
         <Box>
           <Heading level='3'>Works in Javascript</Heading>
           <Paragraph>
@@ -25,7 +21,7 @@ const Index = () => (
           </Paragraph>
         </Box>
         <Box>
-          <Heading level='3'>Can be Implemented it in 2 ways</Heading>
+          <Heading level='3'>Can be Implemented in 2 ways</Heading>
           <Paragraph>
             Include HyperparametersJS in your projects in 2 ways: either through <a href='https://github.com/atanasster/hyperparameters' target='_blank' rel='noopener noreferrer'>webpack</a> or directly in your file.
           </Paragraph>
@@ -41,6 +37,9 @@ const Index = () => (
     <Box align='center' pad='medium'><Heading level='3'>Demos</Heading></Box>
     <Box align='center'>
       <Box direction='row' wrap='true' pad='small' gap='large'>
+        <Box>
+          <Image src='/static/img/randint.png' />
+        </Box>
         <Box align='start'>
           <Text size='large' color='brand'>Parameter Examples</Text>
           <Paragraph>Hpjs features multiple parameter expressions, including a
@@ -48,7 +47,7 @@ const Index = () => (
           </Paragraph>
           <Box direction='row' gap='small'>
             <Button
-              label='Code.'
+              label='Code'
               primary='false'
               href='/randint'
               color='brand'
@@ -61,51 +60,26 @@ const Index = () => (
             />
           </Box>
         </Box>
-        <Box>
-          <KDEChartArray
-            rawData={spaceToArray(hpjs.randint(5))}
-            size='small'
-            smoothing='0.01'
-            style={{
-                pointRadius: 0,
-                borderWidth: 1,
-              }}
-          />
-        </Box>
       </Box>
-      <Box direction='row' wrap='true' pad='small' gap='large'>
+      <Box direction='row' wrap='true' pad='small' margin='small' gap='large'>
         <Box align='start'>
           <Text size='large' color='brand'>Tensorflow Integration</Text>
-          <Paragraph>Hpjs features multiple parameter expressions, including a
-            random int expression
+          <Paragraph>Find the best optimizer and number of epochs for your machine learning models
           </Paragraph>
           <Box direction='row' gap='small'>
             <Button
-              label='Code.'
+              label='Code'
               primary='false'
-              href='/randint'
-              color='brand'
-            />
-            <Button
-              label='More expressions'
-              primary='false'
-              href='/explore'
+              href='/tensorflow/tiny'
               color='brand'
             />
           </Box>
         </Box>
         <Box>
-          <KDEChartArray
-            rawData={spaceToArray(hpjs.randint(5))}
-            size='small'
-            smoothing='0.01'
-            style={{
-                pointRadius: 0,
-                borderWidth: 1,
-              }}
-          />
+          <Image style={{ maxWidth: '600px' }} src='/static/img/tinyTensorflowTable.png' />
         </Box>
       </Box>
+      <Box align='center' pad='medium' />
     </Box>
   </Layout>
 );
