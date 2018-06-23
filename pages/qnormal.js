@@ -1,6 +1,6 @@
 import Doc from '../components/Doc';
 
-const desc = 'returns a quantized value of <a href="/normal">hpjs.normal</a> i.e. (normal(mu, sigma) / q) * q';
+const desc = 'Returns a version of <a href="/normal">hpjs.normal</a> with step size "q" <br /> Mathematically represented as (normal(mu, sigma) / q) * q';
 export default () => (
   <Doc
     name='hpjs.qnormal(label, mu, sigma, q)'
@@ -15,7 +15,7 @@ export default () => (
         properties: [
         { name: 'mu', description: 'the mean of the random variable', required: false },
         { name: 'sigma', description: 'the standard deviation of the random variable', required: false },
-        { name: 'q', description: 'how much to "quantize" by', required: false }],
+        { name: 'q', description: 'The "step size" of the function', required: false }],
 }}
   />
 );
