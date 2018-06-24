@@ -47,13 +47,13 @@ const Index = () => (
           </Paragraph>
           <Box direction='row' gap='small'>
             <Button
-              label='Code'
+              label='code'
               primary='false'
               href='/randint'
               color='brand'
             />
             <Button
-              label='More expressions'
+              label='more expressions'
               primary='false'
               href='/explore'
               color='brand'
@@ -66,9 +66,9 @@ const Index = () => (
           <Text size='large' color='brand'>Tensorflow Integration</Text>
           <Paragraph>Find the best optimizer and number of epochs for your machine learning models
           </Paragraph>
-          <Box direction='row' gap='small'>
+          <Box direction='row' gap='small' pad={{ bottom: 'small' }}>
             <Button
-              label='Code'
+              label='code'
               primary='false'
               href='/tensorflow/tiny'
               color='brand'
