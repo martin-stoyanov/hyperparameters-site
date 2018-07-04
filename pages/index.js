@@ -26,9 +26,9 @@ const Index = () => (
           </Paragraph>
         </Box>
         <Box>
-          <Heading level='3'>Can be Implemented in 2 ways</Heading>
+          <Heading level='3'>Can be used in 2 ways</Heading>
           <Paragraph>
-            Include hpjs in your projects either through <Anchor href='https://github.com/atanasster/hyperparameters' target='_blank' rel='noopener noreferrer'>webpack</Anchor> or link directly in your html file.
+            Link hpjs in your html file from cdn, or install in your project with <Anchor href='https://github.com/atanasster/hyperparameters' target='_blank' rel='noopener noreferrer'>npm</Anchor>
           </Paragraph>
         </Box>
         <Box>
@@ -82,7 +82,15 @@ const Index = () => (
           <Image style={{ maxWidth: '600px' }} src='/static/img/tinyTensorflowTable.png' />
         </Box>
       </Box>
-      <Box align='center' pad='medium' />
+    </Box>
+    <Box>
+      <Box align='center'><Heading level='2'>Getting started</Heading></Box>
+      <Box align='center' pad='small'>
+        <Text size='large' weight='700' color='brand'>Include in html file</Text>
+      </Box>
+      <Box align='center' pad='small'>
+        <Text size='large' weight='700' color='brand'>Install with npm</Text>
+      </Box>
     </Box>
   </Layout>
 );
