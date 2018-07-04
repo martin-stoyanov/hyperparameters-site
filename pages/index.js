@@ -1,47 +1,50 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import { Box, Heading, Paragraph, Image, Text, Button } from 'grommet';
+import { Box, Heading, Paragraph, Image, Text, Button, Anchor } from 'grommet';
 import Link from 'next/link';
 
 import Layout from '../components/Layout';
 
 const Index = () => (
   <Layout>
-    <Box align='center' gap='medium' pad={{ top: 'medium' }} >
+    <Box align='center' pad='medium' >
       <Image src='/static/img/hpjs.png' />
-      <Heading level='2' align='center'>
+      <Heading level='2'>
         A Javascript Library for hyperparameter optimization
       </Heading>
+      <Text>
+        Helps you in selecting the optimal hyperparameters
+        (constraints, weights or learning rates) for your learning algorithms.
+      </Text>
     </Box>
     <Box align='center'>
-      <Box direction='row' wrap='true' alignContent='start' pad='small'>
+      <Box direction='row' wrap='true' alignContent='start' pad='small' gap='small'>
         <Box>
-          <Heading level='3'>Works in Javascript</Heading>
+          <Heading level='3'>Written in Javascript</Heading>
           <Paragraph>
-            Now that Tensorflow, the most popular machine learning framework, has been released as a <a href='https://js.tensorflow.org/faq/' target='_blank' rel='noopener noreferrer'> Javascript API </a>, we can create machine learning models that run in the browser, and it&#39;s easy to see why using Javascript for machine learning is on the rise.
+            Now that Tensorflow, the most popular machine learning framework, has been released as a <Anchor href='https://js.tensorflow.org/faq/' target='_blank' rel='noopener noreferrer'> Javascript API </Anchor>, we can create machine learning models that run in the browser, and it&#39;s easy to see why using Javascript for machine learning is on the rise.
           </Paragraph>
         </Box>
         <Box>
           <Heading level='3'>Can be Implemented in 2 ways</Heading>
           <Paragraph>
-            Include HyperparametersJS in your projects in 2 ways: either through <a href='https://github.com/atanasster/hyperparameters' target='_blank' rel='noopener noreferrer'>webpack</a> or directly in your file.
+            Include hpjs in your projects either through <Anchor href='https://github.com/atanasster/hyperparameters' target='_blank' rel='noopener noreferrer'>webpack</Anchor> or link directly in your html file.
           </Paragraph>
         </Box>
         <Box>
-          <Heading level='3'>Full Featureset</Heading>
+          <Heading level='3'>Inspired by hyperopt</Heading>
           <Paragraph>
-            Utilize multiple <Link href='/explore'>parameters</Link> and multiple search algorithms (grid search, bayesian, and random)
+            Utilize multiple <Link href='/explore'><Anchor>parameters</Anchor></Link> and multiple search algorithms (grid search, random, bayesian)
           </Paragraph>
         </Box>
       </Box>
     </Box>
-    <Box align='center' pad='medium'><Heading level='3'>Demos</Heading></Box>
+    <Box align='center'><Heading level='2'>Examples</Heading></Box>
     <Box align='center'>
-      <Box direction='row' wrap='true' pad='small' gap='large'>
-        <Box>
-          <Image src='/static/img/randint.png' />
-        </Box>
+      <Box direction='row' width='xlarge' justify='between' pad='large'>
+        <Image src='/static/img/randint.png' />
         <Box align='start'>
-          <Text size='large' color='brand'>Parameter Examples</Text>
+          <Text size='large' weight='700' color='brand'>Parameter Examples</Text>
           <Paragraph>Hpjs features multiple parameter expressions, including a
             random int expression
           </Paragraph>
@@ -61,9 +64,9 @@ const Index = () => (
           </Box>
         </Box>
       </Box>
-      <Box direction='row' wrap='true' pad='small' margin='small' gap='large'>
+      <Box direction='row' width='xlarge' justify='between' pad='large'>
         <Box align='start'>
-          <Text size='large' color='brand'>Tensorflow Integration</Text>
+          <Text size='large' weight='700' color='brand'>Tensorflow Integration</Text>
           <Paragraph>Find the best optimizer and number of epochs for your machine learning models
           </Paragraph>
           <Box direction='row' gap='small' pad={{ bottom: 'small' }}>

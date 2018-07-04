@@ -23,7 +23,7 @@
     "eslint": "^4.19.1",
     "grommet": "https://github.com/grommet/grommet/tarball/NEXT-stable",
     "grommet-icons": "^1.0.0",
-    "grommet-controls": "^0.30.2",
+    "grommet-controls": "^0.30.8",
     "hyperparameters": "^0.25.2",
     "kernel-smooth": "^0.2.3",
     "next": "^6.0.3",
