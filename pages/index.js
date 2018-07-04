@@ -32,7 +32,7 @@ const Index = () => (
           </Paragraph>
         </Box>
         <Box>
-          <Heading level='3'>Inspired by hyperopt</Heading>
+          <Heading level='3'>Versatile</Heading>
           <Paragraph>
             Utilize multiple <Link href='/explore'><Anchor>parameters</Anchor></Link> and multiple search algorithms (grid search, random, bayesian)
           </Paragraph>
@@ -41,8 +41,8 @@ const Index = () => (
     </Box>
     <Box align='center'><Heading level='2'>Examples</Heading></Box>
     <Box align='center'>
-      <Box direction='row' width='xlarge' justify='between' pad='large'>
-        <Image src='/static/img/randint.png' />
+      <Box direction='row' wrap='true' width='xlarge' justify='between' pad='large'>
+        <Image style={{ maxWidth: '100%' }} src='/static/img/randint.png' />
         <Box align='start'>
           <Text size='large' weight='700' color='brand'>Parameter Examples</Text>
           <Paragraph>Hpjs features multiple parameter expressions, including a
@@ -50,13 +50,13 @@ const Index = () => (
           </Paragraph>
           <Box direction='row' gap='small'>
             <Button
-              label='code'
+              label='view...'
               primary='false'
               href='/randint'
               color='brand'
             />
             <Button
-              label='more expressions'
+              label='more ...'
               primary='false'
               href='/explore'
               color='brand'
@@ -64,14 +64,14 @@ const Index = () => (
           </Box>
         </Box>
       </Box>
-      <Box direction='row' width='xlarge' justify='between' pad='large'>
+      <Box direction='row' wrap='true' width='xlarge' justify='between' pad='large'>
         <Box align='start'>
           <Text size='large' weight='700' color='brand'>Tensorflow Integration</Text>
-          <Paragraph>Find the best optimizer and number of epochs for your machine learning models
+          <Paragraph>Find the best optimizer and number of epochs for a small tensorflow.js model
           </Paragraph>
           <Box direction='row' gap='small' pad={{ bottom: 'small' }}>
             <Button
-              label='code'
+              label='view...'
               primary='false'
               href='/tensorflow/tiny'
               color='brand'
