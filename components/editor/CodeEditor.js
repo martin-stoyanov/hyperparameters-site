@@ -8,19 +8,23 @@ import 'brace/theme/twilight';
 import './javascript';
 
 
-const CodeEditor = ({ code, options, ...rest }) => (
-  <Box fill='horizontal' background='#141414' style={{ paddingTop: '10px' }}>
-    <AceEditor
-      value={code}
-      mode='javascript'
-      theme='twilight'
-      editorProps={{ $blockScrolling: true }}
-      {...options}
-      {...rest}
-    />
-  </Box>
-
-);
+const CodeEditor = ({ code, options, ...rest }) => {
+  const nLines = code.split(/\r\n|\r|\n/).length;
+  console.log(nLines);
+  return (
+    <Box fill='horizontal' background='#141414' style={{ paddingTop: '10px' }}>
+      <AceEditor
+        value={code}
+        mode='javascript'
+        theme='twilight'
+        height={`${(nLines + 1) * 16}px`}
+        editorProps={{ $blockScrolling: true }}
+        {...options}
+        {...rest}
+      />
+    </Box>
+  );
+};
 
 CodeEditor.defaultProps = {
   options: {
