@@ -92,6 +92,7 @@ const Index = () => (
       <Box align='center' pad='small'>
         <Text size='large' weight='700' color='brand'>Include in html file</Text>
         <CodeEditor
+          showGutter={false}
           code={`
 const space = {
   optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),
