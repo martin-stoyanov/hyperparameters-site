@@ -5,14 +5,16 @@ import { Box } from 'grommet';
 import AceEditor from 'react-ace';
 
 import 'brace/theme/twilight';
+import 'brace/theme/dawn';
 import './javascript';
 
 
-const CodeEditor = ({ code, options, ...rest }) => {
+const CodeEditor = ({
+  code, background, options, ...rest
+}) => {
   const nLines = code.split(/\r\n|\r|\n/).length;
-  console.log(nLines);
   return (
-    <Box fill='horizontal' background='#141414' style={{ paddingTop: '10px' }}>
+    <Box fill='horizontal' background={background} style={{ paddingTop: '10px' }}>
       <AceEditor
         value={code}
         mode='javascript'
@@ -27,6 +29,7 @@ const CodeEditor = ({ code, options, ...rest }) => {
 };
 
 CodeEditor.defaultProps = {
+  background: '#141414',
   options: {
     tabSize: 2,
     width: '100%',
@@ -36,6 +39,7 @@ CodeEditor.defaultProps = {
 
 CodeEditor.propTypes = {
   code: PropTypes.string.isRequired,
+  background: PropTypes.string,
   options: PropTypes.object,
 };
 

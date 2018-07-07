@@ -2,12 +2,8 @@
 import React from 'react';
 import { Box, Heading, Paragraph, Image, Text, Button, Anchor } from 'grommet';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import CodeExample from '../components/editor/CodeExample';
 import Layout from '../components/Layout';
-
-const CodeEditor = dynamic(import('../components/editor/CodeEditor'), {
-  ssr: false,
-});
 
 const Index = () => (
   <Layout>
@@ -91,8 +87,7 @@ const Index = () => (
       <Box align='center'><Heading level='2'>Getting started</Heading></Box>
       <Box align='center' pad='small'>
         <Text size='large' weight='700' color='brand'>Include in html file</Text>
-        <CodeEditor
-          showGutter={false}
+        <CodeExample
           code={`
 const space = {
   optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),
@@ -128,7 +123,6 @@ const opt = trials.argmin;
 console.log('best optimizer',opt.optimizer);
 console.log('best no of epochs', opt.epochs);
           `}
-          readOnly={true}
         />
       </Box>
       <Box align='center' pad='small'>
