@@ -85,7 +85,7 @@ const Index = () => (
     </Box>
     <Box>
       <Box align='center'><Heading level='2'>Getting started</Heading></Box>
-      <Box align='center' pad='small'>
+      <Box align='center' pad={{ vertical: 'small', horizontal: 'xlarge' }}>
         <Text size='large' weight='700' color='brand'>Include in html file</Text>
         <CodeExample
           code={`
@@ -121,8 +121,7 @@ const trials = await hpjs.fmin(
 );
 const opt = trials.argmin;
 console.log('best optimizer',opt.optimizer);
-console.log('best no of epochs', opt.epochs);
-          `}
+console.log('best no of epochs', opt.epochs);`}
         />
       </Box>
       <Box align='center' pad='small'>
