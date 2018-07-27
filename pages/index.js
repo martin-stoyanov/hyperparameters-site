@@ -154,63 +154,87 @@ const Index = () => (
       </Box>
       <Box align='center' pad={{ vertical: 'small', horizontal: 'xlarge' }}>
         <Text size='large' weight='700' color='brand'>Install with npm</Text>
+        <Text size='medium' color='black' margin='medium'>hpjs can also be used through NPM and a build tool (for example, <Anchor href='https://webpack.js.org/' target='_blank'>Webpack</Anchor>).
+        The example below is in React/Webpack.
+        </Text>
         <CodeExample
           code='$ npm install hyperparameters'
         />
-        <p />
+        <br />
         <CodeExample
-          code={`
-import * as tf from '@tensorflow/tfjs';
+          code={`import * as tf from '@tensorflow/tfjs';
 import * as hpjs from 'hyperparameters';
 
+const optimizers = {
+  sgd: tf.train.sgd,
+  adagrad: tf.train.adagrad,
+  adam: tf.train.adam,
+  adamax: tf.train.adamax,
+  rmsprop: tf.train.rmsprop,
+}
 
-// An optimization function. The parameters are optimizer and epochs and will use the loss returned by the fn to measure which parameters are 'best'
-// Input and output data are passed as second argument
-optFunction = async ({ optimizer, epochs }, { xs, ys }) => {
+class Index extends React.Component { 
+  componentDidMount() {
+    this.hyperTFJS();
+  }
+    // An optimization function. The parameters are optimizer and epochs and will use the loss returned by the fn to measure which parameters are "best"
+    // Input and output data are passed as second argument
+    optFunction = async ({ learningRate, optimizer }, { xs, ys }) => {
 
-  // Create a simple sequential model.
-  const model = tf.sequential();
+      // Create a simple sequential model.
+      const model = tf.sequential();
 
-  // add a dense layer to the model and compile
-  model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
-  model.compile({
-    loss: 'meanSquaredError',
-    optimizer,
-  });
 
-  // train model using defined data
-  const h = await model.fit(xs, ys, {epochs});
+      // add a dense layer to the model and compile
+      model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+      model.compile({
+        loss: 'meanSquaredError',
+        optimizer: optimizers[optimizer](learningRate),
+      });
 
-  //printint out each optimizer and its loss
-  console.log(optimizer, h.history.loss[h.history.loss.length - 1]);
-  return { loss: h.history.loss[h.history.loss.length - 1], status: hpjs.STATUS_OK } ;
-};
+      // train model using defined data
+      const h = await model.fit(xs, ys, 250);
 
-hyperTFJS = async () => {
+      //printint out each optimizer and its loss
+      console.log(optimizer);
+      console.log('learning rate: ', learningRate, 'loss: ', h.history.loss[h.history.loss.length - 1]);
+      return { loss: h.history.loss[h.history.loss.length - 1], status: hpjs.STATUS_OK } ;
+    };
 
-  // Generating some data for training (y = 2x - 1) in tf tensors and defining its shape
-  const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
-  const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+    hyperTFJS = async () => {
 
-  // defining a search space we want to optimize. Using hpjs parameters here
-  const space = {
-    optimizer: hpjs.choice(['sgd', 'adagrad', 'adam', 'adamax', 'rmsprop']),
-    epochs: hpjs.quniform(50, 200, 50),
-  };
+      // Generating some data for training (y = 2x - 1) in tf tensors and defining its shape
+      const xs = tf.tensor2d([-1, 0, 1, 2, 3, 4], [6, 1]);
+      const ys = tf.tensor2d([-3, -1, 1, 3, 5, 7], [6, 1]);
+      
 
-  // finding the optimal hyperparameters using hpjs.fmin. Here, 6 is the # of times the optimization function will be called (which can be changed)
-  const trials = await hpjs.fmin(
-    this.optFunction, space, hpjs.search.randomSearch, 6,
-    { rng: new hpjs.RandomState(654321), xs, ys }
-  );
+      // defining a search space we want to optimize. Using hpjs parameters here
+      const space = {
+        learningRate: hpjs.uniform(0.0001, 0.1),
+        optimizer: hpjs.choice(['sgd', 'adagrad', 'adam', 'adamax', 'rmsprop']),
+      };
 
-  const opt = trials.argmin;
+      // finding the optimal hyperparameters using hpjs.fmin. Here, 6 is the # of times the optimization function will be called (this can be changed)
+      const trials = await hpjs.fmin(
+        this.optFunction, space, hpjs.search.randomSearch, 6,
+        { rng: new hpjs.RandomState(654321), xs, ys }
+      );
 
-  //printing out data
-  console.log('trials', trials);
-  console.log('best optimizer:', opt.optimizer);
-  console.log('best epochs:', opt.epochs);
-}`}
+      const opt = trials.argmin;
+
+      //printing out data
+      console.log('trials', trials);
+      console.log('best optimizer:', opt.optimizer);
+      console.log('best learning rate:', opt.learningRate);
+    }
+    render() {
+      return( 
+        <div>  
+        </div> 
+      );
+  }
+}
+export default Index;`}
         />
       </Box>
     </Box>
