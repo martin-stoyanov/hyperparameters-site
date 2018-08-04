@@ -79,15 +79,15 @@ const Index = () => (
           </Box>
         </Box>
         <Box>
-          <Image style={{ maxWidth: '600px' }} src='/static/img/tinyTensorflowTable.png' />
+          <Image style={{ maxWidth: '600px' }} src='/static/img/smallTensorflowTable.png' />
         </Box>
       </Box>
     </Box>
     <Box>
       <Box align='center'><Heading level='2'>Getting started</Heading></Box>
-      <Box align='center' pad={{ vertical: 'small', horizontal: 'xlarge' }}>
-        <Text size='large' weight='700' color='brand'>Include in html file</Text>
-        <Text size='medium' color='black' margin={{ top: 'small' }}>TensorFlow.js and hpjs can be implemented through CDN (so no need to install them through npm)</Text>
+      <Box align='center' pad={{ horizontal: 'xlarge' }}>
+        <Text size='medium' color='black' margin={{ bottom: 'small' }}>There are two ways to get TensorFlow.js and hpjs: via script tags or installing from npm</Text>
+        <Text size='large' weight='700' color='brand'>Using script tags</Text>
         <Text size='medium' color='black' margin='xsmall'>The below code can be directly copied and pasted into an html file</Text>
         <CodeExample
           code={`<html>
@@ -153,12 +153,18 @@ const Index = () => (
         />
       </Box>
       <Box align='center' pad={{ vertical: 'small', horizontal: 'xlarge' }}>
-        <Text size='large' weight='700' color='brand'>Install with npm</Text>
-        <Text size='medium' color='black' margin='medium'>hpjs can also be used through NPM and a build tool (for example, <Anchor href='https://webpack.js.org/' target='_blank'>Webpack</Anchor>).
+        <Text size='large' weight='700' color='brand'>via NPM</Text>
+        <Text size='medium' color='black' margin='medium'>
         The example below is in React/Webpack.
         </Text>
         <CodeExample
           code='$ npm install hyperparameters'
+        />
+        <Box alignSelf='start' pad={{ vertical: 'small' }}>
+          <Text size='medium' color='black'>or</Text>
+        </Box>
+        <CodeExample
+          code='$ yarn add hyperparameters'
         />
         <br />
         <CodeExample
