@@ -42,7 +42,7 @@ const Index = () => (
     <Box align='center'><Heading level='2'>Examples</Heading></Box>
     <Box align='center'>
       <Box direction='row' wrap='true' width='xlarge' justify='between' pad='large'>
-        <Image style={{ maxWidth: '100%' }} src='/static/img/randint.png' />
+        <Image style={{ maxWidth: '100%', height: 'auto' }} src='/static/img/randint.png' />
         <Box align='start'>
           <Text size='large' weight='700' color='brand'>Parameter Examples</Text>
           <Paragraph>Hpjs features multiple parameter expressions, including a
@@ -79,7 +79,7 @@ const Index = () => (
           </Box>
         </Box>
         <Box>
-          <Image style={{ maxWidth: '600px' }} src='/static/img/smallTensorflowTable.png' />
+          <Image style={{ width: '100%', height: 'auto' }} src='/static/img/smallTensorflowTable.png' />
         </Box>
       </Box>
     </Box>
