@@ -10,7 +10,7 @@ export default () => (
     desc={{
         description: 'Randomly returns one of the options',
         properties: [
-            { name: 'options', description: 'an array containing the options', required: true }],
+            { name: 'options', description: 'an array containing the options', required: false }],
 }}
   />
 );

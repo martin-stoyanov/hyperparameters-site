@@ -13,8 +13,8 @@ export default () => (
     desc={{
         description: desc,
         properties: [
-            { name: 'low', description: 'The minimum possible value of the number', required: false },
-            { name: 'high', description: 'The maximum possible value of the number', required: false },
+            { name: 'low', description: 'The minimum value of the number', required: false },
+            { name: 'high', description: 'The maximum value of the number', required: false },
             { name: 'q', description: 'The "step size" of the function', required: false }],
 }}
   />

@@ -13,7 +13,7 @@ export default () => (
     desc={{
         description: 'Return a random integer in the range [0, upper)',
         properties: [
-            { name: 'upper', description: 'The random integer can be anywhere from 0 to upper (not included)', required: false }],
+            { name: 'upper', description: 'The random integer can be anywhere from 0 to upper (not including upper)', required: false }],
           }}
   />
 );

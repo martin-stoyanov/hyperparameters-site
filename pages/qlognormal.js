@@ -16,7 +16,7 @@ export default () => (
         properties: [
         { name: 'mu', description: 'the mean of the random variable', required: false },
         { name: 'sigma', description: 'the standard deviation of the random variable', required: false },
-        { name: 'q', description: 'The "step size" of the function', required: false }],
+        { name: 'q', description: 'The "step size" of the random variable', required: false }],
 }}
   />
 );

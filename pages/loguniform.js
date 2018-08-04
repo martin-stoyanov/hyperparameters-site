@@ -12,10 +12,10 @@ export default () => (
         borderWidth: 1,
       }}
       desc={{
-        description: 'Returns a value exp(uniform(low, high)) so the logarithm of the return value is uniformly distributed.',
+        description: 'Returns a logarithmic version of <a href="/uniform">hpjs.uniform</a> i.e. exp(uniform(low,high))',
         properties: [
-            { name: 'low', description: 'The minimum possible value of the number', required: false },
-            { name: 'high', description: 'The maximum possible value of the number', required: false }],
+            { name: 'low', description: 'The minimum value of the number', required: false },
+            { name: 'high', description: 'The maximum value of the number', required: false }],
 }}
     />
   </Box>
