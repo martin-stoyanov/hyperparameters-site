@@ -5,11 +5,11 @@ import Header from './Header';
 import Footer from './Footer';
 import theme from './utils/theme';
 
-const Layout = ({ title, children, description = 'HyperSearch is a Javascript library for hyperparameter optimization. It is based on the Python library Hyperopt ' }) => (
+const Layout = ({ title, children, description = 'hpjs is a Javascript library for hyperparameter optimization. It is based on the Python library Hyperopt ' }) => (
   <React.Fragment>
     <Head>
       <title>{title}</title>
-      <title>HyperSearch: Hyperparameter Optimization for Javascript</title>
+      <title>hpjs: Hyperparameter Optimization for Javascript</title>
       <meta name='description' content={description} />
     </Head>
     <Grommet theme={theme}>
