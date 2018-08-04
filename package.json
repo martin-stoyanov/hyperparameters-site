@@ -22,7 +22,7 @@
     "chart.js": "^2.7.2",
     "eslint": "^4.19.1",
     "grommet": "https://github.com/grommet/grommet/tarball/NEXT-stable",
-    "grommet-controls": "^0.30.8",
+    "grommet-controls": "^0.30.9",
     "grommet-icons": "https://github.com/grommet/grommet-icons/tarball/stable",
     "hyperparameters": "^0.25.3",
     "kernel-smooth": "^0.2.3",
