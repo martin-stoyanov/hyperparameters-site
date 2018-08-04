@@ -35,7 +35,7 @@ export default class Example extends React.Component {
         description={description}
       >
         <Box direction='row-responsive'>
-          <Box margin={{ top: 'large' }} basis='1/2' align='start'>
+          <Box basis='1/2' align='start'>
             <Heading level={1} margin='none'>
               <strong>{name}</strong>
             </Heading>
@@ -48,7 +48,7 @@ export default class Example extends React.Component {
               code={code}
             />
           </Box>
-          <Box flex={true} pad={{ top: 'large' }} align='center'>
+          <Box flex={true} align='center'>
             <ExpressionChart data={data} argmin={argmin} />
           </Box>
         </Box>

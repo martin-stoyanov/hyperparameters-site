@@ -40,7 +40,7 @@ export default class Doc extends React.Component {
         title={this.props.name}
         description={desc && desc.description}
       >
-        <Box pad={{ horizontal: 'large', top: 'large' }}>
+        <Box pad={{ horizontal: 'large' }}>
           <Box direction='row-responsive'>
             <Box margin={{ vertical: 'large' }} basis='1/2' align='start' gap='small'>
               <Heading level={1}>

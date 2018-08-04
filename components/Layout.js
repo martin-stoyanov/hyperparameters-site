@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grommet } from 'grommet';
+import { Grommet, Box } from 'grommet';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
@@ -14,7 +14,9 @@ const Layout = ({ title, children, description = 'HyperSearch is a Javascript li
     </Head>
     <Grommet theme={theme}>
       <Header />
-      {children}
+      <Box pad={{ vertical: 'large' }}>
+        {children}
+      </Box>
       <Footer />
     </Grommet>
   </React.Fragment>
