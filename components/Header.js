@@ -10,6 +10,9 @@ const Header = () => (
     </Box>
     <Box direction='row' justify='right' gap='small'>
       <Link href='/explore'><Button>Explore</Button></Link>
+      <Button color='#1377f2' primary='true' href='https://github.com/atanasster/hyperparameters' target='_blank'>
+        <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}><Text>GITHUB</Text></Box>
+      </Button>
     </Box>
   </Box>
 );

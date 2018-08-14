@@ -61,5 +61,10 @@ export default {
       family: "'Roboto', sans-serif",
     },
   },
+  button: {
+    border: {
+      radius: '0px',
+    },
+  },
 };
 
