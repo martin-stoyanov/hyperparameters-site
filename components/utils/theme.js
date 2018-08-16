@@ -1,5 +1,18 @@
 export default {
   global: {
+    hover: {
+      background: {
+        dark: {
+          color: '#256abc',
+          opacity: 'none',
+        },
+        light: {
+          color: '#256abc',
+          opacity: 'none',
+        },
+      },
+      color: 'white',
+    },
     colors: { brand: '#ce5f2f' },
     font: {
       family: "'Roboto', sans-serif",
@@ -61,9 +74,17 @@ export default {
       family: "'Roboto', sans-serif",
     },
   },
+  anchor: {
+    color: '#0d5ec1',
+  },
   button: {
     border: {
       radius: '0px',
+      width: '0px',
+      color: 'transparent',
+    },
+    primary: {
+      color: '#0d5ec1',
     },
   },
 };
