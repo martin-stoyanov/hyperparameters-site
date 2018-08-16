@@ -51,15 +51,15 @@ const Index = () => (
           <Box direction='row' gap='small'>
             <Button
               label='view...'
-              primary='false'
+              primary
+              hoverIndicator='background'
               href='/randint'
-              color='brand'
             />
             <Button
               label='more ...'
-              primary='false'
+              primary
+              hoverIndicator='background'
               href='/explore'
-              color='brand'
             />
           </Box>
         </Box>
@@ -72,9 +72,9 @@ const Index = () => (
           <Box direction='row' gap='small' pad={{ bottom: 'small' }}>
             <Button
               label='view...'
-              primary='false'
+              primary
+              hoverIndicator='background'
               href='/tensorflow/tiny'
-              color='brand'
             />
           </Box>
         </Box>

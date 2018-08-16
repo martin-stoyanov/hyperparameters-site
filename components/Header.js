@@ -8,9 +8,13 @@ const Header = () => (
       <Link href='/'><Button><Heading margin='none' level='2'>hpjs</Heading></Button></Link>
       <Text margin={{ top: 'xsmall' }}size='xsmall'>hyperparameter optimization for Javascript</Text>
     </Box>
-    <Box direction='row' justify='right' gap='small'>
+    <Box direction='row' justify='right' gap='medium'>
       <Link href='/explore'><Button>Explore</Button></Link>
-      <Button color='#1377f2' primary='true' href='https://github.com/atanasster/hyperparameters' target='_blank'>
+      <Button
+        primary={true}
+        hoverIndicator='background'
+        href='https://github.com/atanasster/hyperparameters' target='_blank'
+      >
         <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}><Text>GITHUB</Text></Box>
       </Button>
     </Box>

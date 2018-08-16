@@ -14,7 +14,7 @@ import TensorflowPreview from '../components/TensorflowPreview';
 const Explore = () => (
   <Layout title='Hyperparamer Optimization for Javascript'>
     <Box pad={{ horizontal: 'large' }}>
-      <Section align='stretch' name='Parameter Expressions' index={0}>
+      <Section align='stretch' name='parameter expressions' index={0}>
         <Item name='hpjs.choice(options)' path='/choice'>
           <Box flex={true}>
             <ChartArray array={spaceToArray(hpjs.choice(['cat', 'dog']))} />
