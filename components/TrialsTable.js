@@ -48,8 +48,7 @@ export const periodToTime = (duration) => {
   };
 };
 
-export default () => {
-  const { trials } = this.props;
+export default ({ trials }) => {
   const getColumns = (isMobile) => {
     let argColumns = [];
     if (trials.length > 0) {
