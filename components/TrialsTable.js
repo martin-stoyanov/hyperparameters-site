@@ -1,4 +1,5 @@
-import { Box, Text, Heading, Responsive } from 'grommet';
+import { Box, Text, Heading } from 'grommet';
+import { ResponsiveContext } from 'grommet/contexts';
 import { PagingTable } from 'grommet-controls';
 
 const STATES_MAP = ['new', 'running', 'done', 'error'];
@@ -47,17 +48,9 @@ export const periodToTime = (duration) => {
   };
 };
 
-export default class TrialsTable extends React.Component {
-  state = {
-    isMobile: false,
-  }
-  onRsponsive = (size) => {
-    this.setState({ isMobile: size === 'narrow' });
-  };
-
-  render() {
-    const { trials } = this.props;
-    const { isMobile } = this.state;
+export default () => {
+  const { trials } = this.props;
+  const getColumns = (isMobile) => {
     let argColumns = [];
     if (trials.length > 0) {
       if (typeof trials[0].args === 'number') {
@@ -85,7 +78,7 @@ export default class TrialsTable extends React.Component {
           getProps: () => ({ align: 'end' }),
         }));
     }
-    const columns = [
+    return [
       {
         Header: 'id',
         accessor: 'id',
@@ -134,49 +127,51 @@ export default class TrialsTable extends React.Component {
         columns: resultColumns,
       },
     ];
-    return (
-      <Box fill='horizontal' pad={{ bottom: 'large' }}>
-        <Box align='center'>
-          <Heading>Trials</Heading>
-        </Box>
-        <Responsive onChange={this.onRsponsive}>
+  };
+  return (
+    <Box fill='horizontal' pad={{ bottom: 'large' }}>
+      <Box align='center'>
+        <Heading>Trials</Heading>
+      </Box>
+      <ResponsiveContext>
+        {dimension => (
           <PagingTable
-            columns={columns}
+            columns={getColumns(dimension === 'narrow')}
             data={trials}
             SubComponent={this.onExpand}
             defaultSorted={[{
-              id: 'id',
-              desc: false,
-            }]}
+                id: 'id',
+                desc: false,
+              }]}
             decorations={{
-              table: {
-                elevation: 'large',
-                border: 'all',
-              },
-              headerGroup: {
-                background: 'brand',
-                size: 'large',
-              },
-              header: {
-                border: 'all',
-                align: 'center',
-              },
-              body: {
-                animation: {
-                  type: 'fadeIn',
-                  duration: 2000,
+                table: {
+                  elevation: 'large',
+                  border: 'all',
+                },
+                headerGroup: {
+                  background: 'brand',
                   size: 'large',
                 },
-              },
-              rowOdd: {
-                background: { color: 'light-1' },
-              },
-              pagination: { pad: { top: 'medium' } },
-            }}
+                header: {
+                  border: 'all',
+                  align: 'center',
+                },
+                body: {
+                  animation: {
+                    type: 'fadeIn',
+                    duration: 2000,
+                    size: 'large',
+                  },
+                },
+                rowOdd: {
+                  background: { color: 'light-1' },
+                },
+                pagination: { pad: { top: 'medium' } },
+              }}
           />
-        </Responsive>
-      </Box>
-    );
-  }
-}
+          )}
+      </ResponsiveContext>
+    </Box>
+  );
+};
 
