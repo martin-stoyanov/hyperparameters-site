@@ -51,13 +51,13 @@ const Index = () => (
           <Box direction='row' gap='small'>
             <Button
               label='view...'
-              primary
+              primary={true}
               hoverIndicator='background'
               href='/randint'
             />
             <Button
               label='more ...'
-              primary
+              primary={true}
               hoverIndicator='background'
               href='/explore'
             />
@@ -72,7 +72,7 @@ const Index = () => (
           <Box direction='row' gap='small' pad={{ bottom: 'small' }}>
             <Button
               label='view...'
-              primary
+              primary={true}
               hoverIndicator='background'
               href='/tensorflow/tiny'
             />
@@ -199,7 +199,7 @@ class Index extends React.Component {
       });
 
       // train model using defined data
-      const h = await model.fit(xs, ys, 250);
+      const h = await model.fit(xs, ys, { epochs: 250 });
 
       //printint out each optimizer and its loss
       console.log(optimizer);

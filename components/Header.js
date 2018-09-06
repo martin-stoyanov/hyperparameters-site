@@ -13,7 +13,8 @@ const Header = () => (
       <Button
         primary={true}
         hoverIndicator='background'
-        href='https://github.com/atanasster/hyperparameters' target='_blank'
+        href='https://github.com/atanasster/hyperparameters'
+        target='_blank'
       >
         <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}><Text>GITHUB</Text></Box>
       </Button>
