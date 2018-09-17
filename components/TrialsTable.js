@@ -1,5 +1,4 @@
 import { Box, Text, Heading } from 'grommet';
-import { ResponsiveContext } from 'grommet/contexts';
 import { PagingTable } from 'grommet-controls';
 
 const STATES_MAP = ['new', 'running', 'done', 'error'];
@@ -49,7 +48,7 @@ export const periodToTime = (duration) => {
 };
 
 export default ({ trials }) => {
-  const getColumns = (isMobile) => {
+  const getColumns = () => {
     let argColumns = [];
     if (trials.length > 0) {
       if (typeof trials[0].args === 'number') {
@@ -73,7 +72,7 @@ export default ({ trials }) => {
         .map(key => ({
           Header: key,
           accessor: `result.${key}`,
-          show: isMobile ? key !== 'status' : true,
+          responsiveHide: key !== 'status' ? ['narrow'] : undefined,
           getProps: () => ({ align: 'end' }),
         }));
     }
@@ -85,14 +84,14 @@ export default ({ trials }) => {
       },
       {
         Header: 'state',
-        show: !isMobile,
+        responsiveHide: ['narrow'],
         accessor: 'state',
         maxWidth: 140,
         Cell: cell => (<Text weight='bold'>{STATES_MAP[cell.value]}</Text>),
       },
       {
         Header: 'start',
-        show: !isMobile,
+        responsiveHide: ['narrow'],
         accessor: 'book_time',
         maxWidth: 150,
         Cell: cell => (<Text weight='bold'>{formatTraingTime(cell.value)}</Text>),
@@ -101,7 +100,7 @@ export default ({ trials }) => {
       },
       {
         Header: 'update',
-        show: !isMobile,
+        responsiveHide: ['narrow'],
         id: 'updateTime',
         accessor: row => (row.refresh_time - row.book_time),
         Cell: (cell) => {
@@ -132,44 +131,40 @@ export default ({ trials }) => {
       <Box align='center'>
         <Heading>Trials</Heading>
       </Box>
-      <ResponsiveContext>
-        {dimension => (
-          <PagingTable
-            columns={getColumns(dimension === 'narrow')}
-            data={trials}
-            SubComponent={this.onExpand}
-            defaultSorted={[{
-                id: 'id',
-                desc: false,
-              }]}
-            decorations={{
-                table: {
-                  elevation: 'large',
-                  border: 'all',
-                },
-                headerGroup: {
-                  background: 'brand',
-                  size: 'large',
-                },
-                header: {
-                  border: 'all',
-                  align: 'center',
-                },
-                body: {
-                  animation: {
-                    type: 'fadeIn',
-                    duration: 2000,
-                    size: 'large',
-                  },
-                },
-                rowOdd: {
-                  background: { color: 'light-1' },
-                },
-                pagination: { pad: { top: 'medium' } },
-              }}
-          />
-          )}
-      </ResponsiveContext>
+      <PagingTable
+        columns={getColumns()}
+        data={trials}
+        SubComponent={this.onExpand}
+        defaultSorted={[{
+            id: 'id',
+            desc: false,
+          }]}
+        decorations={{
+            table: {
+              elevation: 'large',
+              border: 'all',
+            },
+            headerGroup: {
+              background: 'brand',
+              size: 'large',
+            },
+            header: {
+              border: 'all',
+              align: 'center',
+            },
+            body: {
+              animation: {
+                type: 'fadeIn',
+                duration: 2000,
+                size: 'large',
+              },
+            },
+            rowOdd: {
+              background: { color: 'light-1' },
+            },
+            pagination: { pad: { top: 'medium' } },
+          }}
+      />
     </Box>
   );
 };
