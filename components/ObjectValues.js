@@ -1,5 +1,5 @@
 import { Box } from 'grommet';
-import Value from './Value';
+import { Value } from 'grommet-controls';
 
 export default ({ obj, ...rest }) => (
   <Box align='center' direction='row' gap='medium'>

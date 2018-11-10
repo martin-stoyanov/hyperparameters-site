@@ -18,7 +18,7 @@ const Index = () => (
       </Text>
     </Box>
     <Box align='center'>
-      <Box direction='row' wrap='true' alignContent='start' pad='small' gap='small'>
+      <Box direction='row' wrap={true} alignContent='start' pad='small' gap='small'>
         <Box>
           <Heading level='3'>Written in Javascript</Heading>
           <Paragraph>
@@ -41,10 +41,10 @@ const Index = () => (
     </Box>
     <Box align='center'><Heading level='2'>Examples</Heading></Box>
     <Box align='center'>
-      <Box direction='row' wrap='true' width='xlarge' justify='between' pad='large'>
+      <Box direction='row' wrap={true} width='xlarge' justify='between' pad='large'>
         <Image style={{ maxWidth: '100%', height: 'auto' }} src='/static/img/randint.png' />
         <Box align='start'>
-          <Text size='large' weight='700' color='brand'>Parameter Examples</Text>
+          <Text size='large' weight={700} color='brand'>Parameter Examples</Text>
           <Paragraph>Hpjs features multiple parameter expressions, including a
             random int expression
           </Paragraph>
@@ -64,9 +64,9 @@ const Index = () => (
           </Box>
         </Box>
       </Box>
-      <Box direction='row' wrap='true' width='xlarge' justify='between' pad='large'>
+      <Box direction='row' wrap={true} width='xlarge' justify='between' pad='large'>
         <Box align='start'>
-          <Text size='large' weight='700' color='brand'>Tensorflow Integration</Text>
+          <Text size='large' weight={700} color='brand'>Tensorflow Integration</Text>
           <Paragraph>Find the best optimizer and number of epochs for a small tensorflow.js model
           </Paragraph>
           <Box direction='row' gap='small' pad={{ bottom: 'small' }}>
@@ -87,7 +87,7 @@ const Index = () => (
       <Box align='center'><Heading level='2'>Getting started</Heading></Box>
       <Box align='center' pad={{ horizontal: 'xlarge' }}>
         <Text size='medium' color='black' margin={{ bottom: 'small' }}>There are two ways to get TensorFlow.js and hpjs: via script tags or installing from npm</Text>
-        <Text size='large' weight='700' color='brand'>Using script tags</Text>
+        <Text size='large' weight={700} color='brand'>Using script tags</Text>
         <Text size='medium' color='black' margin='xsmall'>The below code can be directly copied and pasted into an html file</Text>
         <CodeExample
           code={`<html>
@@ -153,7 +153,7 @@ const Index = () => (
         />
       </Box>
       <Box align='center' pad={{ vertical: 'small', horizontal: 'xlarge' }}>
-        <Text size='large' weight='700' color='brand'>via NPM</Text>
+        <Text size='large' weight={700} color='brand'>via NPM</Text>
         <Text size='medium' color='black' margin='medium'>
         The example below is in React/Webpack.
         </Text>

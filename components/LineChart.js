@@ -27,7 +27,7 @@ class LineChart extends React.Component {
     };
     return (
       <Box
-        fill='true'
+        fill={true}
         style={{ position: 'relative', width, height }}
       >
         <Line
