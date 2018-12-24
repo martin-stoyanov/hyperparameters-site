@@ -19,22 +19,22 @@ async function trainModel({ numLayers, optimizer }, { xTrain, yTrain, xTest, yTe
     }));
   }
   model.compile({
-    loss: 'meanSquaredError',
-    optimizer: optimizers[optimizer](0.06),
+    loss: 'categoricalCrossentropy',
+    metrics: ['accuracy'],
+    optimizer: optimizers[optimizer](0.01),
   });
-  
   // Train the model using the data.
   const h = await model.fit(xTrain, yTrain, { 
-    epochs: 100, 
+    epochs: 10, 
     validationData: [xTest, yTest],
     callbacks: { onEpochEnd } });
-  return { model, loss: h.history.loss[h.history.loss.length - 1] };
+  return { model, accuracy: h.history.acc[h.history.acc.length - 1] };
 }
 
 // fmin optmization function, retuns the loss and a STATUS_OK
 async function modelOpt({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest }) {
-  const { loss } = await trainModel({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest });
-  return { loss, status: hpjs.STATUS_OK };
+  const { accuracy } = await trainModel({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest });
+  return { accuracy, status: hpjs.STATUS_OK };
 }
 
 // hyperparameters search space

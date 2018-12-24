@@ -75,9 +75,27 @@ export default class TensorflowExample extends React.Component {
                 <Box direction='row' gap='medium'>
                   <ObjectValues obj={{ '#': experimentEnd.idx }} />
                   <ObjectValues obj={experimentEnd.trial.args} />
-                  <ObjectValues obj={{ loss: experimentEnd.trial.result.loss.toFixed(4) }} />
+                  <ObjectValues
+                    obj={
+                      {
+                        loss: experimentEnd.trial.result.loss !== undefined ?
+                          experimentEnd.trial.result.loss.toFixed(4) : undefined,
+                        accuracy: experimentEnd.trial.result.accuracy !== undefined ?
+                          experimentEnd.trial.result.accuracy.toFixed(4) : undefined,
+                      }
+                    }
+                  />
                 </Box>
-                <ObjectValues obj={{ epoch, loss: logs.loss.toFixed(4) }} />
+                <ObjectValues obj={
+                  {
+                    epoch,
+                    loss: experimentEnd.trial.result.loss !== undefined ?
+                      logs.loss.toFixed(4) : undefined,
+                    accuracy: experimentEnd.trial.result.accuracy !== undefined ?
+                      logs.acc.toFixed(4) : undefined,
+
+                  }}
+                />
               </Box>
             </Box>
           )}
