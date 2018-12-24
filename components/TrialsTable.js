@@ -102,9 +102,9 @@ export default ({ trials }) => {
         Header: 'update',
         responsiveHide: ['narrow'],
         id: 'updateTime',
-        accessor: row => (row.refresh_time - row.book_time),
+        accessor: 'refresh_time',
         Cell: (cell) => {
-          const period = periodToTime(cell.value);
+          const period = periodToTime(cell.original.refresh_time - cell.original.book_time);
           return `${period.time} ${period.units}`;
         },
         maxWidth: 150,
@@ -134,7 +134,6 @@ export default ({ trials }) => {
       <PagingTable
         columns={getColumns()}
         data={trials}
-        SubComponent={this.onExpand}
         defaultSorted={[{
             id: 'id',
             desc: false,
