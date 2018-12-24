@@ -41,13 +41,14 @@ export default class TensorflowExample extends React.Component {
     });
   };
   renderCodeSnippet = () => {
-    const { code } = this.props;
+    const { code, data } = this.props;
     return (
       <CodeSnippet
         evalParams={{
           onExperimentBegin: this.onExperimentBegin,
           onExperimentEnd: this.onExperimentEnd,
           onEpochEnd: this.onEpochEnd,
+          data,
         }}
         onStopRequest={() => this.setState({ stopping: true })}
         onStart={this.onStartExperiments}
@@ -141,8 +142,10 @@ TensorflowExample.propTypes = {
   description: PropTypes.string,
   name: PropTypes.string.isRequired,
   code: PropTypes.string.isRequired,
+  data: PropTypes.any,
 };
 
 TensorflowExample.defaultProps = {
   description: undefined,
+  data: undefined,
 };

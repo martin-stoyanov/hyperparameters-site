@@ -67,6 +67,7 @@ export default async (expression, formatSnippet = p => p, params = {}) => {
 
   window.hpjs = hpjs;
   window.tf = tf;
+  window.data = params.data;
   let value;
   tf.ENV.engine.startScope();
   try {
@@ -82,6 +83,7 @@ export default async (expression, formatSnippet = p => p, params = {}) => {
   tf.ENV.engine.endScope();
   window.hpjs = undefined;
   window.tf = undefined;
+  window.data = undefined;
   return { errors, value };
 };
 

@@ -148,6 +148,12 @@ const Explore = () => (
             description='find best optimizer and number of epochs for the "tiny" tensorflow.js sample'
           />
         </Item>
+        <Item name='Iris Dataset' path='/tensorflow/iris'>
+          <TensorflowPreview
+            items={{ optimizer: 'sgd', epochs: 250 }}
+            description='find best optimizer and layers of epochs for the iris dataset'
+          />
+        </Item>
       </Section>
     </Box>
   </Layout>
