@@ -14,7 +14,7 @@ async function trainModel({ numLayers, optimizer }, { xTrain, yTrain, xTest, yTe
   for (let i = 0; i < numLayers; i += 1) {
     model.add(tf.layers.dense({
       inputShape: i === 0 ? [4] : [5], // if first layer
-      activation: 'sigmoid',
+      activation: i === numLayers - 1 ? 'softmax' : 'sigmoid',
       units: i === numLayers - 1 ? 3 : 5,
     }));
   }
@@ -49,10 +49,10 @@ async function modelOpt({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest
 
 // hyperparameters search space
 // optmizer is a choice field
-// layers ia an integer value from 1 to 5 with a step of 1
+// layers ia an integer value from 2 to 5 with a step of 1
 const space = {
   optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),
-  numLayers: hpjs.quniform(1, 5, 1),
+  numLayers: hpjs.quniform(2, 5, 1),
 };
 // Generate some synthetic data for training. (y = 2x - 1) and pass to fmin as parameters
 // data will be passed as a parameters to the fmin
