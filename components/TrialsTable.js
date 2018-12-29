@@ -1,4 +1,6 @@
 import React from 'react';
+import { findDOMNode } from 'react-dom';
+import * as tfvis from '@tensorflow/tfjs-vis';
 import { Box, Text, Heading } from 'grommet';
 import { PagingTable } from 'grommet-controls';
 
@@ -49,11 +51,76 @@ export const periodToTime = (duration) => {
 };
 
 export default class TrialsTable extends React.Component {
-  onExpand = row => (
-    <Box height='small' fill='horizontal' >
-      {console.log(row)}
-    </Box>
-  );
+  onExpand = (row) => {
+    const h = row.original.result.history;
+    const hasAccuracy = (h.acc !== undefined && h.val_acc !== undefined);
+    return (
+      <Box height='small' fill='horizontal' >
+        <Box direction='row' gap='medium' height='small' pad={{ vertical: 'medium' }}>
+          <Box
+            width={hasAccuracy ? '50%' : '100%'}
+            fill='vertical'
+          >
+            <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+              loss
+            </Box>
+            <Box
+              ref={(r) => {
+                const container = findDOMNode(r);
+                if (container) {
+                  const logs = h.loss.map((l, i) => (
+                    {
+                      loss: l,
+                      val_loss: h.val_loss ? h.val_loss[i] : undefined,
+                    }
+                  ));
+                  tfvis.show.history(container, logs, ['loss', 'val_loss'],
+                  {
+                    width: container.offsetWidth,
+                    height: container.offsetHeight,
+                    yLabel: 'loss',
+                    xLabel: 'epoch',
+                  });
+                }
+              }}
+              fill='vertical'
+            />
+          </Box>
+          {hasAccuracy && (
+            <Box
+              width='50%'
+              fill='vertical'
+            >
+              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                accuracy
+              </Box>
+              <Box
+                ref={(r) => {
+                  const container = findDOMNode(r);
+                  if (container) {
+                    const logs = h.acc.map((a, i) => (
+                      {
+                        acc: a,
+                        val_acc: h.val_acc ? h.val_acc[i] : undefined,
+                      }
+                    ));
+                    tfvis.show.history(container, logs, ['acc', 'val_acc'],
+                    {
+                      width: container.offsetWidth,
+                      height: container.offsetHeight,
+                      yLabel: 'accuracy',
+                      xLabel: 'epoch',
+                    });
+                  }
+                }}
+                fill='vertical'
+              />
+            </Box>
+          )}
+        </Box>
+      </Box>
+    );
+  }
   render() {
     const { trials } = this.props;
     let hasHistory;
