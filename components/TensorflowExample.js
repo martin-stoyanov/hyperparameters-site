@@ -1,4 +1,7 @@
+import React from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
+import * as tfvis from '@tensorflow/tfjs-vis';
 import { Box, Heading } from 'grommet';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
@@ -8,6 +11,7 @@ import ObjectValues from './ObjectValues';
 export default class TensorflowExample extends React.Component {
   state = {
     trials: [],
+    trainLogs: [],
   };
   onData = (trials) => {
     this.setState({
@@ -18,7 +22,7 @@ export default class TensorflowExample extends React.Component {
 
   onExperimentBegin = (idx, trial) => {
     const { stopping } = this.state;
-    this.setState({ experimentBegin: { idx, trial } });
+    this.setState({ experimentBegin: { idx, trial }, trainLogs: [] });
     return stopping;
   };
 
@@ -29,7 +33,26 @@ export default class TensorflowExample extends React.Component {
   };
 
   onEpochEnd = (epoch, logs) => {
-    this.setState({ epoch, logs });
+    const trainLogs = [...this.state.trainLogs, logs];
+    if (this.lossContainer) {
+      tfvis.show.history(this.lossContainer, trainLogs, ['loss', 'val_loss'],
+        {
+          width: this.lossContainer.offsetWidth,
+          height: this.lossContainer.offsetHeight,
+          yLabel: 'loss',
+          xLabel: 'epoch',
+        });
+    }
+    if (this.accContainer) {
+      tfvis.show.history(this.accContainer, trainLogs, ['acc', 'val_acc'],
+        {
+          width: this.accContainer.offsetWidth,
+          height: this.accContainer.offsetHeight,
+          yLabel: 'accuracy',
+          xLabel: 'epoch',
+        });
+    }
+    this.setState({ epoch, logs, trainLogs });
   };
   onStartExperiments = () => {
     this.setState({
@@ -64,14 +87,44 @@ export default class TensorflowExample extends React.Component {
     } = this.state;
     let progress;
     if (epoch !== undefined) {
+      const hasAccuracy = (logs.acc !== undefined && logs.val_acc !== undefined);
       progress = (
-        <Box fill='horizontal' gap='small'>
+        <Box fill='horizontal' gap='small' >
+          <Box direction='row' gap='medium' height='small' pad={{ vertical: 'medium' }}>
+            <Box
+              width={hasAccuracy ? '50%' : '100%'}
+              fill='vertical'
+            >
+              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                loss
+              </Box>
+              <Box
+                ref={(r) => { this.lossContainer = findDOMNode(r); }}
+                fill='vertical'
+              />
+            </Box>
+            {hasAccuracy && (
+              <Box
+                width='50%'
+                fill='vertical'
+              >
+                <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                  accuracy
+                </Box>
+                <Box
+                  ref={(r) => { this.accContainer = findDOMNode(r); }}
+                  fill='vertical'
+                />
+              </Box>
+            )}
+          </Box>
+
           {experimentEnd && (
-            <Box border={{ color: 'light-3', side: 'all' }}>
+            <Box border={{ color: 'light-3', side: 'all' }} gap='small'>
               <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
                 experiment
               </Box>
-              <Box pad='small' wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
+              <Box wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
                 <Box direction='row' gap='medium'>
                   <ObjectValues obj={{ '#': experimentEnd.idx }} />
                   <ObjectValues obj={experimentEnd.trial.args} />

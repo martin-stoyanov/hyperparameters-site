@@ -1,5 +1,5 @@
 import TensorflowExample from '../../components/TensorflowExample';
-import irisTensorflowModel from '../../components/editor/IrisCode';
+import irisTensorflowModel from '../../components/editor/tfjs_examples/iris';
 import * as data from '../../data/iris';
 
 export default () => (

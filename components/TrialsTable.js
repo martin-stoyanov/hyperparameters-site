@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Text, Heading } from 'grommet';
 import { PagingTable } from 'grommet-controls';
 
@@ -47,8 +48,15 @@ export const periodToTime = (duration) => {
   };
 };
 
-export default ({ trials }) => {
-  const getColumns = () => {
+export default class TrialsTable extends React.Component {
+  onExpand = row => (
+    <Box height='small' fill='horizontal' >
+      {console.log(row)}
+    </Box>
+  );
+  render() {
+    const { trials } = this.props;
+    let hasHistory;
     let argColumns = [];
     if (trials.length > 0) {
       if (typeof trials[0].args === 'number') {
@@ -68,7 +76,10 @@ export default ({ trials }) => {
     }
     let resultColumns = [];
     if (trials.length > 0) {
+      hasHistory = trials[0].result.history !== undefined;
       resultColumns = Object.keys(trials[0].result)
+        .filter(key => (typeof trials[0].result[key] !== 'object' &&
+            !Array.isArray(trials[0].result[key])))
         .map(key => ({
           Header: key,
           accessor: `result.${key}`,
@@ -76,7 +87,7 @@ export default ({ trials }) => {
           getProps: () => ({ align: 'end' }),
         }));
     }
-    return [
+    const columns = [
       {
         Header: 'id',
         accessor: 'id',
@@ -125,20 +136,20 @@ export default ({ trials }) => {
         columns: resultColumns,
       },
     ];
-  };
-  return (
-    <Box fill='horizontal' pad={{ bottom: 'large' }}>
-      <Box align='center'>
-        <Heading>Trials</Heading>
-      </Box>
-      <PagingTable
-        columns={getColumns()}
-        data={trials}
-        defaultSorted={[{
+    return (
+      <Box fill='horizontal' pad={{ bottom: 'large' }}>
+        <Box align='center'>
+          <Heading>Trials</Heading>
+        </Box>
+        <PagingTable
+          columns={columns}
+          data={trials}
+          SubComponent={hasHistory ? this.onExpand : undefined}
+          defaultSorted={[{
             id: 'id',
             desc: false,
           }]}
-        decorations={{
+          decorations={{
             table: {
               elevation: 'large',
               border: 'all',
@@ -163,8 +174,8 @@ export default ({ trials }) => {
             },
             pagination: { pad: { top: 'medium' } },
           }}
-      />
-    </Box>
-  );
-};
-
+        />
+      </Box>
+    );
+  }
+}

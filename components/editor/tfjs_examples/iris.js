@@ -28,13 +28,13 @@ async function trainModel({ numLayers, optimizer }, { xTrain, yTrain, xTest, yTe
     epochs: 10, 
     validationData: [xTest, yTest],
     callbacks: { onEpochEnd } });
-  return { model, accuracy: h.history.acc[h.history.acc.length - 1] };
+  return { model, h };
 }
 
 // fmin optmization function, retuns the loss and a STATUS_OK
 async function modelOpt({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest }) {
-  const { accuracy } = await trainModel({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest });
-  return { accuracy, status: hpjs.STATUS_OK };
+  const { h } = await trainModel({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest });
+  return { accuracy: h.history.acc[h.history.acc.length - 1], history: h.history, status: hpjs.STATUS_OK };
 }
 
 // hyperparameters search space
