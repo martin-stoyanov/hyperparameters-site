@@ -1,5 +1,6 @@
 import * as tf from '@tensorflow/tfjs';
 import * as hpjs from 'hyperparameters';
+import * as tfvis from '@tensorflow/tfjs-vis';
 
 // from https://github.com/tensorflow/tfjs-website/blob/master/themes/dljs/source/js/codeSnippets.js
 function getErrorLine(error) {
@@ -68,6 +69,7 @@ export default async (expression, formatSnippet = p => p, params = {}) => {
   window.hpjs = hpjs;
   window.tf = tf;
   window.data = params.data;
+  window.tfvis = tfvis;
   let value;
   tf.ENV.engine.startScope();
   try {
@@ -84,6 +86,7 @@ export default async (expression, formatSnippet = p => p, params = {}) => {
   window.hpjs = undefined;
   window.tf = undefined;
   window.data = undefined;
+  window.tfvis = undefined;
   return { errors, value };
 };
 

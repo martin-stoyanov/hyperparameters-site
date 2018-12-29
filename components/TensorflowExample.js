@@ -184,7 +184,7 @@ export default class TensorflowExample extends React.Component {
     );
   };
   render() {
-    const { description, name } = this.props;
+    const { description, name, data } = this.props;
     const { trials } = this.state;
     return (
       <PageLayout
@@ -203,7 +203,7 @@ export default class TensorflowExample extends React.Component {
             {this.renderCodeSnippet()}
           </Box>
         </Box>
-        <TrialsTable trials={trials} />
+        <TrialsTable trials={trials} data={data} />
       </PageLayout>
     );
   }

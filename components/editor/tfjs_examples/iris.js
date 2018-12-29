@@ -33,8 +33,18 @@ async function trainModel({ numLayers, optimizer }, { xTrain, yTrain, xTest, yTe
 
 // fmin optmization function, retuns the loss and a STATUS_OK
 async function modelOpt({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest }) {
-  const { h } = await trainModel({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest });
-  return { accuracy: h.history.acc[h.history.acc.length - 1], history: h.history, status: hpjs.STATUS_OK };
+  const { h, model } = await trainModel({ optimizer, numLayers }, { xTrain, yTrain, xTest, yTest });
+  
+  const preds = model.predict(xTest).argMax(-1);
+  const labels = yTest.argMax(-1);
+  const confMatrixData = await tfvis.metrics.confusionMatrix(labels, preds);
+
+  return { 
+    accuracy: h.history.acc[h.history.acc.length - 1],
+    history: h.history,
+    confMatrixData,
+    status: hpjs.STATUS_OK
+  };
 }
 
 // hyperparameters search space
