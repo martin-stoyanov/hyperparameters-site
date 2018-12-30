@@ -13,9 +13,9 @@ async function trainModel({ numLayers, optimizer }, { xTrain, yTrain, xTest, yTe
   // adding random number of layers
   for (let i = 0; i < numLayers; i += 1) {
     model.add(tf.layers.dense({
-      inputShape: i === 0 ? [4] : [5], // if first layer
+      inputShape: i === 0 ? [4] : [10], // if first layer
       activation: i === numLayers - 1 ? 'softmax' : 'sigmoid',
-      units: i === numLayers - 1 ? 3 : 5,
+      units: i === numLayers - 1 ? 3 : 10,
     }));
   }
   model.compile({
@@ -25,7 +25,7 @@ async function trainModel({ numLayers, optimizer }, { xTrain, yTrain, xTest, yTe
   });
   // Train the model using the data.
   const h = await model.fit(xTrain, yTrain, { 
-    epochs: 10, 
+    epochs: 20, 
     validationData: [xTest, yTest],
     callbacks: { onEpochEnd } });
   return { model, h };
@@ -59,7 +59,7 @@ const space = {
 const [xTrain, yTrain, xTest, yTest] = data.getIrisData(0.15);
 
 return await hpjs.fmin(
-  modelOpt, space, hpjs.search.randomSearch, 10,
-  { rng: new hpjs.RandomState(654321), xTrain, yTrain, xTest, yTest, callbacks: { onExperimentBegin, onExperimentEnd } }
+  modelOpt, space, hpjs.search.randomSearch, 6,
+  { rng: new hpjs.RandomState(54321), xTrain, yTrain, xTest, yTest, callbacks: { onExperimentBegin, onExperimentEnd } }
 );
 `;
