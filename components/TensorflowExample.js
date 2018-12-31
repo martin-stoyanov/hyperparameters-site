@@ -196,7 +196,7 @@ export default class TensorflowExample extends React.Component {
             <Heading level={1} margin='none'>
               <strong>{name}</strong>
             </Heading>
-            <p dangerouslySetInnerHTML={{ __html: description }} />
+            <div dangerouslySetInnerHTML={{ __html: description }} />
             {this.renderDescriptionPanel()}
           </Box>
           <Box flex={true} pad={{ top: 'large' }} align='center'>
