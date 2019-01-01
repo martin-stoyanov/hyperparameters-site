@@ -79,7 +79,6 @@ export default class TrialsTable extends React.Component {
                           val_loss: h.val_loss ? h.val_loss[i] : undefined,
                         }
                       ));
-                      console.log(container.offsetHeight);
                       tfvis.show.history(container, logs, ['loss', 'val_loss'],
                       {
                         width: container.offsetWidth,
