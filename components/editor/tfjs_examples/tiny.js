@@ -21,7 +21,7 @@ async function modelOpt({ optimizer, epochs }, { xs, ys }) {
 
 // hyperparameters search space
 // optimizer is a choice field
-// epochs ia an integer value from 10 to 250 with a step of 5
+// epochs is an integer value from 10 to 30 with a step of 10
 const space = {
   optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),
   epochs: hpjs.quniform(10, 30, 10),
