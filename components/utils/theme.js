@@ -1,5 +1,10 @@
 export default {
   global: {
+    breakpoints: {
+      small: {
+        value: 1000,
+      },
+    },
     hover: {
       background: {
         dark: {

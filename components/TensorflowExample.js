@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import * as tfvis from '@tensorflow/tfjs-vis';
 import { Box, Heading } from 'grommet';
+import { ResponsiveContext } from 'grommet/contexts';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
 import TrialsTable from './TrialsTable';
@@ -89,83 +90,87 @@ export default class TensorflowExample extends React.Component {
     if (epoch !== undefined) {
       const hasAccuracy = (logs.acc !== undefined && logs.val_acc !== undefined);
       progress = (
-        <Box fill='horizontal' gap='small' >
-          <Box direction='row' gap='medium' height='small' pad={{ vertical: 'medium' }}>
-            <Box
-              width={hasAccuracy ? '50%' : '100%'}
-              fill='vertical'
-            >
-              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
-                loss
-              </Box>
-              <Box
-                ref={(r) => { this.lossContainer = findDOMNode(r); }}
-                fill='vertical'
-              />
-            </Box>
-            {hasAccuracy && (
-              <Box
-                width='50%'
-                fill='vertical'
-              >
-                <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
-                  accuracy
-                </Box>
+        <ResponsiveContext.Consumer>
+          {size => (
+            <Box fill='horizontal' gap='small' >
+              <Box direction='row-responsive' gap='medium' pad={{ vertical: 'medium' }}>
                 <Box
-                  ref={(r) => { this.accContainer = findDOMNode(r); }}
-                  fill='vertical'
-                />
-              </Box>
-            )}
-          </Box>
-
-          {experimentEnd && (
-            <Box border={{ color: 'light-3', side: 'all' }} gap='small'>
-              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
-                experiment
-              </Box>
-              <Box wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
-                <Box direction='row' gap='medium'>
-                  <ObjectValues obj={{ '#': experimentEnd.idx }} />
-                  <ObjectValues obj={experimentEnd.trial.args} />
-                  <ObjectValues
-                    obj={
-                      {
-                        loss: experimentEnd.trial.result.loss !== undefined ?
-                          experimentEnd.trial.result.loss.toFixed(4) : undefined,
-                        accuracy: experimentEnd.trial.result.accuracy !== undefined ?
-                          experimentEnd.trial.result.accuracy.toFixed(4) : undefined,
-                      }
-                    }
+                  width={hasAccuracy && size !== 'small' ? '50%' : '100%'}
+                  height='small'
+                >
+                  <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                    loss
+                  </Box>
+                  <Box
+                    ref={(r) => { this.lossContainer = findDOMNode(r); }}
+                    fill='vertical'
                   />
                 </Box>
-                <ObjectValues obj={
-                  {
-                    epoch,
-                    loss: experimentEnd.trial.result.loss !== undefined ?
-                      logs.loss.toFixed(4) : undefined,
-                    accuracy: experimentEnd.trial.result.accuracy !== undefined ?
-                      logs.acc.toFixed(4) : undefined,
+                {hasAccuracy && (
+                  <Box
+                    width={size !== 'small' ? '50%' : '100%'}
+                    height='small'
+                  >
+                    <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                      accuracy
+                    </Box>
+                    <Box
+                      ref={(r) => { this.accContainer = findDOMNode(r); }}
+                      fill='vertical'
+                    />
+                  </Box>
+                )}
+              </Box>
 
-                  }}
-                />
-              </Box>
-            </Box>
-          )}
-          {false && (
-            <Box border={{ color: 'light-3', side: 'all' }}>
-              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
-                last trial
-              </Box>
-              <Box pad='small' wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
-                <Box direction='row' gap='medium'>
-                  <ObjectValues obj={{ 'trial': experimentBegin.idx }} />
-                  <ObjectValues obj={experimentBegin.trial.args} />
+              {experimentEnd && (
+                <Box border={{ color: 'light-3', side: 'all' }} gap='small'>
+                  <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                    experiment
+                  </Box>
+                  <Box wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
+                    <Box direction='row' gap='medium'>
+                      <ObjectValues obj={{ '#': experimentEnd.idx }} />
+                      <ObjectValues obj={experimentEnd.trial.args} />
+                      <ObjectValues
+                        obj={
+                          {
+                            loss: experimentEnd.trial.result.loss !== undefined ?
+                              experimentEnd.trial.result.loss.toFixed(4) : undefined,
+                            accuracy: experimentEnd.trial.result.accuracy !== undefined ?
+                              experimentEnd.trial.result.accuracy.toFixed(4) : undefined,
+                          }
+                        }
+                      />
+                    </Box>
+                    <ObjectValues obj={
+                      {
+                        epoch,
+                        loss: experimentEnd.trial.result.loss !== undefined ?
+                          logs.loss.toFixed(4) : undefined,
+                        accuracy: experimentEnd.trial.result.accuracy !== undefined ?
+                          logs.acc.toFixed(4) : undefined,
+
+                      }}
+                    />
+                  </Box>
                 </Box>
-              </Box>
+              )}
+              {false && (
+                <Box border={{ color: 'light-3', side: 'all' }}>
+                  <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                    last trial
+                  </Box>
+                  <Box pad='small' wrap={true} direction='row' align='center' justify='between' fill='horizontal'>
+                    <Box direction='row' gap='medium'>
+                      <ObjectValues obj={{ 'trial': experimentBegin.idx }} />
+                      <ObjectValues obj={experimentBegin.trial.args} />
+                    </Box>
+                  </Box>
+                </Box>
+              )}
             </Box>
-          )}
-        </Box>
+        )}
+        </ResponsiveContext.Consumer>
       );
     }
     const items = (best && best.args) ? <ObjectValues obj={best.args} size='xxlarge' color='brand' /> : null;

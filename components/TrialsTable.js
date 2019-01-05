@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 import * as tfvis from '@tensorflow/tfjs-vis';
 import { Box, Text, Heading } from 'grommet';
 import { PagingTable } from 'grommet-controls';
+import { ResponsiveContext } from 'grommet/contexts';
 
 const STATES_MAP = ['new', 'running', 'done', 'error'];
 
@@ -57,96 +58,100 @@ export default class TrialsTable extends React.Component {
     const hasAccuracy = (h.acc !== undefined && h.val_acc !== undefined);
     const { confMatrixData } = row.original.result;
     return (
-      <Box fill='horizontal' >
-        <Box direction='row' gap='medium' height='small' pad={{ vertical: 'medium' }}>
-          <Box
-            width={hasAccuracy ? '50%' : '100%'}
-            fill='vertical'
-          >
-            <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
-              loss
-            </Box>
-            <Box
-              ref={(r) => {
-                const container = findDOMNode(r);
-                if (container) {
-                  const logs = h.loss.map((l, i) => (
-                    {
-                      loss: l,
-                      val_loss: h.val_loss ? h.val_loss[i] : undefined,
-                    }
-                  ));
-                  tfvis.show.history(container, logs, ['loss', 'val_loss'],
-                  {
-                    width: container.offsetWidth,
-                    height: container.offsetHeight,
-                    yLabel: 'loss',
-                    xLabel: 'epoch',
-                  });
-                }
-              }}
-              fill='vertical'
-            />
-          </Box>
-          {hasAccuracy && (
-            <Box
-              width='50%'
-              fill='vertical'
-            >
-              <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
-                accuracy
-              </Box>
+      <ResponsiveContext.Consumer>
+        {size => (
+          <Box fill='horizontal' >
+            <Box direction='row-responsive' gap='medium' pad={{ vertical: 'medium' }}>
               <Box
-                ref={(r) => {
-                  const container = findDOMNode(r);
-                  if (container) {
-                    const logs = h.acc.map((a, i) => (
+                width={hasAccuracy && size !== 'small' ? '50%' : '100%'}
+                height='small'
+              >
+                <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                  loss
+                </Box>
+                <Box
+                  ref={(r) => {
+                    const container = findDOMNode(r);
+                    if (container) {
+                      const logs = h.loss.map((l, i) => (
+                        {
+                          loss: l,
+                          val_loss: h.val_loss ? h.val_loss[i] : undefined,
+                        }
+                      ));
+                      tfvis.show.history(container, logs, ['loss', 'val_loss'],
                       {
-                        acc: a,
-                        val_acc: h.val_acc ? h.val_acc[i] : undefined,
+                        width: container.offsetWidth,
+                        height: container.offsetHeight,
+                        yLabel: 'loss',
+                        xLabel: 'epoch',
+                      });
+                    }
+                  }}
+                  fill='vertical'
+                />
+              </Box>
+              {hasAccuracy && (
+                <Box
+                  width={size !== 'small' ? '50%' : '100%'}
+                  height='small'
+                >
+                  <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                    accuracy
+                  </Box>
+                  <Box
+                    ref={(r) => {
+                      const container = findDOMNode(r);
+                      if (container) {
+                        const logs = h.acc.map((a, i) => (
+                          {
+                            acc: a,
+                            val_acc: h.val_acc ? h.val_acc[i] : undefined,
+                          }
+                        ));
+                        tfvis.show.history(container, logs, ['acc', 'val_acc'],
+                        {
+                          width: container.offsetWidth,
+                          height: container.offsetHeight,
+                          yLabel: 'accuracy',
+                          xLabel: 'epoch',
+                        });
                       }
-                    ));
-                    tfvis.show.history(container, logs, ['acc', 'val_acc'],
-                    {
-                      width: container.offsetWidth,
-                      height: container.offsetHeight,
-                      yLabel: 'accuracy',
-                      xLabel: 'epoch',
-                    });
-                  }
-                }}
+                    }}
+                    fill='vertical'
+                  />
+                </Box>
+              )}
+            </Box>
+            <Box direction='row' gap='medium' height='medium' pad={{ vertical: 'medium' }}>
+              {data && confMatrixData && (
+              <Box
+                width='50%'
                 fill='vertical'
-              />
+                alignContent='between'
+              >
+                <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
+                    confusion matrix
+                </Box>
+                <Box
+                  ref={(r) => {
+                    const container = findDOMNode(r);
+                    if (container) {
+                      tfvis.render.confusionMatrix(
+                        { values: confMatrixData, labels: data.labels },
+                        container,
+                        { shadeDiagonal: true },
+                    );
+                    }
+                  }}
+                  fill='vertical'
+                />
+              </Box>
+              )}
             </Box>
-          )}
-        </Box>
-        <Box direction='row' gap='medium' height='medium' pad={{ vertical: 'medium' }}>
-          {data && confMatrixData && (
-          <Box
-            width='50%'
-            fill='vertical'
-            alignContent='between'
-          >
-            <Box background='light-1' pad={{ horizontal: 'small' }} border={{ color: 'light-3', side: 'bottom' }}>
-                confusion matrix
-            </Box>
-            <Box
-              ref={(r) => {
-                const container = findDOMNode(r);
-                if (container) {
-                  tfvis.render.confusionMatrix(
-                    { values: confMatrixData, labels: data.labels },
-                    container,
-                    { shadeDiagonal: true },
-                );
-                }
-              }}
-              fill='vertical'
-            />
           </Box>
-          )}
-        </Box>
-      </Box>
+        )}
+      </ResponsiveContext.Consumer>
     );
   }
   render() {
@@ -178,7 +183,7 @@ export default class TrialsTable extends React.Component {
         .map(key => ({
           Header: key,
           accessor: `result.${key}`,
-          responsiveHide: key !== 'status' ? ['narrow'] : undefined,
+          responsiveHide: key !== 'status' ? ['small'] : undefined,
           getProps: () => ({ align: 'end' }),
         }));
     }
@@ -190,14 +195,14 @@ export default class TrialsTable extends React.Component {
       },
       {
         Header: 'state',
-        responsiveHide: ['narrow'],
+        responsiveHide: ['small'],
         accessor: 'state',
         maxWidth: 140,
         Cell: cell => (<Text weight='bold'>{STATES_MAP[cell.value]}</Text>),
       },
       {
         Header: 'start',
-        responsiveHide: ['narrow'],
+        responsiveHide: ['small'],
         accessor: 'book_time',
         maxWidth: 150,
         Cell: cell => (<Text weight='bold'>{formatTraingTime(cell.value)}</Text>),
@@ -206,7 +211,7 @@ export default class TrialsTable extends React.Component {
       },
       {
         Header: 'update',
-        responsiveHide: ['narrow'],
+        responsiveHide: ['small'],
         id: 'updateTime',
         accessor: 'refresh_time',
         Cell: (cell) => {
