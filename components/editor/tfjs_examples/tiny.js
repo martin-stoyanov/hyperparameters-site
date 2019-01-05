@@ -13,14 +13,14 @@ export default
   return { model, h };
 }
 
-// fmin optmization function, retuns the loss and a STATUS_OK
+// fmin optimization function, returns the loss and a STATUS_OK
 async function modelOpt({ optimizer, epochs }, { xs, ys }) {
   const { h } = await trainModel({ optimizer, epochs }, { xs, ys });
   return { loss: h.history.loss[h.history.loss.length - 1], history: h.history, status: hpjs.STATUS_OK };
 }
 
 // hyperparameters search space
-// optmizer is a choice field
+// optimizer is a choice field
 // epochs ia an integer value from 10 to 250 with a step of 5
 const space = {
   optimizer: hpjs.choice(['sgd', 'adam', 'adagrad', 'rmsprop']),
