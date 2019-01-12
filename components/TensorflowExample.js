@@ -67,7 +67,7 @@ export default class TensorflowExample extends React.Component {
   renderCodeSnippet = () => {
     const { code, data } = this.props;
     return (
-      <CodeSnippet
+      data && <CodeSnippet
         evalParams={{
           onExperimentBegin: this.onExperimentBegin,
           onExperimentEnd: this.onExperimentEnd,
@@ -208,7 +208,7 @@ export default class TensorflowExample extends React.Component {
             {this.renderCodeSnippet()}
           </Box>
         </Box>
-        <TrialsTable trials={trials} data={data} />
+        {data ? <TrialsTable trials={trials} data={data} /> : <p>Loading Data</p>}
       </PageLayout>
     );
   }
