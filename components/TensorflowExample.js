@@ -14,6 +14,31 @@ export default class TensorflowExample extends React.Component {
     trials: [],
     trainLogs: [],
   };
+
+  callTestFunction = async ({ testFunc, data }) => {
+    if (testFunc && data) {
+      const trials = await testFunc({
+        data,
+        onEpochEnd: this.onEpochEnd,
+        onExperimentBegin: this.onExperimentBegin,
+        onExperimentEnd: this.onExperimentEnd,
+      });
+      this.setState({
+        trials: trials.trials,
+        best: trials.bestTrial(),
+      });
+    }
+  };
+
+  async componentDidMount() {
+    await this.callTestFunction(this.props);
+  }
+  async componentWillReceiveProps(nextProps) {
+    const { testFunc, data } = this.props;
+    if (testFunc && !data && nextProps.data) {
+      await this.callTestFunction(nextProps);
+    }
+  }
   onData = (trials) => {
     this.setState({
       trials: trials.trials,
@@ -67,7 +92,7 @@ export default class TensorflowExample extends React.Component {
   renderCodeSnippet = () => {
     const { code, data } = this.props;
     return (
-      data && <CodeSnippet
+      data && code && <CodeSnippet
         evalParams={{
           onExperimentBegin: this.onExperimentBegin,
           onExperimentEnd: this.onExperimentEnd,
@@ -142,7 +167,8 @@ export default class TensorflowExample extends React.Component {
                         }
                       />
                     </Box>
-                    <ObjectValues obj={
+                    <ObjectValues
+                      obj={
                       {
                         epoch,
                         loss: experimentEnd.trial.result.loss !== undefined ?
@@ -217,11 +243,14 @@ export default class TensorflowExample extends React.Component {
 TensorflowExample.propTypes = {
   description: PropTypes.string,
   name: PropTypes.string.isRequired,
-  code: PropTypes.string.isRequired,
+  code: PropTypes.string,
+  testFunc: PropTypes.func,
   data: PropTypes.any,
 };
 
 TensorflowExample.defaultProps = {
   description: undefined,
   data: undefined,
+  code: undefined,
+  testFunc: undefined,
 };
