@@ -1,10 +1,12 @@
 import TensorflowExample from '../../components/TensorflowExample';
 import irisTensorflowModel from '../../components/editor/tfjs_examples/iris';
 import * as data from '../../data/iris';
+// import testFunc from '../../components/editor/tfjs_tests/irisTestFunc';
 
 export default () => (
   <TensorflowExample
     name='Iris tensorflow model'
+    // testFunc={testFunc}
     description='<br /><div>Find best optimizer and number of layers for the the iris dataset.
       <ul><li>To change seed: on line 63: replace RandomState(54321) with any number
       Or, to get random results every time you run, remove the whole argument.</li>
