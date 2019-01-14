@@ -154,6 +154,12 @@ const Explore = () => (
             description='find best optimizer and number of layers for the iris dataset'
           />
         </Item>
+        <Item name='Mnist Dataset' path='/tensorflow/mnist'>
+          <TensorflowPreview
+            items={{ optimizer: 'sgd', epochs: 250 }}
+            description='find best kernel size for the mnist dataset'
+          />
+        </Item>
       </Section>
     </Box>
   </Layout>
