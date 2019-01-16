@@ -21,9 +21,9 @@ export const IMAGE_H = 28;
 export const IMAGE_W = 28;
 const IMAGE_SIZE = IMAGE_H * IMAGE_W;
 const NUM_CLASSES = 10;
-const NUM_DATASET_ELEMENTS = 65000;
+const NUM_DATASET_ELEMENTS = 4000;
 
-const NUM_TRAIN_ELEMENTS = 55000;
+const NUM_TRAIN_ELEMENTS = 3000;
 const NUM_TEST_ELEMENTS = NUM_DATASET_ELEMENTS - NUM_TRAIN_ELEMENTS;
 
 const MNIST_IMAGES_SPRITE_PATH =
@@ -52,7 +52,7 @@ export class MnistData {
         const datasetBytesBuffer =
             new ArrayBuffer(NUM_DATASET_ELEMENTS * IMAGE_SIZE * 4);
 
-        const chunkSize = 5000;
+        const chunkSize = 2000;
         canvas.width = img.width;
         canvas.height = chunkSize;
 
@@ -123,7 +123,7 @@ export class MnistData {
    *   labels: The one-hot encoded labels tensor, of shape
    *     `[numTestExamples, 10]`.
    */
-  getTestData(numExamples) {
+  getTestData(numExamples = NUM_TEST_ELEMENTS) {
     let xs = tf.tensor4d(
         this.testImages,
         [this.testImages.length / IMAGE_SIZE, IMAGE_H, IMAGE_W, 1]);

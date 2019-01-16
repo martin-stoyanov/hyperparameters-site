@@ -35,8 +35,9 @@ export default async ({
 
     // Train the model using the data.
     const h = await model.fit(trainData.xs, trainData.labels, {
+      validationData: [testData.xs, testData.labels],
       validationSplit,
-      epochs: 2,
+      epochs: 4,
       callbacks: { onEpochEnd },
     });
     console.log('3');
