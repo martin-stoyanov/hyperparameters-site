@@ -32,42 +32,34 @@ export default async ({
 
   // training function, called by the optimization function
   // eslint-disable-next-line no-unused-vars
-  async function trainModel({ modelType }, { trainData, testData }) {
+  async function trainModel({ modelType, validationSplit }, { trainData, testData }) {
     let model;
-    console.log(modelType);
     if (modelType === 'ConvNet') {
-      console.log(modelType);
       model = createConvModel();
     } else if (modelType === 'DenseNet') {
-      console.log(modelType);
       model = createDenseModel();
     }
     model.summary();
-    console.log('1');
     model.compile({
       optimizer: 'rmsprop',
       loss: 'categoricalCrossentropy',
       metrics: ['accuracy'],
     });
-    console.log('2');
-    const validationSplit = 0.15;
 
     // Train the model using the data.
     const h = await model.fit(trainData.xs, trainData.labels, {
       validationData: [testData.xs, testData.labels],
       validationSplit,
-      epochs: 6,
+      epochs: 4,
       callbacks: { onEpochEnd },
     });
-    console.log('3');
-    console.log(h);
     return { model, h };
   }
 
-  // fmin optmization function, retuns the accuracy, history, confusion matrix data, and a STATUS_OK
-  async function modelOpt({ modelType }, { trainData, testData }) {
+  // fmin optmization function, retuns the accuracy, history, and a STATUS_OK
+  async function modelOpt({ modelType, validationSplit }, { trainData, testData }) {
     // eslint-disable-next-line no-unused-vars
-    const { h, model } = await trainModel({ modelType }, { trainData, testData });
+    const { h, model } = await trainModel({ modelType, validationSplit }, { trainData, testData });
 
     return {
       accuracy: h.history.acc[h.history.acc.length - 1],
@@ -77,18 +69,16 @@ export default async ({
   }
 
   // hyperparameters search space
-  // kernelSize is an integer value from 2 to 5 with a step of 1
+  // modelType is a random string
+  // validationSplit is a random # from 0.1-0.25
   const space = {
     modelType: hpjs.choice(['ConvNet', 'DenseNet']),
+    validationSplit: hpjs.uniform(0.1, 0.25),
   };
 
   // Getting data to train, using the tensorflowjs mnist example's data
-  console.log(data);
   const trainData = data.getTrainData();
   const testData = data.getTestData();
-
-  console.log(trainData);
-  console.log(testData);
 
   return hpjs.fmin(
     modelOpt, space, hpjs.search.randomSearch, 5,
