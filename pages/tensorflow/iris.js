@@ -16,5 +16,6 @@ export default () => (
       </div>'
     code={irisTensorflowModel}
     data={data}
+    labels={data.IRIS_CLASSES}
   />
 );

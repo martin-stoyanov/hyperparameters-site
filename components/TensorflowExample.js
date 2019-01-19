@@ -215,7 +215,12 @@ export default class TensorflowExample extends React.Component {
     );
   };
   render() {
-    const { description, name, data } = this.props;
+    const {
+      description,
+      name,
+      data,
+      labels,
+    } = this.props;
     const { trials } = this.state;
     return (
       <PageLayout
@@ -234,7 +239,7 @@ export default class TensorflowExample extends React.Component {
             {this.renderCodeSnippet()}
           </Box>
         </Box>
-        {data ? <TrialsTable trials={trials} data={data} /> : <p>Loading Data</p>}
+        {data ? <TrialsTable trials={trials} data={data} labels={labels} /> : <p>Loading Data</p>}
       </PageLayout>
     );
   }
@@ -246,11 +251,13 @@ TensorflowExample.propTypes = {
   code: PropTypes.string,
   testFunc: PropTypes.func,
   data: PropTypes.any,
+  labels: PropTypes.arrayOf(PropTypes.string),
 };
 
 TensorflowExample.defaultProps = {
   description: undefined,
   data: undefined,
+  labels: undefined,
   code: undefined,
   testFunc: undefined,
 };

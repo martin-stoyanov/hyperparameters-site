@@ -17,9 +17,9 @@
 
 import * as tf from '@tensorflow/tfjs';
 
-export const labels =
+export const IRIS_CLASSES =
     ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica'];
-export const IRIS_NUM_CLASSES = labels.length;
+export const IRIS_NUM_CLASSES = IRIS_CLASSES.length;
 
 // Iris flowers data. Source:
 //   https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data
@@ -154,7 +154,7 @@ export function getIrisData(testSplit) {
   return tf.tidy(() => {
     const dataByClass = [];
     const targetsByClass = [];
-    for (let i = 0; i < labels.length; ++i) {
+    for (let i = 0; i < IRIS_CLASSES.length; ++i) {
       dataByClass.push([]);
       targetsByClass.push([]);
     }
@@ -169,7 +169,7 @@ export function getIrisData(testSplit) {
     const yTrains = [];
     const xTests = [];
     const yTests = [];
-    for (let i = 0; i < labels.length; ++i) {
+    for (let i = 0; i < IRIS_CLASSES.length; ++i) {
       const [xTrain, yTrain, xTest, yTest] =
           convertToTensors(dataByClass[i], targetsByClass[i], testSplit);
       xTrains.push(xTrain);

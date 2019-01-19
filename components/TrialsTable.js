@@ -53,7 +53,7 @@ export const periodToTime = (duration) => {
 
 export default class TrialsTable extends React.Component {
   onExpand = (row) => {
-    const { data } = this.props;
+    const { data, labels } = this.props;
     const h = row.original.result.history;
     const hasAccuracy = (h.acc !== undefined && h.val_acc !== undefined);
     const { confMatrixData } = row.original.result;
@@ -138,7 +138,7 @@ export default class TrialsTable extends React.Component {
                     const container = findDOMNode(r);
                     if (container) {
                       tfvis.render.confusionMatrix(
-                        { values: confMatrixData, labels: data.labels },
+                        { values: confMatrixData, labels },
                         container,
                         { shadeDiagonal: true },
                     );
