@@ -19,8 +19,9 @@ import * as tf from '@tensorflow/tfjs';
 
 export const IMAGE_H = 28;
 export const IMAGE_W = 28;
+export const MNIST_CLASSES = ['0','1','2','3','4','5','6','7','8','9'];
 const IMAGE_SIZE = IMAGE_H * IMAGE_W;
-const NUM_CLASSES = 10;
+const NUM_CLASSES = MNIST_CLASSES.length;
 const NUM_DATASET_ELEMENTS = 2000;
 
 const NUM_TRAIN_ELEMENTS = 1500;

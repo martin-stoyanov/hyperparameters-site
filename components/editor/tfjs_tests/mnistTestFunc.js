@@ -1,5 +1,6 @@
 import * as tf from '@tensorflow/tfjs';
 import * as hpjs from 'hyperparameters';
+import * as tfvis from '@tensorflow/tfjs-vis';
 
 export default async ({
   data, onEpochEnd, onExperimentBegin, onExperimentEnd,
@@ -39,13 +40,13 @@ export default async ({
     } else if (modelType === 'DenseNet') {
       model = createDenseModel();
     }
-    model.summary();
     model.compile({
       optimizer: 'rmsprop',
       loss: 'categoricalCrossentropy',
       metrics: ['accuracy'],
     });
 
+    const validationSplit = validationSplit.toFixed(2);
     // Train the model using the data.
     const h = await model.fit(trainData.xs, trainData.labels, {
       validationData: [testData.xs, testData.labels],
@@ -61,9 +62,15 @@ export default async ({
     // eslint-disable-next-line no-unused-vars
     const { h, model } = await trainModel({ modelType, validationSplit }, { trainData, testData });
 
+    const preds = model.predict(testData.xs)
+      .argMax(-1);
+    const labels = testData.labels.argMax(-1);
+    const confMatrixData = await tfvis.metrics.confusionMatrix(labels, preds);
+    
     return {
       accuracy: h.history.acc[h.history.acc.length - 1],
       history: h.history,
+      confMatrixData,
       status: hpjs.STATUS_OK,
     };
   }
@@ -73,7 +80,7 @@ export default async ({
   // validationSplit is a random # from 0.1-0.25
   const space = {
     modelType: hpjs.choice(['ConvNet', 'DenseNet']),
-    validationSplit: hpjs.uniform(0.1, 0.25),
+    validationSplit: hpjs.quniform(0.1, 0.25, 0.05),
   };
 
   // Getting data to train, using the tensorflowjs mnist example's data

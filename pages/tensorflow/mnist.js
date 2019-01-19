@@ -2,7 +2,7 @@ import React from 'react';
 import TensorflowExample from '../../components/TensorflowExample';
 import mnistTensorflowModel from '../../components/editor/tfjs_examples/mnist';
 // import testFunc from '../../components/editor/tfjs_tests/mnistTestFunc';
-import { MnistData } from '../../data/mnist';
+import { MnistData, MNIST_CLASSES } from '../../data/mnist';
 
 class MnistPage extends React.Component {
   state = { data: undefined }
@@ -21,6 +21,7 @@ class MnistPage extends React.Component {
         code={mnistTensorflowModel}
         data={data}
         testFunc={undefined}
+        labels={MNIST_CLASSES}
       />
     );
   }

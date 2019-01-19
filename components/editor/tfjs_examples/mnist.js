@@ -35,7 +35,6 @@ async function trainModel({ modelType, validationSplit }, { trainData, testData 
   } else if (modelType === 'DenseNet') {
     model = createDenseModel();
   }
-  model.summary();
   model.compile({
     optimizer: 'rmsprop',
     loss: 'categoricalCrossentropy',
@@ -57,9 +56,15 @@ async function modelOpt({ modelType, validationSplit }, { trainData, testData })
   // eslint-disable-next-line no-unused-vars
   const { h, model } = await trainModel({ modelType, validationSplit }, { trainData, testData });
 
+  const preds = model.predict(testData.xs)
+    .argMax(-1);
+  const labels = testData.labels.argMax(-1);
+  const confMatrixData = await tfvis.metrics.confusionMatrix(labels, preds);
+  
   return {
     accuracy: h.history.acc[h.history.acc.length - 1],
     history: h.history,
+    confMatrixData,
     status: hpjs.STATUS_OK,
   };
 }
@@ -69,7 +74,7 @@ async function modelOpt({ modelType, validationSplit }, { trainData, testData })
 // validationSplit is a random # from 0.1-0.25
 const space = {
   modelType: hpjs.choice(['ConvNet', 'DenseNet']),
-  validationSplit: hpjs.uniform(0.1, 0.25),
+  validationSplit: hpjs.quniform(0.1, 0.25, 0.05),
 };
 
 // Getting data to train, using the tensorflowjs mnist example's data
