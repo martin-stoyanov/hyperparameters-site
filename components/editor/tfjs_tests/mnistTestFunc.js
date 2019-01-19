@@ -46,7 +46,6 @@ export default async ({
       metrics: ['accuracy'],
     });
 
-    const validationSplit = validationSplit.toFixed(2);
     // Train the model using the data.
     const h = await model.fit(trainData.xs, trainData.labels, {
       validationData: [testData.xs, testData.labels],
@@ -66,7 +65,7 @@ export default async ({
       .argMax(-1);
     const labels = testData.labels.argMax(-1);
     const confMatrixData = await tfvis.metrics.confusionMatrix(labels, preds);
-    
+
     return {
       accuracy: h.history.acc[h.history.acc.length - 1],
       history: h.history,
