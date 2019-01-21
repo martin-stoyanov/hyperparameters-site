@@ -150,14 +150,14 @@ const Explore = () => (
         </Item>
         <Item name='Iris Dataset' path='/tensorflow/iris'>
           <TensorflowPreview
-            items={{ optimizer: 'sgd', epochs: 250 }}
+            items={{ optimizer: 'sgd' }}
             description='find best optimizer and number of layers for the iris dataset'
           />
         </Item>
         <Item name='Mnist Dataset' path='/tensorflow/mnist'>
           <TensorflowPreview
-            items={{ optimizer: 'sgd', epochs: 250 }}
-            description='find best kernel size for the mnist dataset'
+            items={{ optimizer: 'rmsprop' }}
+            description='find best neural net type (Convolutional vs dense) and validation split for the Mnist dataset'
           />
         </Item>
       </Section>

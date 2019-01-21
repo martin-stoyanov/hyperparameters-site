@@ -28,7 +28,7 @@ function createConvModel() {
 
 // training function, called by the optimization function
 // eslint-disable-next-line no-unused-vars
-async function trainModel({ modelType, validationSplit }, { trainData, testData }) {
+async function trainModel({ modelType, learningRate }, { trainData, testData }) {
   let model;
   if (modelType === 'ConvNet') {
     model = createConvModel();
@@ -36,7 +36,7 @@ async function trainModel({ modelType, validationSplit }, { trainData, testData 
     model = createDenseModel();
   }
   model.compile({
-    optimizer: 'rmsprop',
+    optimizer: tf.train.rmsprop(learningRate),
     loss: 'categoricalCrossentropy',
     metrics: ['accuracy'],
   });
@@ -44,7 +44,7 @@ async function trainModel({ modelType, validationSplit }, { trainData, testData 
   // Train the model using the data.
   const h = await model.fit(trainData.xs, trainData.labels, {
     validationData: [testData.xs, testData.labels],
-    validationSplit,
+    validationSplit: 0.15,
     epochs: 4,
     callbacks: { onEpochEnd },
   });
@@ -52,15 +52,15 @@ async function trainModel({ modelType, validationSplit }, { trainData, testData 
 }
 
 // fmin optmization function, retuns the accuracy, history, and a STATUS_OK
-async function modelOpt({ modelType, validationSplit }, { trainData, testData }) {
+async function modelOpt({ modelType, learningRate }, { trainData, testData }) {
   // eslint-disable-next-line no-unused-vars
-  const { h, model } = await trainModel({ modelType, validationSplit }, { trainData, testData });
+  const { h, model } = await trainModel({ modelType, learningRate }, { trainData, testData });
 
   const preds = model.predict(testData.xs)
     .argMax(-1);
   const labels = testData.labels.argMax(-1);
   const confMatrixData = await tfvis.metrics.confusionMatrix(labels, preds);
-  
+
   return {
     accuracy: h.history.acc[h.history.acc.length - 1],
     history: h.history,
@@ -71,10 +71,10 @@ async function modelOpt({ modelType, validationSplit }, { trainData, testData })
 
 // hyperparameters search space
 // modelType is a random string
-// validationSplit is a random # from 0.1-0.25
+// learning rate is a random # from 0.0001, 0.1, 
 const space = {
   modelType: hpjs.choice(['ConvNet', 'DenseNet']),
-  validationSplit: hpjs.quniform(0.1, 0.25, 0.05),
+  learningRate: hpjs.choice([0.0001, 0.001, 0.01, 0.1]),
 };
 
 // Getting data to train, using the tensorflowjs mnist example's data
