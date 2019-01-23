@@ -28,7 +28,7 @@ function createConvModel() {
 
 // training function, called by the optimization function
 // eslint-disable-next-line no-unused-vars
-async function trainModel({ modelType, learningRate }, { trainData, testData }) {
+async function trainModel({ modelType }, { trainData, testData }) {
   let model;
   if (modelType === 'ConvNet') {
     model = createConvModel();
@@ -36,7 +36,7 @@ async function trainModel({ modelType, learningRate }, { trainData, testData }) 
     model = createDenseModel();
   }
   model.compile({
-    optimizer: tf.train.rmsprop(learningRate),
+    optimizer: 'rmsprop',
     loss: 'categoricalCrossentropy',
     metrics: ['accuracy'],
   });
@@ -52,9 +52,9 @@ async function trainModel({ modelType, learningRate }, { trainData, testData }) 
 }
 
 // fmin optmization function, retuns the accuracy, history, and a STATUS_OK
-async function modelOpt({ modelType, learningRate }, { trainData, testData }) {
+async function modelOpt({ modelType }, { trainData, testData }) {
   // eslint-disable-next-line no-unused-vars
-  const { h, model } = await trainModel({ modelType, learningRate }, { trainData, testData });
+  const { h, model } = await trainModel({ modelType }, { trainData, testData });
 
   const preds = model.predict(testData.xs)
     .argMax(-1);
@@ -71,10 +71,9 @@ async function modelOpt({ modelType, learningRate }, { trainData, testData }) {
 
 // hyperparameters search space
 // modelType is a random string
-// learning rate is a random # from 0.0001, 0.1, 
+// validationSplit is a random # from 0.1-0.25
 const space = {
   modelType: hpjs.choice(['ConvNet', 'DenseNet']),
-  learningRate: hpjs.choice([0.0001, 0.001, 0.01, 0.1]),
 };
 
 // Getting data to train, using the tensorflowjs mnist example's data
@@ -82,7 +81,7 @@ const trainData = data.getTrainData();
 const testData = data.getTestData();
 
 return hpjs.fmin(
-  modelOpt, space, hpjs.search.randomSearch, 5,
+  modelOpt, space, hpjs.search.randomSearch, 2,
   {
     rng: new hpjs.RandomState(54321),
     trainData,
