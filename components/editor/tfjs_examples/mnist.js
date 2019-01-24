@@ -1,37 +1,37 @@
 export default
 `
-function createDenseModel() {
+function createDenseModel(hiddenLayerOpt, lastLayerOpt) {
   const model = tf.sequential();
   model.add(tf.layers.flatten({ inputShape: [28, 28, 1] }));
-  model.add(tf.layers.dense({ units: 42, activation: 'relu' }));
-  model.add(tf.layers.dense({ units: 10, activation: 'softmax' }));
+  model.add(tf.layers.dense({ units: 42, activation: hiddenLayerOpt }));
+  model.add(tf.layers.dense({ units: 10, activation: lastLayerOpt }));
   return model;
 }
-function createConvModel() {
+function createConvModel(hiddenLayerOpt, lastLayerOpt) {
   const model = tf.sequential(); // creating a simple model
   const kernelSize = 4;
   model.add(tf.layers.conv2d({
     inputShape: [28, 28, 1], // data is 28*28 px
     kernelSize,
     filters: 16,
-    activation: 'relu',
+    activation: hiddenLayerOpt,
   }));
   model.add(tf.layers.maxPooling2d({ poolSize: 2, strides: 2 }));
-  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: 'relu' }));
+  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: hiddenLayerOpt }));
   model.add(tf.layers.maxPooling2d({ poolSize: 2, strides: 2 }));
-  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: 'relu' }));
+  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: hiddenLayerOpt }));
   model.add(tf.layers.flatten({}));
-  model.add(tf.layers.dense({ units: 64, activation: 'relu' }));
-  model.add(tf.layers.dense({ units: 10, activation: 'softmax' }));
+  model.add(tf.layers.dense({ units: 64, activation: hiddenLayerOpt }));
+  model.add(tf.layers.dense({ units: 10, activation: lastLayerOpt }));
   return model;
 }
 
 // training function, called by the optimization function
 // eslint-disable-next-line no-unused-vars
-async function trainModel({ modelType }, { trainData, testData }) {
+async function trainModel({ modelType, hiddenLayerOpt, lastLayerOpt }, { trainData, testData }) {
   let model;
   if (modelType === 'ConvNet') {
-    model = createConvModel();
+    model = createConvModel(hiddenLayerOpt, lastLayerOpt);
   } else if (modelType === 'DenseNet') {
     model = createDenseModel();
   }
@@ -52,9 +52,9 @@ async function trainModel({ modelType }, { trainData, testData }) {
 }
 
 // fmin optmization function, retuns the accuracy, history, and a STATUS_OK
-async function modelOpt({ modelType }, { trainData, testData }) {
+async function modelOpt({ modelType, hiddenLayerOpt, lastLayerOpt }, { trainData, testData }) {
   // eslint-disable-next-line no-unused-vars
-  const { h, model } = await trainModel({ modelType }, { trainData, testData });
+  const { h, model } = await trainModel({ modelType, hiddenLayerOpt, lastLayerOpt }, { trainData, testData });
 
   const preds = model.predict(testData.xs)
     .argMax(-1);
@@ -74,6 +74,8 @@ async function modelOpt({ modelType }, { trainData, testData }) {
 // validationSplit is a random # from 0.1-0.25
 const space = {
   modelType: hpjs.choice(['ConvNet', 'DenseNet']),
+  hiddenLayerOpt: hpjs.choice(['relu', 'sigmoid', 'tanh']),
+  lastLayerOpt: hpjs.choice(['softmax', 'sigmoid']),
 };
 
 // Getting data to train, using the tensorflowjs mnist example's data
@@ -81,7 +83,7 @@ const trainData = data.getTrainData();
 const testData = data.getTestData();
 
 return hpjs.fmin(
-  modelOpt, space, hpjs.search.randomSearch, 2,
+  modelOpt, space, hpjs.search.randomSearch, 6,
   {
     rng: new hpjs.RandomState(54321),
     trainData,
