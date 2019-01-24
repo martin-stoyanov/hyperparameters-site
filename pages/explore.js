@@ -157,7 +157,7 @@ const Explore = () => (
         <Item name='Mnist Dataset' path='/tensorflow/mnist'>
           <TensorflowPreview
             items={{ optimizer: 'rmsprop' }}
-            description='find best neural net type (Convolutional vs dense) and validation split for the Mnist dataset'
+            description='find best neural net type (Convolutional vs dense) for the Mnist dataset'
           />
         </Item>
       </Section>
