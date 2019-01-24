@@ -156,7 +156,7 @@ const Explore = () => (
         </Item>
         <Item name='Mnist Dataset' path='/tensorflow/mnist'>
           <TensorflowPreview
-            items={{ net_type: 'ConvNet', hiddenLayerOpt: 'relu', lastLayerOpt: 'softmax' }}
+            items={{ net_type: 'ConvNet', hiddenLayerActivationFn: 'relu', lastLayerActivationFn: 'softmax' }}
             description='find best neural net type (Convolutional vs dense) and optimizers
              for the hidden/last layers for the Mnist dataset'
           />
