@@ -1,37 +1,37 @@
 export default
 `
-function createDenseModel(hiddenLayerActivation, lastLayerActivation) {
+function createDenseModel(inActivation, outActivation) {
   const model = tf.sequential();
   model.add(tf.layers.flatten({ inputShape: [28, 28, 1] }));
-  model.add(tf.layers.dense({ units: 42, activation: hiddenLayerActivation }));
-  model.add(tf.layers.dense({ units: 10, activation: lastLayerActivation }));
+  model.add(tf.layers.dense({ units: 42, activation: inActivation }));
+  model.add(tf.layers.dense({ units: 10, activation: outActivation }));
   return model;
 }
-function createConvModel(hiddenLayerActivation, lastLayerActivation) {
+function createConvModel(inActivation, outActivation) {
   const model = tf.sequential(); // creating a simple model
   const kernelSize = 4;
   model.add(tf.layers.conv2d({
     inputShape: [28, 28, 1], // data is 28*28 px
     kernelSize,
     filters: 16,
-    activation: hiddenLayerActivation,
+    activation: inActivation,
   }));
   model.add(tf.layers.maxPooling2d({ poolSize: 2, strides: 2 }));
-  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: hiddenLayerActivation }));
+  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: inActivation }));
   model.add(tf.layers.maxPooling2d({ poolSize: 2, strides: 2 }));
-  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: hiddenLayerActivation }));
+  model.add(tf.layers.conv2d({ kernelSize, filters: 32, activation: inActivation }));
   model.add(tf.layers.flatten({}));
-  model.add(tf.layers.dense({ units: 64, activation: hiddenLayerActivation }));
-  model.add(tf.layers.dense({ units: 10, activation: lastLayerActivation }));
+  model.add(tf.layers.dense({ units: 64, activation: inActivation }));
+  model.add(tf.layers.dense({ units: 10, activation: outActivation }));
   return model;
 }
 
 // training function, called by the optimization function
 // eslint-disable-next-line no-unused-vars
-async function trainModel({ modelType, hiddenLayerActivation, lastLayerActivation }, { trainData, testData }) {
+async function trainModel({ modelType, inActivation, outActivation }, { trainData, testData }) {
   let model;
   if (modelType === 'ConvNet') {
-    model = createConvModel(hiddenLayerActivation, lastLayerActivation);
+    model = createConvModel(inActivation, outActivation);
   } else if (modelType === 'DenseNet') {
     model = createDenseModel();
   }
@@ -52,9 +52,9 @@ async function trainModel({ modelType, hiddenLayerActivation, lastLayerActivatio
 }
 
 // fmin optmization function, retuns the accuracy, history, and a STATUS_OK
-async function modelOpt({ modelType, hiddenLayerActivation, lastLayerActivation }, { trainData, testData }) {
+async function modelOpt({ modelType, inActivation, outActivation }, { trainData, testData }) {
   // eslint-disable-next-line no-unused-vars
-  const { h, model } = await trainModel({ modelType, hiddenLayerActivation, lastLayerActivation },
+  const { h, model } = await trainModel({ modelType, inActivation, outActivation },
     { trainData, testData });
 
   const preds = model.predict(testData.xs)
@@ -75,8 +75,8 @@ async function modelOpt({ modelType, hiddenLayerActivation, lastLayerActivation 
 // validationSplit is a random # from 0.1-0.25
 const space = {
   modelType: hpjs.choice(['ConvNet', 'DenseNet']),
-  hiddenLayerActivation: hpjs.choice(['relu', 'sigmoid', 'tanh']),
-  lastLayerActivation: hpjs.choice(['softmax', 'sigmoid']),
+  inActivation: hpjs.choice(['relu', 'sigmoid', 'tanh']),
+  outActivation: hpjs.choice(['softmax', 'sigmoid']),
 };
 
 // Getting data to train, using the tensorflowjs mnist example's data

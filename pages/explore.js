@@ -150,13 +150,13 @@ const Explore = () => (
         </Item>
         <Item name='Iris Dataset' path='/tensorflow/iris'>
           <TensorflowPreview
-            items={{ optimizer: 'rmsprop', layers: 3 }}
+            items={{ optimizer: 'rmsprop', numLayers: 3 }}
             description='find best optimizer and number of layers for the iris dataset'
           />
         </Item>
         <Item name='Mnist Dataset' path='/tensorflow/mnist'>
           <TensorflowPreview
-            items={{ net_type: 'ConvNet', hiddenLayerActivationFn: 'relu', lastLayerActivationFn: 'softmax' }}
+            items={{ net_type: 'ConvNet', inActivation: 'relu', outActivation: 'softmax' }}
             description='find best neural net type (Convolutional vs dense) and optimizers
              for the hidden/last layers for the Mnist dataset'
           />
