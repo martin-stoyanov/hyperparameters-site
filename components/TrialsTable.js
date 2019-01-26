@@ -158,12 +158,17 @@ export default class TrialsTable extends React.Component {
     const { trials } = this.props;
     let hasHistory;
     let argColumns = [];
+    const floatColumn = {
+      Cell: cell => (Number(cell.value) !== cell.value || cell.value % 1 === 0
+        ? cell.value : parseFloat(cell.value).toFixed(4)),
+    };
     if (trials.length > 0) {
       if (typeof trials[0].args === 'number') {
         argColumns.push({
           Header: 'parameter',
           accessor: 'args',
           getProps: () => ({ align: 'end' }),
+          ...floatColumn,
         });
       } else if (typeof trials[0].args === 'object') {
         argColumns = Object.keys(trials[0].args)
@@ -171,6 +176,7 @@ export default class TrialsTable extends React.Component {
             Header: key,
             accessor: `args.${key}`,
             getProps: () => ({ align: 'end' }),
+            ...floatColumn,
           }));
       }
     }
@@ -185,6 +191,7 @@ export default class TrialsTable extends React.Component {
           accessor: `result.${key}`,
           responsiveHide: key !== 'status' ? ['small'] : undefined,
           getProps: () => ({ align: 'end' }),
+          ...floatColumn,
         }));
     }
     const columns = [
