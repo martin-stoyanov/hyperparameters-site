@@ -82,7 +82,7 @@ export default async ({
   // validationSplit is a random # from 0.1-0.25
   const space = {
     modelType: hpjs.choice(['ConvNet', 'DenseNet']),
-    inActivation: hpjs.choice(['relu', 'elu', 'relu6', 'selu', 'linear', 'sigmoid', 'hardsigmoid', 'tanh']),
+    inActivation: hpjs.choice(['relu', 'elu', 'relu6', 'selu', 'linear', 'sigmoid', 'tanh']),
     outActivation: hpjs.choice(['softmax', 'softplus', 'softsign']),
   };
   // Getting data to train, using the tensorflowjs mnist example's data
