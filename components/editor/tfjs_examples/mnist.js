@@ -33,7 +33,7 @@ async function trainModel({ modelType, inActivation, outActivation }, { trainDat
   if (modelType === 'ConvNet') {
     model = createConvModel(inActivation, outActivation);
   } else if (modelType === 'DenseNet') {
-    model = createDenseModel();
+    model = createDenseModel(inActivation, outActivation);
   }
   model.compile({
     optimizer: 'rmsprop',
@@ -76,7 +76,7 @@ async function modelOpt({ modelType, inActivation, outActivation }, { trainData,
 const space = {
   modelType: hpjs.choice(['ConvNet', 'DenseNet']),
   inActivation: hpjs.choice(['relu', 'elu', 'relu6', 'selu', 'linear', 'sigmoid', 'tanh']),
-  outActivation: hpjs.choice(['softmax', 'softplus', 'softsign']),
+  outActivation: hpjs.choice(['softmax', 'softplus']),
 };
 
 // Getting data to train, using the tensorflowjs mnist example's data

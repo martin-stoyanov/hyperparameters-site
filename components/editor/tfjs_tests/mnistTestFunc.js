@@ -39,7 +39,7 @@ export default async ({
     if (modelType === 'ConvNet') {
       model = createConvModel(inActivation, outActivation);
     } else if (modelType === 'DenseNet') {
-      model = createDenseModel();
+      model = createDenseModel(inActivation, outActivation);
     }
     model.compile({
       optimizer: 'rmsprop',
@@ -90,7 +90,7 @@ export default async ({
   const testData = data.getTestData();
 
   return hpjs.fmin(
-    modelOpt, space, hpjs.search.randomSearch, 6,
+    modelOpt, space, hpjs.search.randomSearch, 30,
     {
       rng: new hpjs.RandomState(54321),
       trainData,
