@@ -28,7 +28,8 @@ function createConvModel(inActivation, outActivation) {
 
 // training function, called by the optimization function
 // eslint-disable-next-line no-unused-vars
-async function trainModel({ modelType, inActivation, outActivation }, { trainData, testData }) {
+async function trainModel({ modelType, inActivation, outActivation },
+  { trainData, testData }) {
   let model;
   if (modelType === 'ConvNet') {
     model = createConvModel(inActivation, outActivation);
@@ -52,7 +53,8 @@ async function trainModel({ modelType, inActivation, outActivation }, { trainDat
 }
 
 // fmin optmization function, retuns the accuracy, history, and a STATUS_OK
-async function modelOpt({ modelType, inActivation, outActivation }, { trainData, testData }) {
+async function modelOpt({ modelType, inActivation, outActivation },
+  { trainData, testData }) {
   // eslint-disable-next-line no-unused-vars
   const { h, model } = await trainModel({ modelType, inActivation, outActivation },
     { trainData, testData });
@@ -72,13 +74,12 @@ async function modelOpt({ modelType, inActivation, outActivation }, { trainData,
 
 // hyperparameters search space
 // modelType is a random string
-// validationSplit is a random # from 0.1-0.25
+// in and outActivation are random strings
 const space = {
   modelType: hpjs.choice(['ConvNet', 'DenseNet']),
   inActivation: hpjs.choice(['relu', 'elu', 'relu6', 'selu', 'linear', 'sigmoid', 'tanh']),
-  outActivation: hpjs.choice(['softmax', 'softplus']),
+  outActivation: hpjs.choice(['softmax', 'softplus', 'softsign']),
 };
-
 // Getting data to train, using the tensorflowjs mnist example's data
 const trainData = data.getTrainData();
 const testData = data.getTestData();
