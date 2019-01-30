@@ -83,14 +83,14 @@ export default async ({
   const space = {
     modelType: hpjs.choice(['ConvNet', 'DenseNet']),
     inActivation: hpjs.choice(['relu', 'elu', 'relu6', 'selu', 'linear', 'sigmoid', 'tanh']),
-    outActivation: hpjs.choice(['softmax', 'softplus', 'softsign']),
+    outActivation: hpjs.choice(['softmax', 'softplus']),
   };
   // Getting data to train, using the tensorflowjs mnist example's data
   const trainData = data.getTrainData();
   const testData = data.getTestData();
 
   return hpjs.fmin(
-    modelOpt, space, hpjs.search.randomSearch, 30,
+    modelOpt, space, hpjs.search.randomSearch, 20,
     {
       rng: new hpjs.RandomState(54321),
       trainData,
