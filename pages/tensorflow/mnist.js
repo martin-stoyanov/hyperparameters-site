@@ -17,12 +17,12 @@ class MnistPage extends React.Component {
       <TensorflowExample
         name='Mnist tensorflow model'
         description='<br /><div>Find best model type (ConvNet vs DenseNet) and activation functions
-         (for input and output layers) for the the Mnist dataset.
+         (for input and output layers) for the Mnist dataset.
         <p>
           Based on the Tensorflow.js Mnist example, found <a href = "https://github.com/tensorflow/tfjs-examples/tree/master/mnist">
           here</a>.
-        <li>To change # of trials: replace the 4 on line 47 with # of trials</li></ul>
-        <a href = https://medium.com/@martin_stoyanov/hyperparameter-optimization-for-the-iris-dataset-in-javascript-81f81809275e?source=your_stories_page target="_blank">Blog post</a> on this topic
+        <li>To change # of trials: replace the 20 on line 87 with # of trials</li></ul>
+        <a href = https://medium.com/@martin_stoyanov/optimizing-hyperparameters-for-the-mnist-dataset-in-javascript-4cb8c17df940 target="_blank">Blog post</a> on this topic
           </p></div>'
         code={mnistTensorflowModel}
         data={data}
