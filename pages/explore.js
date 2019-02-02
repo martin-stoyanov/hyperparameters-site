@@ -158,7 +158,7 @@ const Explore = () => (
           <TensorflowPreview
             items={{ net_type: 'ConvNet', inActivation: 'tanh', outActivation: 'softmax' }}
             description='find best neural net type (Convolutional vs dense) and activation fns
-             for the hidden/last layers for the Mnist dataset'
+             for the input and output layers for the Mnist dataset'
           />
         </Item>
       </Section>

@@ -17,7 +17,7 @@ class MnistPage extends React.Component {
       <TensorflowExample
         name='Mnist tensorflow model'
         description='<br /><div>Find best model type (ConvNet vs DenseNet) and activation functions
-         (for hidden layers and last layer) for the the Mnist dataset.
+         (for input and output layers) for the the Mnist dataset.
         <p>
           Based on the Tensorflow.js Mnist example, found <a href = "https://github.com/tensorflow/tfjs-examples/tree/master/mnist">
           here</a>.
