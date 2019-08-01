@@ -1,18 +1,16 @@
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 // import ErrorMessage from './ErrorMessage';
-// import PostUpvoter from './PostUpvoter';
+
 
 export const allModelsQuery = gql`
-  query model() {
-    trials{
-      trial
-    }parameters{
+  query models {
+    allModels{
       name
-      parameterValue{
-        value
+      trials{
+        trial
       }
-    }    
+    }
   }
 `;
 
@@ -21,17 +19,25 @@ export default function ModelsList() {
   return (
     <Query query={allModelsQuery}>
       {({
- loading, error, data: { model },
+ loading, error, data,
 }) => {
-        if (error) console.log('There was an error');
-        if (loading) return <div>Loading</div>;
+        console.log(data);
+        if (error) {
+          console.log(error);
+          return <div>error</div>;
+        }
 
+        if (loading) return <div>Loading</div>;
+        if (!data) return null;
+        const { allModels } = data;
+        console.log(data);
         return (
           <section>
             <ul>
-              {model.trials.map(trial => (
+              {allModels.map(model => (
                 <li>
-                  { trial }
+                  {model.name}
+                  {console.log(model)}
                 </li>
               ))}
             </ul>
