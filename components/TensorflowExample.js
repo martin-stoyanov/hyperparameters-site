@@ -6,7 +6,7 @@ import { Box, Heading } from 'grommet';
 import { ResponsiveContext } from 'grommet/contexts';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
-import TrialsTable from './TrialsTable';
+import TrialsTable, { formatTraingTime } from './TrialsTable';
 import ObjectValues from './ObjectValues';
 
 export default class TensorflowExample extends React.Component {
@@ -53,7 +53,12 @@ export default class TensorflowExample extends React.Component {
   };
 
   onExperimentEnd = (idx, trial) => {
+    console.log(`trial #: ${idx}`);
     const { trials, stopping } = this.state;
+    // console.log(trial);
+    console.log(`Accuracy: ${trial.result.accuracy}`);
+    console.log(`Start time: ${formatTraingTime(trial.book_time)}`);
+    console.log(`End time: ${formatTraingTime(trial.refresh_time)}`);
     this.setState({ experimentEnd: { idx, trial }, trials: [...trials, trial] });
     return stopping;
   };
