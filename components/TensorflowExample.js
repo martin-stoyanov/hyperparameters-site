@@ -2,12 +2,26 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import * as tfvis from '@tensorflow/tfjs-vis';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
 import { Box, Heading } from 'grommet';
 import { ResponsiveContext } from 'grommet/contexts';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
 import TrialsTable, { formatTraingTime } from './TrialsTable';
 import ObjectValues from './ObjectValues';
+import AddModel from './ModelsAdd';
+
+const ADD_MUTATION = gql`
+      mutation addModel($name: String!, $trials: [TrialInputType],
+        $parameters: [ParameterInputType], $parameterValues: [ParameterValueInputType] ) {
+          addModel(name: $name, trials: $trials, parameters: $parameters, 
+            parameterValues: $parameterValues) {
+              hpjsModel{
+                name
+              }
+          }
+      }`;
 
 export default class TensorflowExample extends React.Component {
   state = {
@@ -55,10 +69,6 @@ export default class TensorflowExample extends React.Component {
   onExperimentEnd = (idx, trial) => {
     console.log(`trial #: ${idx}`);
     const { trials, stopping } = this.state;
-    // console.log(trial);
-    console.log(`Accuracy: ${trial.result.accuracy}`);
-    console.log(`Start time: ${formatTraingTime(trial.book_time)}`);
-    console.log(`End time: ${formatTraingTime(trial.refresh_time)}`);
     this.setState({ experimentEnd: { idx, trial }, trials: [...trials, trial] });
     return stopping;
   };
@@ -245,6 +255,10 @@ export default class TensorflowExample extends React.Component {
           </Box>
         </Box>
         {data ? <TrialsTable trials={trials} data={data} labels={labels} /> : <p>Loading Data</p>}
+        <AddModel
+          name='test'
+          experiment={trials}
+        />
       </PageLayout>
     );
   }

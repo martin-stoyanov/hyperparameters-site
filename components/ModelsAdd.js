@@ -27,18 +27,64 @@ function modelAdd(client, {
   });
 }
 
+function formatTimes(date) {
+  return (new Date(date));
+}
+
 export default function AddModel({
-  name, trials, parameters, parameterValues,
+  name, experiment,
 }) {
+  const uploadTrials = (client) => {
+    const trials = [];
+    const parameters = [];
+    const parameterValues = [];
+
+    // adding parameters
+    Object.keys(experiment[0].args).forEach((parameter) => {
+      parameters.push({ name: parameter });
+    });
+
+    // adding trials and parameter values(which are linked to parameters)
+    experiment.forEach((trial, id) => {
+      trials.push({
+        trial: id + 1,
+        startTime: formatTimes(trial.book_time),
+        endTime: formatTimes(trial.refresh_time),
+        accuracy: trial.result.accuracy,
+      });
+
+      const parametersData = trial.args;
+      Object.keys(parametersData).forEach((parameter) => {
+        parameterValues.push({
+          value: parametersData[parameter],
+          trial: id + 1,
+          parameterName: parameter,
+        });
+      });
+      // parameterValues.push()
+      // parameterArgs.forEach((a, b) => {
+      //   console.log(a);
+      //   console.log(b);
+      // });
+      console.log(experiment);
+      // console.log(trials);
+      // console.log(parameters);
+      // console.log(parameterValues);
+    });
+    modelAdd(client, {
+      name, trials, parameters, parameterValues,
+    });
+  };
+  // console.log(experiment);
+  // console.log(Object.keys(experiment[0].args));
+
   return (
     <ApolloConsumer>
       {client => (
         <Button
           primary={true}
           hoverIndicator='background'
-          onClick={() => modelAdd(client, {
- name, trials, parameters, parameterValues,
-})}
+          onClick={() => uploadTrials(client)}
         >
           <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}><Text>click</Text></Box>
         </Button>
