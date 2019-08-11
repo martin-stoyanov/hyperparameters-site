@@ -2,26 +2,13 @@ import React from 'react';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import * as tfvis from '@tensorflow/tfjs-vis';
-import gql from 'graphql-tag';
-import { Mutation } from 'react-apollo';
 import { Box, Heading } from 'grommet';
 import { ResponsiveContext } from 'grommet/contexts';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
-import TrialsTable, { formatTraingTime } from './TrialsTable';
+import TrialsTable from './TrialsTable';
 import ObjectValues from './ObjectValues';
 import AddModel from './ModelsAdd';
-
-const ADD_MUTATION = gql`
-      mutation addModel($name: String!, $trials: [TrialInputType],
-        $parameters: [ParameterInputType], $parameterValues: [ParameterValueInputType] ) {
-          addModel(name: $name, trials: $trials, parameters: $parameters, 
-            parameterValues: $parameterValues) {
-              hpjsModel{
-                name
-              }
-          }
-      }`;
 
 export default class TensorflowExample extends React.Component {
   state = {
@@ -255,10 +242,12 @@ export default class TensorflowExample extends React.Component {
           </Box>
         </Box>
         {data ? <TrialsTable trials={trials} data={data} labels={labels} /> : <p>Loading Data</p>}
-        <AddModel
-          name='test'
-          experiment={trials}
-        />
+        <Box fill='horizontal' align='center'>
+          <AddModel
+            name='test'
+            experiment={trials}
+          />
+        </Box>
       </PageLayout>
     );
   }

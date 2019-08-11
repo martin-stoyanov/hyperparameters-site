@@ -86,7 +86,9 @@ export default function AddModel({
           hoverIndicator='background'
           onClick={() => uploadTrials(client)}
         >
-          <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}><Text>click</Text></Box>
+          <Box pad={{ horizontal: 'small', vertical: 'xsmall' }}>
+            <Text>Click to submit trials</Text>
+          </Box>
         </Button>
       )}
     </ApolloConsumer>
