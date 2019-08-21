@@ -54,7 +54,6 @@ export default class TensorflowExample extends React.Component {
   };
 
   onExperimentEnd = (idx, trial) => {
-    console.log(`trial #: ${idx}`);
     const { trials, stopping } = this.state;
     this.setState({ experimentEnd: { idx, trial }, trials: [...trials, trial] });
     return stopping;
@@ -244,7 +243,7 @@ export default class TensorflowExample extends React.Component {
         {data ? <TrialsTable trials={trials} data={data} labels={labels} /> : <p>Loading Data</p>}
         <Box fill='horizontal' align='center'>
           <AddModel
-            name='test'
+            name={name}
             experiment={trials}
           />
         </Box>
