@@ -66,7 +66,7 @@ export default function AddModel({
       //   console.log(a);
       //   console.log(b);
       // });
-      console.log(experiment);
+      // console.log(experiment);
       // console.log(trials);
       // console.log(parameters);
       // console.log(parameterValues);

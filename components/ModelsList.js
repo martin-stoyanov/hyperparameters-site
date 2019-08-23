@@ -1,6 +1,8 @@
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { PagingTable } from 'grommet-controls';
+import { Heading, Box } from 'grommet';
+import RoutedAnchor from './RoutedAnchor';
 // import ErrorMessage from './ErrorMessage';
 
 
@@ -36,7 +38,6 @@ export default function ModelsList() {
         if (loading) return <div>Loading</div>;
         if (!data) return null;
         const { allModels } = data;
-        console.log(allModels);
 
         const bestTrials = allModels.map((model) => {
           const bestTrialParameters = {
@@ -52,40 +53,43 @@ export default function ModelsList() {
               bestTrialParameters.accuracy = bestAccuracy;
               bestTrial = trial.trial;
             }
-            // console.log('aa');
-            // console.log(trial);
           });
           model.parameters.forEach((trial) => {
-            // bestTrialParameters.hyperparameters.push(
-            //   {trial.name = trial.parameterValue[bestTrial]
-            //   );
             bestTrialParameters.hyperparameters[trial.name] = trial.parameterValue[bestTrial].value;
           });
-          // return bestTrialParameters;
-          console.log(bestTrialParameters);
           return (
               {
-                name: bestTrialParameters.name,
+                name: bestTrialParameters.name.split(' ')[0],
                 accuracy: bestTrialParameters.accuracy.toFixed(4),
                 hp: JSON.stringify(bestTrialParameters.hyperparameters),
               }
             );
         });
-        console.log(bestTrials);
 
         return (
           <section>
             <PagingTable
               columns={[
                  {
-                   Header: 'Model Name',
-                   accessor: 'name',
+                  Header: 'Model Name',
+                  Cell: props => (
+                    <RoutedAnchor path={`./tensorflow/${props.original.name.toLowerCase()}`} >
+                      <Box>
+                        <Heading level={3} size='small' margin={{ top: 'none', bottom: 'xsmall' }}>
+                          <strong>{props.original.name}</strong>
+                        </Heading>
+                      </Box>
+                    </RoutedAnchor>
+                  ),
+                   minWidth: 150,
                  }, {
                    Header: 'Accuracy',
                    accessor: 'accuracy',
+                   minWidth: 100,
                  }, {
                    Header: 'Hyperparameters',
                    accessor: 'hp',
+                   minWidth: 600,
                  },
                  ]}
               data={bestTrials}

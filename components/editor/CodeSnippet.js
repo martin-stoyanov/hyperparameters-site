@@ -59,7 +59,7 @@ class CodeSnippet extends React.Component {
 
   render() {
     const {
-      code, ondata, evalParams, ...rest
+      code, ondata, evalParams, onLoad, ...rest
     } = this.props;
     const {
       snippet, annotations, modified, running,
@@ -79,7 +79,7 @@ class CodeSnippet extends React.Component {
         <CodeEditor
           annotations={annotations}
           code={snippet}
-          onLoad={() => this.executeCodeSnippet(snippet)}
+          onLoad={onLoad ? onLoad(snippet) : () => this.executeCodeSnippet(snippet)}
           onChange={value => this.setState({ modified: true, snippet: value })}
           {...rest}
         />
