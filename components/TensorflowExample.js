@@ -1,14 +1,17 @@
 import React from 'react';
+import gql from 'graphql-tag';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import * as tfvis from '@tensorflow/tfjs-vis';
 import { Box, Heading } from 'grommet';
 import { ResponsiveContext } from 'grommet/contexts';
+import { apolloClient } from '../lib/init-apollo';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
 import TrialsTable from './TrialsTable';
 import ObjectValues from './ObjectValues';
 import AddModel from './ModelsAdd';
+// import { ModelQuery } from './ModelQuery';
 
 export default class TensorflowExample extends React.Component {
   state = {
@@ -32,7 +35,8 @@ export default class TensorflowExample extends React.Component {
   };
 
   async componentDidMount() {
-    await this.callTestFunction(this.props);
+    await this.modelQuery();
+    // await this.callTestFunction(this.props);
   }
   async componentWillReceiveProps(nextProps) {
     const { testFunc, data } = this.props;
@@ -90,6 +94,70 @@ export default class TensorflowExample extends React.Component {
       stopping: false,
     });
   };
+
+  modelQuery = async () => {
+    const ModelQuery = gql`
+  query models($name: String!) {
+    model(name: $name){
+      trials{
+        trial
+        accuracy
+        startTime
+        endTime
+      }parameters{
+        name
+        parameterValue{
+          trial {
+             trial
+          }
+          value
+        }
+      }
+    }
+  }
+  `;
+    const { name } = this.props;
+    const result = await apolloClient.query({
+      query: ModelQuery,
+      variables: {
+        name,
+      },
+    });
+    const { data } = result;
+    const trials = data.model.trials.map((trial) => {
+      const trialID = trial.trial;
+      const args = data.model.parameters.reduce((arg, parameter) => (
+        {
+          ...arg,
+          [parameter.name]: parameter.parameterValue
+            .find(val => val.trial.trial === trialID).value,
+        }
+      ), {});
+      return {
+        args,
+        result: {
+          accuracy: trial.accuracy,
+          status: 'ok',
+        },
+        state: 2,
+        book_time: new Date(trial.startTime).getTime(),
+        refresh_time: new Date(trial.endTime).getTime(),
+      };
+    });
+    function findBestTrial(a, b) {
+      if (a.result.accuracy > b.result.accuracy) {
+        return -1;
+      }
+      return 1;
+    }
+    const bestTrial = trials.sort(findBestTrial)[0];
+    console.log('sorted trials-', trials);
+    this.setState({
+      trials,
+      best: bestTrial,
+    });
+  }
+
   renderCodeSnippet = () => {
     const { code, data } = this.props;
     return (
@@ -104,6 +172,7 @@ export default class TensorflowExample extends React.Component {
         onStart={this.onStartExperiments}
         onData={this.onData}
         code={code}
+        onLoad={() => {}}
       />
     );
   };
@@ -223,6 +292,7 @@ export default class TensorflowExample extends React.Component {
       labels,
     } = this.props;
     const { trials } = this.state;
+    console.log(this.state);
     return (
       <PageLayout
         title={this.props.name}
