@@ -11,7 +11,6 @@ import CodeSnippet from './editor/CodeSnippet';
 import TrialsTable from './TrialsTable';
 import ObjectValues from './ObjectValues';
 import AddModel from './ModelsAdd';
-// import { ModelQuery } from './ModelQuery';
 
 export default class TensorflowExample extends React.Component {
   state = {

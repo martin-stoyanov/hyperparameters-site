@@ -243,7 +243,6 @@ export default class TrialsTable extends React.Component {
         columns: resultColumns,
       },
     ];
-    console.log('table data', trials);
     return (
       <Box fill='horizontal' pad={{ bottom: 'large' }}>
         <Box align='center'>

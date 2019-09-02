@@ -1,6 +1,4 @@
-import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Button, Box, Text } from 'grommet';
 // import ErrorMessage from './ErrorMessage';
 
 function modelAdd(client, {
@@ -34,6 +32,7 @@ function formatTimes(date) {
 export default function AddModel({
   name, experiment,
 }) {
+  // eslint-disable-next-line
   const uploadTrials = (client) => {
     const trials = [];
     const parameters = [];
@@ -61,24 +60,14 @@ export default function AddModel({
           parameterName: parameter,
         });
       });
-      // parameterValues.push()
-      // parameterArgs.forEach((a, b) => {
-      //   console.log(a);
-      //   console.log(b);
-      // });
-      // console.log(experiment);
-      // console.log(trials);
-      // console.log(parameters);
-      // console.log(parameterValues);
     });
     modelAdd(client, {
       name, trials, parameters, parameterValues,
     });
   };
-  // console.log(experiment);
-  // console.log(Object.keys(experiment[0].args));
 
-  return (
+  return null;
+  /* return (
     <ApolloConsumer>
       {client => (
         <Button
@@ -92,5 +81,5 @@ export default function AddModel({
         </Button>
       )}
     </ApolloConsumer>
-  );
+  ); */
 }

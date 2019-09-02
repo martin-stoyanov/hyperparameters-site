@@ -18,10 +18,12 @@ const Index = () => (
         (constraints, weights or learning rates) for your learning algorithms.
       </Text>
     </Box>
+    <Box align='center' pad='large' >
+      <ModelsList />
+    </Box>
     <Box align='center'>
       <Box direction='row' wrap={true} alignContent='start' pad='small' gap='small'>
         <Box>
-          <ModelsList />
           <Heading level='3'>Written in Javascript</Heading>
           <Paragraph>
             Now that Tensorflow, the most popular machine learning framework, has been released as a <Anchor href='https://js.tensorflow.org/faq/' target='_blank' rel='noopener noreferrer'> Javascript API </Anchor>, we can create machine learning models that run in the browser, and it&#39;s easy to see why using Javascript for machine learning is on the rise.
