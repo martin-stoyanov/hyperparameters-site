@@ -151,7 +151,6 @@ export default class TensorflowExample extends React.Component {
       return 1;
     }
     const bestTrial = trials.sort(findBestTrial)[0];
-    console.log('sorted trials-', trials);
     this.setState({
       trials,
       best: bestTrial,
@@ -292,7 +291,6 @@ export default class TensorflowExample extends React.Component {
       labels,
     } = this.props;
     const { trials } = this.state;
-    console.log(this.state);
     return (
       <PageLayout
         title={this.props.name}
