@@ -18,9 +18,6 @@ const Index = () => (
         (constraints, weights or learning rates) for your learning algorithms.
       </Text>
     </Box>
-    <Box align='center' pad='large' >
-      <ModelsList />
-    </Box>
     <Box align='center'>
       <Box direction='row' wrap={true} alignContent='start' pad='small' gap='small'>
         <Box>
@@ -44,6 +41,10 @@ const Index = () => (
       </Box>
     </Box>
     <Box align='center'><Heading level='2'>Examples</Heading></Box>
+    <Box align='center' pad='large' >
+      <Heading level='5'>Best hyperparameters for some sample models:</Heading>
+      <ModelsList />
+    </Box>
     <Box align='center'>
       <Box direction='row' wrap={true} width='xlarge' justify='between' pad='large'>
         <Image style={{ maxWidth: '100%', height: 'auto' }} src='/static/img/randint.png' />
