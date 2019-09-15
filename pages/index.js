@@ -41,8 +41,10 @@ const Index = () => (
       </Box>
     </Box>
     <Box align='center'><Heading level='2'>Examples</Heading></Box>
-    <Box align='center' pad='large' >
-      <Heading level='5'>Best hyperparameters for some sample models:</Heading>
+    <Box align='center' pad='none' margin='none' >
+      <Heading level='5'>Best hyperparameters for some sample models we made (click
+      on the model names to see more):
+      </Heading>
       <ModelsList />
     </Box>
     <Box align='center'>
