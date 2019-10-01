@@ -51,7 +51,7 @@ export default function ModelsList() {
             if (trial.accuracy > bestAccuracy) {
               bestAccuracy = trial.accuracy;
               bestTrialParameters.accuracy = bestAccuracy;
-              bestTrial = trial.trial;
+              bestTrial = trial.trial - 1;
             }
           });
           model.parameters.forEach((trial) => {
