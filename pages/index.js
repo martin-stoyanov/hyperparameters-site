@@ -14,7 +14,7 @@ const Index = () => (
         A Javascript Library for hyperparameter optimization
       </Heading>
       <Text>
-        Helps you in selecting the optimal hyperparameters
+        Helps you find the optimal hyperparameters
         (constraints, weights or learning rates) for your learning algorithms.
       </Text>
     </Box>
