@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as tfvis from '@tensorflow/tfjs-vis';
 import { Box, Heading } from 'grommet';
 import { ResponsiveContext } from 'grommet/contexts';
-import { apolloClient } from '../lib/init-apollo';
+import { apolloClient_ } from '../lib/init-apollo';
 import PageLayout from './PageLayout';
 import CodeSnippet from './editor/CodeSnippet';
 import TrialsTable from './TrialsTable';
@@ -116,7 +116,7 @@ export default class TensorflowExample extends React.Component {
   }
   `;
     const { name } = this.props;
-    const result = await apolloClient.query({
+    const result = await apolloClient_.query({
       query: ModelQuery,
       variables: {
         name,
