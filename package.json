@@ -34,7 +34,7 @@
     "hyperparameters": "^0.25.6",
     "isomorphic-unfetch": "^3.0.0",
     "kernel-smooth": "^0.2.3",
-    "next": "^7.0.0",
+    "next": "^9.3.3",
     "react": "^16.8.3",
     "react-ace": "^6.1.1",
     "react-apollo": "^2.5.8",
